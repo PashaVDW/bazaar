@@ -29,7 +29,7 @@ class CreateNewUser implements CreatesNewUsers
                 Rule::unique(User::class),
             ],
             'password' => $this->passwordRules(),
-            'account_type' => ['required', 'string', Rule::in(['guest', 'premium', 'admin'])],
+            'account_type' => ['required', 'string', Rule::in(['customer', 'private_advertiser', 'business_advertiser'])],
         ])->validate();
 
         return User::create([
