@@ -24,30 +24,30 @@
                 <i class="fas fa-shopping-cart"></i>
             </a>
             @auth
-               
+
 
                 @role('Super Admin')
-                    <a href="/admin/contracts" class="text-gray-700 hover:text-blue-600">
+                    <a href="{{ route('admin.contracts.index') }}" class="text-gray-700 hover:text-blue-600">
                         <i class="fas fa-user-shield"></i>
                         <span class="ml-1">Admin</span>
                     </a>
                 @elserole('business_advertiser')
-                    <a href="/dashboard" class="text-gray-700 hover:text-blue-600">
+                    <a href="#" class="text-gray-700 hover:text-blue-600">
                         <i class="fas fa-building"></i>
                         <span class="ml-1">Business</span>
                     </a>
                 @elserole('private_advertiser')
-                    <a href="/profile" class="text-gray-700 hover:text-blue-600">
+                    <a href="#" class="text-gray-700 hover:text-blue-600">
                         <i class="fas fa-user"></i>
                         <span class="ml-1">Profile</span>
                     </a>
                 @elserole('customer')
-                    <a href="/orders" class="text-gray-700 hover:text-blue-600">
+                    <a href="#" class="text-gray-700 hover:text-blue-600">
                         <i class="fas fa-box"></i>
                         <span class="ml-1">My Orders</span>
                     </a>
                 @endrole
-                    
+
                 <a href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();" class="text-gray-700 hover:text-red-600">
                     <i class="fas fa-sign-out-alt"></i>
                 </a>
@@ -55,9 +55,9 @@
                     @csrf
                 </form>
 
-                
+
             @else
-                <a href="/login" class="text-gray-700 hover:text-blue-600">
+                <a href="{{ route('login') }}" class="text-gray-700 hover:text-blue-600">
                     <i class="fas fa-user-circle"></i>
                 </a>
             @endauth

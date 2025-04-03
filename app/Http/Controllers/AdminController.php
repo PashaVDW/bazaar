@@ -5,9 +5,9 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use App\Models\Business;
 
-class BusinessContractController extends Controller
+class AdminController extends Controller
 {
-    public function index()
+    public function contractIndex()
     {
         $businesses = Business::with('user')->latest()->get();
 

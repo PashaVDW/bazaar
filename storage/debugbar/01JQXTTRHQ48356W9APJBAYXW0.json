@@ -1,0 +1,265 @@
+{
+    "__meta": {
+        "id": "01JQXTTRHQ48356W9APJBAYXW0",
+        "datetime": "2025-04-03 12:43:18",
+        "utime": 1743684198.968821,
+        "method": "GET",
+        "uri": "\/login",
+        "ip": "127.0.0.1"
+    },
+    "messages": { "count": 0, "messages": [] },
+    "time": {
+        "start": 1743684198.818098,
+        "end": 1743684198.968845,
+        "duration": 0.15074682235717773,
+        "duration_str": "151ms",
+        "measures": [
+            {
+                "label": "Booting",
+                "start": 1743684198.818098,
+                "relative_start": 0,
+                "end": 1743684198.917886,
+                "relative_end": 1743684198.917886,
+                "duration": 0.09978795051574707,
+                "duration_str": "99.79ms",
+                "memory": 0,
+                "memory_str": "0B",
+                "params": [],
+                "collector": "time",
+                "group": null
+            },
+            {
+                "label": "Application",
+                "start": 1743684198.917895,
+                "relative_start": 0.09979701042175293,
+                "end": 1743684198.968848,
+                "relative_end": 3.0994415283203125e-6,
+                "duration": 0.050952911376953125,
+                "duration_str": "50.95ms",
+                "memory": 0,
+                "memory_str": "0B",
+                "params": [],
+                "collector": "time",
+                "group": null
+            },
+            {
+                "label": "Routing",
+                "start": 1743684198.930969,
+                "relative_start": 0.11287093162536621,
+                "end": 1743684198.932523,
+                "relative_end": 1743684198.932523,
+                "duration": 0.0015540122985839844,
+                "duration_str": "1.55ms",
+                "memory": 0,
+                "memory_str": "0B",
+                "params": [],
+                "collector": null,
+                "group": null
+            },
+            {
+                "label": "Preparing Response",
+                "start": 1743684198.956952,
+                "relative_start": 0.1388540267944336,
+                "end": 1743684198.966491,
+                "relative_end": 1743684198.966491,
+                "duration": 0.009538888931274414,
+                "duration_str": "9.54ms",
+                "memory": 0,
+                "memory_str": "0B",
+                "params": [],
+                "collector": null,
+                "group": null
+            },
+            {
+                "label": "View: auth.login",
+                "start": 1743684198.962564,
+                "relative_start": 0.14446592330932617,
+                "end": 1743684198.962564,
+                "relative_end": 1743684198.962564,
+                "duration": 0,
+                "duration_str": "0\u03bcs",
+                "memory": 0,
+                "memory_str": "0B",
+                "params": [],
+                "collector": "views",
+                "group": "View"
+            },
+            {
+                "label": "View: layouts.app",
+                "start": 1743684198.965373,
+                "relative_start": 0.14727497100830078,
+                "end": 1743684198.965373,
+                "relative_end": 1743684198.965373,
+                "duration": 0,
+                "duration_str": "0\u03bcs",
+                "memory": 0,
+                "memory_str": "0B",
+                "params": [],
+                "collector": "views",
+                "group": "View"
+            }
+        ]
+    },
+    "memory": { "peak_usage": 22553168, "peak_usage_str": "22MB" },
+    "exceptions": { "count": 0, "exceptions": [] },
+    "laravel": {
+        "version": "12.x",
+        "tooltip": {
+            "Laravel Version": "12.3.0",
+            "PHP Version": "8.3.13",
+            "Environment": "local",
+            "Debug Mode": "Enabled",
+            "URL": "127.0.0.1:8000",
+            "Timezone": "UTC",
+            "Locale": "en"
+        }
+    },
+    "views": {
+        "count": 2,
+        "nb_templates": 2,
+        "templates": [
+            {
+                "name": "auth.login",
+                "param_count": null,
+                "params": [],
+                "start": 1743684198.962541,
+                "type": "blade",
+                "hash": "bladeC:\\Users\\pasha\\dev\\bazaar\\resources\\views\/auth\/login.blade.phpauth.login",
+                "xdebug_link": {
+                    "url": "phpstorm:\/\/open?file=C%3A%2FUsers%2Fpasha%2Fdev%2Fbazaar%2Fresources%2Fviews%2Fauth%2Flogin.blade.php&line=1",
+                    "ajax": false,
+                    "filename": "login.blade.php",
+                    "line": "?"
+                }
+            },
+            {
+                "name": "layouts.app",
+                "param_count": null,
+                "params": [],
+                "start": 1743684198.965349,
+                "type": "blade",
+                "hash": "bladeC:\\Users\\pasha\\dev\\bazaar\\resources\\views\/layouts\/app.blade.phplayouts.app",
+                "xdebug_link": {
+                    "url": "phpstorm:\/\/open?file=C%3A%2FUsers%2Fpasha%2Fdev%2Fbazaar%2Fresources%2Fviews%2Flayouts%2Fapp.blade.php&line=1",
+                    "ajax": false,
+                    "filename": "app.blade.php",
+                    "line": "?"
+                }
+            }
+        ]
+    },
+    "queries": {
+        "count": 1,
+        "nb_statements": 1,
+        "nb_visible_statements": 1,
+        "nb_excluded_statements": 0,
+        "nb_failed_statements": 0,
+        "accumulated_duration": 0.013550000000000001,
+        "accumulated_duration_str": "13.55ms",
+        "memory_usage": 0,
+        "memory_usage_str": null,
+        "statements": [
+            {
+                "sql": "select * from `sessions` where `id` = 'hmIymO3JrpXFVg5W8qx93MGk6sV7notUWYkPJIar' limit 1",
+                "type": "query",
+                "params": [],
+                "bindings": ["hmIymO3JrpXFVg5W8qx93MGk6sV7notUWYkPJIar"],
+                "hints": null,
+                "show_copy": true,
+                "backtrace": [
+                    {
+                        "index": 15,
+                        "namespace": null,
+                        "name": "vendor\/laravel\/framework\/src\/Illuminate\/Session\/DatabaseSessionHandler.php",
+                        "file": "C:\\Users\\pasha\\dev\\bazaar\\vendor\\laravel\\framework\\src\\Illuminate\\Session\\DatabaseSessionHandler.php",
+                        "line": 97
+                    },
+                    {
+                        "index": 16,
+                        "namespace": null,
+                        "name": "vendor\/laravel\/framework\/src\/Illuminate\/Session\/Store.php",
+                        "file": "C:\\Users\\pasha\\dev\\bazaar\\vendor\\laravel\\framework\\src\\Illuminate\\Session\\Store.php",
+                        "line": 117
+                    },
+                    {
+                        "index": 17,
+                        "namespace": null,
+                        "name": "vendor\/laravel\/framework\/src\/Illuminate\/Session\/Store.php",
+                        "file": "C:\\Users\\pasha\\dev\\bazaar\\vendor\\laravel\\framework\\src\\Illuminate\\Session\\Store.php",
+                        "line": 105
+                    },
+                    {
+                        "index": 18,
+                        "namespace": null,
+                        "name": "vendor\/laravel\/framework\/src\/Illuminate\/Session\/Store.php",
+                        "file": "C:\\Users\\pasha\\dev\\bazaar\\vendor\\laravel\\framework\\src\\Illuminate\\Session\\Store.php",
+                        "line": 89
+                    },
+                    {
+                        "index": 19,
+                        "namespace": null,
+                        "name": "vendor\/laravel\/framework\/src\/Illuminate\/Session\/Middleware\/StartSession.php",
+                        "file": "C:\\Users\\pasha\\dev\\bazaar\\vendor\\laravel\\framework\\src\\Illuminate\\Session\\Middleware\\StartSession.php",
+                        "line": 147
+                    }
+                ],
+                "start": 1743684198.941212,
+                "duration": 0.013550000000000001,
+                "duration_str": "13.55ms",
+                "memory": 0,
+                "memory_str": null,
+                "filename": "DatabaseSessionHandler.php:97",
+                "source": {
+                    "index": 15,
+                    "namespace": null,
+                    "name": "vendor\/laravel\/framework\/src\/Illuminate\/Session\/DatabaseSessionHandler.php",
+                    "file": "C:\\Users\\pasha\\dev\\bazaar\\vendor\\laravel\\framework\\src\\Illuminate\\Session\\DatabaseSessionHandler.php",
+                    "line": 97
+                },
+                "xdebug_link": {
+                    "url": "phpstorm:\/\/open?file=C%3A%2FUsers%2Fpasha%2Fdev%2Fbazaar%2Fvendor%2Flaravel%2Fframework%2Fsrc%2FIlluminate%2FSession%2FDatabaseSessionHandler.php&line=97",
+                    "ajax": false,
+                    "filename": "DatabaseSessionHandler.php",
+                    "line": "97"
+                },
+                "connection": "bazaar",
+                "explain": null,
+                "start_percent": 0,
+                "width_percent": 100
+            }
+        ]
+    },
+    "models": { "data": [], "count": 0, "is_counter": true },
+    "symfonymailer_mails": { "count": 0, "mails": [] },
+    "gate": { "count": 0, "messages": [] },
+    "request": {
+        "data": {
+            "status": "200 OK",
+            "full_url": "http:\/\/127.0.0.1:8000\/login",
+            "action_name": "login",
+            "controller_action": "Laravel\\Fortify\\Http\\Controllers\\AuthenticatedSessionController@create",
+            "uri": "GET login",
+            "controller": "Laravel\\Fortify\\Http\\Controllers\\AuthenticatedSessionController@create<a href=\"phpstorm:\/\/open?file=C%3A%2FUsers%2Fpasha%2Fdev%2Fbazaar%2Fvendor%2Flaravel%2Ffortify%2Fsrc%2FHttp%2FControllers%2FAuthenticatedSessionController.php&line=47\" class=\"phpdebugbar-widgets-editor-link\"><\/a>",
+            "namespace": "Laravel\\Fortify\\Http\\Controllers",
+            "file": "<a href=\"phpstorm:\/\/open?file=C%3A%2FUsers%2Fpasha%2Fdev%2Fbazaar%2Fvendor%2Flaravel%2Ffortify%2Fsrc%2FHttp%2FControllers%2FAuthenticatedSessionController.php&line=47\" onclick=\"\" class=\"phpdebugbar-widgets-editor-link\">vendor\/laravel\/fortify\/src\/Http\/Controllers\/AuthenticatedSessionController.php:47-50<\/a>",
+            "middleware": "web, guest:web",
+            "duration": "152ms",
+            "peak_memory": "22MB",
+            "response": "text\/html; charset=UTF-8",
+            "request_format": "html",
+            "request_query": "<pre class=sf-dump id=sf-dump-1126898368 data-indent-pad=\"  \">[]\n<\/pre><script>Sfdump(\"sf-dump-1126898368\", {\"maxDepth\":0})<\/script>\n",
+            "request_request": "<pre class=sf-dump id=sf-dump-2066468180 data-indent-pad=\"  \">[]\n<\/pre><script>Sfdump(\"sf-dump-2066468180\", {\"maxDepth\":0})<\/script>\n",
+            "request_headers": "<pre class=sf-dump id=sf-dump-841687323 data-indent-pad=\"  \"><span class=sf-dump-note>array:15<\/span> [<samp data-depth=1 class=sf-dump-expanded>\n  \"<span class=sf-dump-key>host<\/span>\" => <span class=sf-dump-note>array:1<\/span> [<samp data-depth=2 class=sf-dump-compact>\n    <span class=sf-dump-index>0<\/span> => \"<span class=sf-dump-str title=\"14 characters\">127.0.0.1:8000<\/span>\"\n  <\/samp>]\n  \"<span class=sf-dump-key>connection<\/span>\" => <span class=sf-dump-note>array:1<\/span> [<samp data-depth=2 class=sf-dump-compact>\n    <span class=sf-dump-index>0<\/span> => \"<span class=sf-dump-str title=\"10 characters\">keep-alive<\/span>\"\n  <\/samp>]\n  \"<span class=sf-dump-key>sec-ch-ua<\/span>\" => <span class=sf-dump-note>array:1<\/span> [<samp data-depth=2 class=sf-dump-compact>\n    <span class=sf-dump-index>0<\/span> => \"<span class=sf-dump-str title=\"65 characters\">&quot;Chromium&quot;;v=&quot;134&quot;, &quot;Not:A-Brand&quot;;v=&quot;24&quot;, &quot;Google Chrome&quot;;v=&quot;134&quot;<\/span>\"\n  <\/samp>]\n  \"<span class=sf-dump-key>sec-ch-ua-mobile<\/span>\" => <span class=sf-dump-note>array:1<\/span> [<samp data-depth=2 class=sf-dump-compact>\n    <span class=sf-dump-index>0<\/span> => \"<span class=sf-dump-str title=\"2 characters\">?0<\/span>\"\n  <\/samp>]\n  \"<span class=sf-dump-key>sec-ch-ua-platform<\/span>\" => <span class=sf-dump-note>array:1<\/span> [<samp data-depth=2 class=sf-dump-compact>\n    <span class=sf-dump-index>0<\/span> => \"<span class=sf-dump-str title=\"9 characters\">&quot;Windows&quot;<\/span>\"\n  <\/samp>]\n  \"<span class=sf-dump-key>upgrade-insecure-requests<\/span>\" => <span class=sf-dump-note>array:1<\/span> [<samp data-depth=2 class=sf-dump-compact>\n    <span class=sf-dump-index>0<\/span> => \"<span class=sf-dump-str>1<\/span>\"\n  <\/samp>]\n  \"<span class=sf-dump-key>user-agent<\/span>\" => <span class=sf-dump-note>array:1<\/span> [<samp data-depth=2 class=sf-dump-compact>\n    <span class=sf-dump-index>0<\/span> => \"<span class=sf-dump-str title=\"119 characters\">Mozilla\/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit\/537.36 (KHTML, like Gecko) HeadlessChrome\/134.0.0.0 Safari\/537.36<\/span>\"\n  <\/samp>]\n  \"<span class=sf-dump-key>accept<\/span>\" => <span class=sf-dump-note>array:1<\/span> [<samp data-depth=2 class=sf-dump-compact>\n    <span class=sf-dump-index>0<\/span> => \"<span class=sf-dump-str title=\"135 characters\">text\/html,application\/xhtml+xml,application\/xml;q=0.9,image\/avif,image\/webp,image\/apng,*\/*;q=0.8,application\/signed-exchange;v=b3;q=0.7<\/span>\"\n  <\/samp>]\n  \"<span class=sf-dump-key>sec-fetch-site<\/span>\" => <span class=sf-dump-note>array:1<\/span> [<samp data-depth=2 class=sf-dump-compact>\n    <span class=sf-dump-index>0<\/span> => \"<span class=sf-dump-str title=\"4 characters\">none<\/span>\"\n  <\/samp>]\n  \"<span class=sf-dump-key>sec-fetch-mode<\/span>\" => <span class=sf-dump-note>array:1<\/span> [<samp data-depth=2 class=sf-dump-compact>\n    <span class=sf-dump-index>0<\/span> => \"<span class=sf-dump-str title=\"8 characters\">navigate<\/span>\"\n  <\/samp>]\n  \"<span class=sf-dump-key>sec-fetch-user<\/span>\" => <span class=sf-dump-note>array:1<\/span> [<samp data-depth=2 class=sf-dump-compact>\n    <span class=sf-dump-index>0<\/span> => \"<span class=sf-dump-str title=\"2 characters\">?1<\/span>\"\n  <\/samp>]\n  \"<span class=sf-dump-key>sec-fetch-dest<\/span>\" => <span class=sf-dump-note>array:1<\/span> [<samp data-depth=2 class=sf-dump-compact>\n    <span class=sf-dump-index>0<\/span> => \"<span class=sf-dump-str title=\"8 characters\">document<\/span>\"\n  <\/samp>]\n  \"<span class=sf-dump-key>accept-encoding<\/span>\" => <span class=sf-dump-note>array:1<\/span> [<samp data-depth=2 class=sf-dump-compact>\n    <span class=sf-dump-index>0<\/span> => \"<span class=sf-dump-str title=\"23 characters\">gzip, deflate, br, zstd<\/span>\"\n  <\/samp>]\n  \"<span class=sf-dump-key>accept-language<\/span>\" => <span class=sf-dump-note>array:1<\/span> [<samp data-depth=2 class=sf-dump-compact>\n    <span class=sf-dump-index>0<\/span> => \"<span class=sf-dump-str title=\"26 characters\">en-GB,en-US;q=0.9,en;q=0.8<\/span>\"\n  <\/samp>]\n  \"<span class=sf-dump-key>cookie<\/span>\" => <span class=sf-dump-note>array:1<\/span> [<samp data-depth=2 class=sf-dump-compact>\n    <span class=sf-dump-index>0<\/span> => \"<span class=sf-dump-str title=\"713 characters\">XSRF-TOKEN=eyJpdiI6Ik9jZnlGeVEyeXVOODVPcjh6R2Fpb0E9PSIsInZhbHVlIjoiNm42UkloTVRWYzN2ZmZrelIrQTZPa2JRczVhcmZaTHFRWURLV2FWMVJFOXhlVWIxSVpqMjJ5Q2pWaDNKSkI2RS83RHZ6d0ZzUVJHem5jcUl4SjBqekQ3cFhQeHgwTUVKc3h4NGpLdS92eFpselFWL2RwOCtpUno3WGxtTTlzcGMiLCJtYWMiOiJiZWRlZTlkYWQ0ZTcyOTVhNDhkM2NlMGNhOTg1NGIwYWZmYzVjMmQ5ZjEyYzkzZWM2ZmMwZDVmNGFjZWRmZjY3IiwidGFnIjoiIn0%3D; laravel_session=eyJpdiI6IlVSTHBGeWt1Tnd3Mmx4L3JyckxObEE9PSIsInZhbHVlIjoicWdxNm80YlVaOVRRR050ZGp5Q3M3WENuYXZFenBXWDErckE3bit4cWRMaUM0Wjd2ZFZwYzZjbEFoWHJYdlFCOXhrQVo5OE02RmlBeFJHSm81aTVBTEdaU0tERHhPZFhFRTdaUWM4V281QU9wNHNWek9ITnhPaGNtNmNJQmZOZGMiLCJtYWMiOiI2NjE0MTQwYzEzZGVmZmU4ZTZkMTg4ZTkxZDZmMWUzNjBmZTQwZDViYjQxYzUyZTU0MmIwMGVkNzQ2YWUzNzIyIiwidGFnIjoiIn0%3D<\/span>\"\n  <\/samp>]\n<\/samp>]\n<\/pre><script>Sfdump(\"sf-dump-841687323\", {\"maxDepth\":0})<\/script>\n",
+            "request_cookies": "<pre class=sf-dump id=sf-dump-1913099232 data-indent-pad=\"  \"><span class=sf-dump-note>array:2<\/span> [<samp data-depth=1 class=sf-dump-expanded>\n  \"<span class=sf-dump-key>XSRF-TOKEN<\/span>\" => \"<span class=sf-dump-str title=\"40 characters\">d5YV2BlWgDCWCe3Pgs0BogCuRI0gIaoYEY2NKDX9<\/span>\"\n  \"<span class=sf-dump-key>laravel_session<\/span>\" => \"<span class=sf-dump-str title=\"40 characters\">hmIymO3JrpXFVg5W8qx93MGk6sV7notUWYkPJIar<\/span>\"\n<\/samp>]\n<\/pre><script>Sfdump(\"sf-dump-1913099232\", {\"maxDepth\":0})<\/script>\n",
+            "response_headers": "<pre class=sf-dump id=sf-dump-992657629 data-indent-pad=\"  \"><span class=sf-dump-note>array:3<\/span> [<samp data-depth=1 class=sf-dump-expanded>\n  \"<span class=sf-dump-key>content-type<\/span>\" => <span class=sf-dump-note>array:1<\/span> [<samp data-depth=2 class=sf-dump-compact>\n    <span class=sf-dump-index>0<\/span> => \"<span class=sf-dump-str title=\"24 characters\">text\/html; charset=UTF-8<\/span>\"\n  <\/samp>]\n  \"<span class=sf-dump-key>cache-control<\/span>\" => <span class=sf-dump-note>array:1<\/span> [<samp data-depth=2 class=sf-dump-compact>\n    <span class=sf-dump-index>0<\/span> => \"<span class=sf-dump-str title=\"17 characters\">no-cache, private<\/span>\"\n  <\/samp>]\n  \"<span class=sf-dump-key>date<\/span>\" => <span class=sf-dump-note>array:1<\/span> [<samp data-depth=2 class=sf-dump-compact>\n    <span class=sf-dump-index>0<\/span> => \"<span class=sf-dump-str title=\"29 characters\">Thu, 03 Apr 2025 12:43:18 GMT<\/span>\"\n  <\/samp>]\n<\/samp>]\n<\/pre><script>Sfdump(\"sf-dump-992657629\", {\"maxDepth\":0})<\/script>\n",
+            "session_attributes": "<pre class=sf-dump id=sf-dump-1785189298 data-indent-pad=\"  \"><span class=sf-dump-note>array:4<\/span> [<samp data-depth=1 class=sf-dump-expanded>\n  \"<span class=sf-dump-key>_token<\/span>\" => \"<span class=sf-dump-str title=\"40 characters\">d5YV2BlWgDCWCe3Pgs0BogCuRI0gIaoYEY2NKDX9<\/span>\"\n  \"<span class=sf-dump-key>PHPDEBUGBAR_STACK_DATA<\/span>\" => []\n  \"<span class=sf-dump-key>_previous<\/span>\" => <span class=sf-dump-note>array:1<\/span> [<samp data-depth=2 class=sf-dump-compact>\n    \"<span class=sf-dump-key>url<\/span>\" => \"<span class=sf-dump-str title=\"27 characters\">http:\/\/127.0.0.1:8000\/login<\/span>\"\n  <\/samp>]\n  \"<span class=sf-dump-key>_flash<\/span>\" => <span class=sf-dump-note>array:2<\/span> [<samp data-depth=2 class=sf-dump-compact>\n    \"<span class=sf-dump-key>old<\/span>\" => []\n    \"<span class=sf-dump-key>new<\/span>\" => []\n  <\/samp>]\n<\/samp>]\n<\/pre><script>Sfdump(\"sf-dump-1785189298\", {\"maxDepth\":0})<\/script>\n"
+        },
+        "tooltip": {
+            "status": "200 OK",
+            "full_url": "http:\/\/127.0.0.1:8000\/login",
+            "action_name": "login",
+            "controller_action": "Laravel\\Fortify\\Http\\Controllers\\AuthenticatedSessionController@create"
+        },
+        "badge": null
+    }
+}
