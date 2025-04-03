@@ -36,8 +36,9 @@
                             </span>
                         </td>
                         <td class="px-6 py-4 space-x-2">
-                            <a href="{{ route('admin.business.export.pdf', $business->id) }}"
-                               class="text-blue-600 hover:underline text-sm">
+                            <a dusk="download-pdf"
+                                href="{{ route('admin.business.export.pdf', $business->id) }}"
+                                class="text-blue-600 hover:underline text-sm">
                                 Download PDF
                             </a>
                             @if($business->contract_file_path)

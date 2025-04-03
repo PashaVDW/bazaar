@@ -15,6 +15,7 @@ class UserRoleSeeder extends Seeder
      */
     public function run(): void
     {
+        
         $adminUser = User::create([
             'name' => 'Super Admin',
             'email' => 'admin@bazaar.test',

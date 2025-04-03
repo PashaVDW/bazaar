@@ -1,6 +1,5 @@
-@extends('layouts.base')
-
-<x-shop-navbar />
+@extends('layouts.app')
+@section('content')
 <nav>
     @auth
         Welkom, {{ Auth::user()->name }} |
@@ -17,3 +16,4 @@
 <h1>Welkom bij De Bazaar</h1>
 <p>Je bent nu op de startpagina van je Laravel-app.</p>
 
+@endsection
