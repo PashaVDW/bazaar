@@ -15,7 +15,6 @@ abstract class DuskTestCase extends BaseTestCase
     {
         return 'http://127.0.0.1:8000';
     }
-
     /**
      * Prepare for Dusk test execution.
      */

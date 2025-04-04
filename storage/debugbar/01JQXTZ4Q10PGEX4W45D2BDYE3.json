@@ -1,0 +1,1112 @@
+{
+    "__meta": {
+        "id": "01JQXTZ4Q10PGEX4W45D2BDYE3",
+        "datetime": "2025-04-03 12:45:42",
+        "utime": 1743684342.498403,
+        "method": "POST",
+        "uri": "\/login",
+        "ip": "127.0.0.1"
+    },
+    "messages": { "count": 0, "messages": [] },
+    "time": {
+        "start": 1743684342.069794,
+        "end": 1743684342.498414,
+        "duration": 0.4286201000213623,
+        "duration_str": "429ms",
+        "measures": [
+            {
+                "label": "Booting",
+                "start": 1743684342.069794,
+                "relative_start": 0,
+                "end": 1743684342.161899,
+                "relative_end": 1743684342.161899,
+                "duration": 0.09210515022277832,
+                "duration_str": "92.11ms",
+                "memory": 0,
+                "memory_str": "0B",
+                "params": [],
+                "collector": "time",
+                "group": null
+            },
+            {
+                "label": "Application",
+                "start": 1743684342.161909,
+                "relative_start": 0.09211516380310059,
+                "end": 1743684342.498415,
+                "relative_end": 9.5367431640625e-7,
+                "duration": 0.3365058898925781,
+                "duration_str": "337ms",
+                "memory": 0,
+                "memory_str": "0B",
+                "params": [],
+                "collector": "time",
+                "group": null
+            },
+            {
+                "label": "Routing",
+                "start": 1743684342.17294,
+                "relative_start": 0.10314607620239258,
+                "end": 1743684342.174634,
+                "relative_end": 1743684342.174634,
+                "duration": 0.0016939640045166016,
+                "duration_str": "1.69ms",
+                "memory": 0,
+                "memory_str": "0B",
+                "params": [],
+                "collector": null,
+                "group": null
+            },
+            {
+                "label": "Preparing Response",
+                "start": 1743684342.496982,
+                "relative_start": 0.4271881580352783,
+                "end": 1743684342.497244,
+                "relative_end": 1743684342.497244,
+                "duration": 0.0002617835998535156,
+                "duration_str": "262\u03bcs",
+                "memory": 0,
+                "memory_str": "0B",
+                "params": [],
+                "collector": null,
+                "group": null
+            }
+        ]
+    },
+    "memory": { "peak_usage": 24502520, "peak_usage_str": "23MB" },
+    "exceptions": { "count": 0, "exceptions": [] },
+    "laravel": {
+        "version": "12.x",
+        "tooltip": {
+            "Laravel Version": "12.3.0",
+            "PHP Version": "8.3.13",
+            "Environment": "local",
+            "Debug Mode": "Enabled",
+            "URL": "127.0.0.1:8000",
+            "Timezone": "UTC",
+            "Locale": "en"
+        }
+    },
+    "views": { "count": 0, "nb_templates": 0, "templates": [] },
+    "queries": {
+        "count": 14,
+        "nb_statements": 12,
+        "nb_visible_statements": 14,
+        "nb_excluded_statements": 0,
+        "nb_failed_statements": 0,
+        "accumulated_duration": 0.040940000000000004,
+        "accumulated_duration_str": "40.94ms",
+        "memory_usage": 0,
+        "memory_usage_str": null,
+        "statements": [
+            {
+                "sql": "select * from `sessions` where `id` = 'TBGJuoQ1Vdm10eIPYZoWcZepMd4PpABy9wHozR63' limit 1",
+                "type": "query",
+                "params": [],
+                "bindings": ["TBGJuoQ1Vdm10eIPYZoWcZepMd4PpABy9wHozR63"],
+                "hints": null,
+                "show_copy": true,
+                "backtrace": [
+                    {
+                        "index": 15,
+                        "namespace": null,
+                        "name": "vendor\/laravel\/framework\/src\/Illuminate\/Session\/DatabaseSessionHandler.php",
+                        "file": "C:\\Users\\pasha\\dev\\bazaar\\vendor\\laravel\\framework\\src\\Illuminate\\Session\\DatabaseSessionHandler.php",
+                        "line": 97
+                    },
+                    {
+                        "index": 16,
+                        "namespace": null,
+                        "name": "vendor\/laravel\/framework\/src\/Illuminate\/Session\/Store.php",
+                        "file": "C:\\Users\\pasha\\dev\\bazaar\\vendor\\laravel\\framework\\src\\Illuminate\\Session\\Store.php",
+                        "line": 117
+                    },
+                    {
+                        "index": 17,
+                        "namespace": null,
+                        "name": "vendor\/laravel\/framework\/src\/Illuminate\/Session\/Store.php",
+                        "file": "C:\\Users\\pasha\\dev\\bazaar\\vendor\\laravel\\framework\\src\\Illuminate\\Session\\Store.php",
+                        "line": 105
+                    },
+                    {
+                        "index": 18,
+                        "namespace": null,
+                        "name": "vendor\/laravel\/framework\/src\/Illuminate\/Session\/Store.php",
+                        "file": "C:\\Users\\pasha\\dev\\bazaar\\vendor\\laravel\\framework\\src\\Illuminate\\Session\\Store.php",
+                        "line": 89
+                    },
+                    {
+                        "index": 19,
+                        "namespace": null,
+                        "name": "vendor\/laravel\/framework\/src\/Illuminate\/Session\/Middleware\/StartSession.php",
+                        "file": "C:\\Users\\pasha\\dev\\bazaar\\vendor\\laravel\\framework\\src\\Illuminate\\Session\\Middleware\\StartSession.php",
+                        "line": 147
+                    }
+                ],
+                "start": 1743684342.182981,
+                "duration": 0.028300000000000002,
+                "duration_str": "28.3ms",
+                "memory": 0,
+                "memory_str": null,
+                "filename": "DatabaseSessionHandler.php:97",
+                "source": {
+                    "index": 15,
+                    "namespace": null,
+                    "name": "vendor\/laravel\/framework\/src\/Illuminate\/Session\/DatabaseSessionHandler.php",
+                    "file": "C:\\Users\\pasha\\dev\\bazaar\\vendor\\laravel\\framework\\src\\Illuminate\\Session\\DatabaseSessionHandler.php",
+                    "line": 97
+                },
+                "xdebug_link": {
+                    "url": "phpstorm:\/\/open?file=C%3A%2FUsers%2Fpasha%2Fdev%2Fbazaar%2Fvendor%2Flaravel%2Fframework%2Fsrc%2FIlluminate%2FSession%2FDatabaseSessionHandler.php&line=97",
+                    "ajax": false,
+                    "filename": "DatabaseSessionHandler.php",
+                    "line": "97"
+                },
+                "connection": "bazaar",
+                "explain": null,
+                "start_percent": 0,
+                "width_percent": 69.126
+            },
+            {
+                "sql": "select * from `cache` where `key` in ('laravel_cache_dabf0f260370f64da33ce3eab59699b6')",
+                "type": "query",
+                "params": [],
+                "bindings": ["laravel_cache_dabf0f260370f64da33ce3eab59699b6"],
+                "hints": null,
+                "show_copy": true,
+                "backtrace": [
+                    {
+                        "index": 13,
+                        "namespace": null,
+                        "name": "vendor\/laravel\/framework\/src\/Illuminate\/Cache\/DatabaseStore.php",
+                        "file": "C:\\Users\\pasha\\dev\\bazaar\\vendor\\laravel\\framework\\src\\Illuminate\\Cache\\DatabaseStore.php",
+                        "line": 130
+                    },
+                    {
+                        "index": 14,
+                        "namespace": null,
+                        "name": "vendor\/laravel\/framework\/src\/Illuminate\/Cache\/DatabaseStore.php",
+                        "file": "C:\\Users\\pasha\\dev\\bazaar\\vendor\\laravel\\framework\\src\\Illuminate\\Cache\\DatabaseStore.php",
+                        "line": 105
+                    },
+                    {
+                        "index": 15,
+                        "namespace": null,
+                        "name": "vendor\/laravel\/framework\/src\/Illuminate\/Cache\/Repository.php",
+                        "file": "C:\\Users\\pasha\\dev\\bazaar\\vendor\\laravel\\framework\\src\\Illuminate\\Cache\\Repository.php",
+                        "line": 117
+                    },
+                    {
+                        "index": 16,
+                        "namespace": null,
+                        "name": "vendor\/laravel\/framework\/src\/Illuminate\/Cache\/RateLimiter.php",
+                        "file": "C:\\Users\\pasha\\dev\\bazaar\\vendor\\laravel\\framework\\src\\Illuminate\\Cache\\RateLimiter.php",
+                        "line": 207
+                    },
+                    {
+                        "index": 17,
+                        "namespace": null,
+                        "name": "vendor\/laravel\/framework\/src\/Illuminate\/Cache\/RateLimiter.php",
+                        "file": "C:\\Users\\pasha\\dev\\bazaar\\vendor\\laravel\\framework\\src\\Illuminate\\Cache\\RateLimiter.php",
+                        "line": 301
+                    }
+                ],
+                "start": 1743684342.215287,
+                "duration": 0.0011200000000000001,
+                "duration_str": "1.12ms",
+                "memory": 0,
+                "memory_str": null,
+                "filename": "DatabaseStore.php:130",
+                "source": {
+                    "index": 13,
+                    "namespace": null,
+                    "name": "vendor\/laravel\/framework\/src\/Illuminate\/Cache\/DatabaseStore.php",
+                    "file": "C:\\Users\\pasha\\dev\\bazaar\\vendor\\laravel\\framework\\src\\Illuminate\\Cache\\DatabaseStore.php",
+                    "line": 130
+                },
+                "xdebug_link": {
+                    "url": "phpstorm:\/\/open?file=C%3A%2FUsers%2Fpasha%2Fdev%2Fbazaar%2Fvendor%2Flaravel%2Fframework%2Fsrc%2FIlluminate%2FCache%2FDatabaseStore.php&line=130",
+                    "ajax": false,
+                    "filename": "DatabaseStore.php",
+                    "line": "130"
+                },
+                "connection": "bazaar",
+                "explain": null,
+                "start_percent": 69.126,
+                "width_percent": 2.736
+            },
+            {
+                "sql": "select * from `cache` where `key` in ('laravel_cache_dabf0f260370f64da33ce3eab59699b6:timer')",
+                "type": "query",
+                "params": [],
+                "bindings": ["laravel_cache_dabf0f260370f64da33ce3eab59699b6:timer"],
+                "hints": null,
+                "show_copy": true,
+                "backtrace": [
+                    {
+                        "index": 13,
+                        "namespace": null,
+                        "name": "vendor\/laravel\/framework\/src\/Illuminate\/Cache\/DatabaseStore.php",
+                        "file": "C:\\Users\\pasha\\dev\\bazaar\\vendor\\laravel\\framework\\src\\Illuminate\\Cache\\DatabaseStore.php",
+                        "line": 130
+                    },
+                    {
+                        "index": 14,
+                        "namespace": null,
+                        "name": "vendor\/laravel\/framework\/src\/Illuminate\/Cache\/DatabaseStore.php",
+                        "file": "C:\\Users\\pasha\\dev\\bazaar\\vendor\\laravel\\framework\\src\\Illuminate\\Cache\\DatabaseStore.php",
+                        "line": 105
+                    },
+                    {
+                        "index": 15,
+                        "namespace": null,
+                        "name": "vendor\/laravel\/framework\/src\/Illuminate\/Cache\/DatabaseStore.php",
+                        "file": "C:\\Users\\pasha\\dev\\bazaar\\vendor\\laravel\\framework\\src\\Illuminate\\Cache\\DatabaseStore.php",
+                        "line": 203
+                    },
+                    {
+                        "index": 16,
+                        "namespace": null,
+                        "name": "vendor\/laravel\/framework\/src\/Illuminate\/Cache\/Repository.php",
+                        "file": "C:\\Users\\pasha\\dev\\bazaar\\vendor\\laravel\\framework\\src\\Illuminate\\Cache\\Repository.php",
+                        "line": 346
+                    },
+                    {
+                        "index": 17,
+                        "namespace": null,
+                        "name": "vendor\/laravel\/framework\/src\/Illuminate\/Cache\/RateLimiter.php",
+                        "file": "C:\\Users\\pasha\\dev\\bazaar\\vendor\\laravel\\framework\\src\\Illuminate\\Cache\\RateLimiter.php",
+                        "line": 165
+                    }
+                ],
+                "start": 1743684342.2175941,
+                "duration": 0.00067,
+                "duration_str": "670\u03bcs",
+                "memory": 0,
+                "memory_str": null,
+                "filename": "DatabaseStore.php:130",
+                "source": {
+                    "index": 13,
+                    "namespace": null,
+                    "name": "vendor\/laravel\/framework\/src\/Illuminate\/Cache\/DatabaseStore.php",
+                    "file": "C:\\Users\\pasha\\dev\\bazaar\\vendor\\laravel\\framework\\src\\Illuminate\\Cache\\DatabaseStore.php",
+                    "line": 130
+                },
+                "xdebug_link": {
+                    "url": "phpstorm:\/\/open?file=C%3A%2FUsers%2Fpasha%2Fdev%2Fbazaar%2Fvendor%2Flaravel%2Fframework%2Fsrc%2FIlluminate%2FCache%2FDatabaseStore.php&line=130",
+                    "ajax": false,
+                    "filename": "DatabaseStore.php",
+                    "line": "130"
+                },
+                "connection": "bazaar",
+                "explain": null,
+                "start_percent": 71.861,
+                "width_percent": 1.637
+            },
+            {
+                "sql": "insert ignore into `cache` (`key`, `value`, `expiration`) values ('laravel_cache_dabf0f260370f64da33ce3eab59699b6:timer', 'i:1743684402;', 1743684402)",
+                "type": "query",
+                "params": [],
+                "bindings": [
+                    "laravel_cache_dabf0f260370f64da33ce3eab59699b6:timer",
+                    "i:1743684402;",
+                    1743684402
+                ],
+                "hints": null,
+                "show_copy": true,
+                "backtrace": [
+                    {
+                        "index": 10,
+                        "namespace": null,
+                        "name": "vendor\/laravel\/framework\/src\/Illuminate\/Cache\/DatabaseStore.php",
+                        "file": "C:\\Users\\pasha\\dev\\bazaar\\vendor\\laravel\\framework\\src\\Illuminate\\Cache\\DatabaseStore.php",
+                        "line": 212
+                    },
+                    {
+                        "index": 11,
+                        "namespace": null,
+                        "name": "vendor\/laravel\/framework\/src\/Illuminate\/Cache\/Repository.php",
+                        "file": "C:\\Users\\pasha\\dev\\bazaar\\vendor\\laravel\\framework\\src\\Illuminate\\Cache\\Repository.php",
+                        "line": 346
+                    },
+                    {
+                        "index": 12,
+                        "namespace": null,
+                        "name": "vendor\/laravel\/framework\/src\/Illuminate\/Cache\/RateLimiter.php",
+                        "file": "C:\\Users\\pasha\\dev\\bazaar\\vendor\\laravel\\framework\\src\\Illuminate\\Cache\\RateLimiter.php",
+                        "line": 165
+                    },
+                    {
+                        "index": 13,
+                        "namespace": null,
+                        "name": "vendor\/laravel\/framework\/src\/Illuminate\/Cache\/RateLimiter.php",
+                        "file": "C:\\Users\\pasha\\dev\\bazaar\\vendor\\laravel\\framework\\src\\Illuminate\\Cache\\RateLimiter.php",
+                        "line": 150
+                    },
+                    {
+                        "index": 14,
+                        "namespace": "middleware",
+                        "name": "throttle",
+                        "file": "C:\\Users\\pasha\\dev\\bazaar\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Middleware\\ThrottleRequests.php",
+                        "line": 158
+                    }
+                ],
+                "start": 1743684342.220361,
+                "duration": 0.00296,
+                "duration_str": "2.96ms",
+                "memory": 0,
+                "memory_str": null,
+                "filename": "DatabaseStore.php:212",
+                "source": {
+                    "index": 10,
+                    "namespace": null,
+                    "name": "vendor\/laravel\/framework\/src\/Illuminate\/Cache\/DatabaseStore.php",
+                    "file": "C:\\Users\\pasha\\dev\\bazaar\\vendor\\laravel\\framework\\src\\Illuminate\\Cache\\DatabaseStore.php",
+                    "line": 212
+                },
+                "xdebug_link": {
+                    "url": "phpstorm:\/\/open?file=C%3A%2FUsers%2Fpasha%2Fdev%2Fbazaar%2Fvendor%2Flaravel%2Fframework%2Fsrc%2FIlluminate%2FCache%2FDatabaseStore.php&line=212",
+                    "ajax": false,
+                    "filename": "DatabaseStore.php",
+                    "line": "212"
+                },
+                "connection": "bazaar",
+                "explain": null,
+                "start_percent": 73.498,
+                "width_percent": 7.23
+            },
+            {
+                "sql": "select * from `cache` where `key` in ('laravel_cache_dabf0f260370f64da33ce3eab59699b6')",
+                "type": "query",
+                "params": [],
+                "bindings": ["laravel_cache_dabf0f260370f64da33ce3eab59699b6"],
+                "hints": null,
+                "show_copy": true,
+                "backtrace": [
+                    {
+                        "index": 13,
+                        "namespace": null,
+                        "name": "vendor\/laravel\/framework\/src\/Illuminate\/Cache\/DatabaseStore.php",
+                        "file": "C:\\Users\\pasha\\dev\\bazaar\\vendor\\laravel\\framework\\src\\Illuminate\\Cache\\DatabaseStore.php",
+                        "line": 130
+                    },
+                    {
+                        "index": 14,
+                        "namespace": null,
+                        "name": "vendor\/laravel\/framework\/src\/Illuminate\/Cache\/DatabaseStore.php",
+                        "file": "C:\\Users\\pasha\\dev\\bazaar\\vendor\\laravel\\framework\\src\\Illuminate\\Cache\\DatabaseStore.php",
+                        "line": 105
+                    },
+                    {
+                        "index": 15,
+                        "namespace": null,
+                        "name": "vendor\/laravel\/framework\/src\/Illuminate\/Cache\/DatabaseStore.php",
+                        "file": "C:\\Users\\pasha\\dev\\bazaar\\vendor\\laravel\\framework\\src\\Illuminate\\Cache\\DatabaseStore.php",
+                        "line": 203
+                    },
+                    {
+                        "index": 16,
+                        "namespace": null,
+                        "name": "vendor\/laravel\/framework\/src\/Illuminate\/Cache\/Repository.php",
+                        "file": "C:\\Users\\pasha\\dev\\bazaar\\vendor\\laravel\\framework\\src\\Illuminate\\Cache\\Repository.php",
+                        "line": 346
+                    },
+                    {
+                        "index": 17,
+                        "namespace": null,
+                        "name": "vendor\/laravel\/framework\/src\/Illuminate\/Cache\/RateLimiter.php",
+                        "file": "C:\\Users\\pasha\\dev\\bazaar\\vendor\\laravel\\framework\\src\\Illuminate\\Cache\\RateLimiter.php",
+                        "line": 170
+                    }
+                ],
+                "start": 1743684342.224252,
+                "duration": 0.00037,
+                "duration_str": "370\u03bcs",
+                "memory": 0,
+                "memory_str": null,
+                "filename": "DatabaseStore.php:130",
+                "source": {
+                    "index": 13,
+                    "namespace": null,
+                    "name": "vendor\/laravel\/framework\/src\/Illuminate\/Cache\/DatabaseStore.php",
+                    "file": "C:\\Users\\pasha\\dev\\bazaar\\vendor\\laravel\\framework\\src\\Illuminate\\Cache\\DatabaseStore.php",
+                    "line": 130
+                },
+                "xdebug_link": {
+                    "url": "phpstorm:\/\/open?file=C%3A%2FUsers%2Fpasha%2Fdev%2Fbazaar%2Fvendor%2Flaravel%2Fframework%2Fsrc%2FIlluminate%2FCache%2FDatabaseStore.php&line=130",
+                    "ajax": false,
+                    "filename": "DatabaseStore.php",
+                    "line": "130"
+                },
+                "connection": "bazaar",
+                "explain": null,
+                "start_percent": 80.728,
+                "width_percent": 0.904
+            },
+            {
+                "sql": "insert ignore into `cache` (`key`, `value`, `expiration`) values ('laravel_cache_dabf0f260370f64da33ce3eab59699b6', 'i:0;', 1743684402)",
+                "type": "query",
+                "params": [],
+                "bindings": ["laravel_cache_dabf0f260370f64da33ce3eab59699b6", "i:0;", 1743684402],
+                "hints": null,
+                "show_copy": true,
+                "backtrace": [
+                    {
+                        "index": 10,
+                        "namespace": null,
+                        "name": "vendor\/laravel\/framework\/src\/Illuminate\/Cache\/DatabaseStore.php",
+                        "file": "C:\\Users\\pasha\\dev\\bazaar\\vendor\\laravel\\framework\\src\\Illuminate\\Cache\\DatabaseStore.php",
+                        "line": 212
+                    },
+                    {
+                        "index": 11,
+                        "namespace": null,
+                        "name": "vendor\/laravel\/framework\/src\/Illuminate\/Cache\/Repository.php",
+                        "file": "C:\\Users\\pasha\\dev\\bazaar\\vendor\\laravel\\framework\\src\\Illuminate\\Cache\\Repository.php",
+                        "line": 346
+                    },
+                    {
+                        "index": 12,
+                        "namespace": null,
+                        "name": "vendor\/laravel\/framework\/src\/Illuminate\/Cache\/RateLimiter.php",
+                        "file": "C:\\Users\\pasha\\dev\\bazaar\\vendor\\laravel\\framework\\src\\Illuminate\\Cache\\RateLimiter.php",
+                        "line": 170
+                    },
+                    {
+                        "index": 13,
+                        "namespace": null,
+                        "name": "vendor\/laravel\/framework\/src\/Illuminate\/Cache\/RateLimiter.php",
+                        "file": "C:\\Users\\pasha\\dev\\bazaar\\vendor\\laravel\\framework\\src\\Illuminate\\Cache\\RateLimiter.php",
+                        "line": 301
+                    },
+                    {
+                        "index": 14,
+                        "namespace": null,
+                        "name": "vendor\/laravel\/framework\/src\/Illuminate\/Cache\/RateLimiter.php",
+                        "file": "C:\\Users\\pasha\\dev\\bazaar\\vendor\\laravel\\framework\\src\\Illuminate\\Cache\\RateLimiter.php",
+                        "line": 169
+                    }
+                ],
+                "start": 1743684342.2254238,
+                "duration": 0.00287,
+                "duration_str": "2.87ms",
+                "memory": 0,
+                "memory_str": null,
+                "filename": "DatabaseStore.php:212",
+                "source": {
+                    "index": 10,
+                    "namespace": null,
+                    "name": "vendor\/laravel\/framework\/src\/Illuminate\/Cache\/DatabaseStore.php",
+                    "file": "C:\\Users\\pasha\\dev\\bazaar\\vendor\\laravel\\framework\\src\\Illuminate\\Cache\\DatabaseStore.php",
+                    "line": 212
+                },
+                "xdebug_link": {
+                    "url": "phpstorm:\/\/open?file=C%3A%2FUsers%2Fpasha%2Fdev%2Fbazaar%2Fvendor%2Flaravel%2Fframework%2Fsrc%2FIlluminate%2FCache%2FDatabaseStore.php&line=212",
+                    "ajax": false,
+                    "filename": "DatabaseStore.php",
+                    "line": "212"
+                },
+                "connection": "bazaar",
+                "explain": null,
+                "start_percent": 81.632,
+                "width_percent": 7.01
+            },
+            {
+                "sql": "Begin Transaction",
+                "type": "transaction",
+                "params": [],
+                "bindings": [],
+                "hints": null,
+                "show_copy": false,
+                "backtrace": [
+                    {
+                        "index": 8,
+                        "namespace": null,
+                        "name": "vendor\/laravel\/framework\/src\/Illuminate\/Cache\/DatabaseStore.php",
+                        "file": "C:\\Users\\pasha\\dev\\bazaar\\vendor\\laravel\\framework\\src\\Illuminate\\Cache\\DatabaseStore.php",
+                        "line": 262
+                    },
+                    {
+                        "index": 9,
+                        "namespace": null,
+                        "name": "vendor\/laravel\/framework\/src\/Illuminate\/Cache\/DatabaseStore.php",
+                        "file": "C:\\Users\\pasha\\dev\\bazaar\\vendor\\laravel\\framework\\src\\Illuminate\\Cache\\DatabaseStore.php",
+                        "line": 233
+                    },
+                    {
+                        "index": 10,
+                        "namespace": null,
+                        "name": "vendor\/laravel\/framework\/src\/Illuminate\/Cache\/Repository.php",
+                        "file": "C:\\Users\\pasha\\dev\\bazaar\\vendor\\laravel\\framework\\src\\Illuminate\\Cache\\Repository.php",
+                        "line": 371
+                    },
+                    {
+                        "index": 11,
+                        "namespace": null,
+                        "name": "vendor\/laravel\/framework\/src\/Illuminate\/Cache\/RateLimiter.php",
+                        "file": "C:\\Users\\pasha\\dev\\bazaar\\vendor\\laravel\\framework\\src\\Illuminate\\Cache\\RateLimiter.php",
+                        "line": 173
+                    },
+                    {
+                        "index": 12,
+                        "namespace": null,
+                        "name": "vendor\/laravel\/framework\/src\/Illuminate\/Cache\/RateLimiter.php",
+                        "file": "C:\\Users\\pasha\\dev\\bazaar\\vendor\\laravel\\framework\\src\\Illuminate\\Cache\\RateLimiter.php",
+                        "line": 150
+                    }
+                ],
+                "start": 1743684342.229918,
+                "duration": 0,
+                "duration_str": "",
+                "memory": 0,
+                "memory_str": null,
+                "filename": "DatabaseStore.php:262",
+                "source": {
+                    "index": 8,
+                    "namespace": null,
+                    "name": "vendor\/laravel\/framework\/src\/Illuminate\/Cache\/DatabaseStore.php",
+                    "file": "C:\\Users\\pasha\\dev\\bazaar\\vendor\\laravel\\framework\\src\\Illuminate\\Cache\\DatabaseStore.php",
+                    "line": 262
+                },
+                "xdebug_link": {
+                    "url": "phpstorm:\/\/open?file=C%3A%2FUsers%2Fpasha%2Fdev%2Fbazaar%2Fvendor%2Flaravel%2Fframework%2Fsrc%2FIlluminate%2FCache%2FDatabaseStore.php&line=262",
+                    "ajax": false,
+                    "filename": "DatabaseStore.php",
+                    "line": "262"
+                },
+                "connection": "bazaar",
+                "explain": null,
+                "start_percent": 88.642,
+                "width_percent": 0
+            },
+            {
+                "sql": "select * from `cache` where `key` = 'laravel_cache_dabf0f260370f64da33ce3eab59699b6' limit 1 for update",
+                "type": "query",
+                "params": [],
+                "bindings": ["laravel_cache_dabf0f260370f64da33ce3eab59699b6"],
+                "hints": null,
+                "show_copy": true,
+                "backtrace": [
+                    {
+                        "index": 14,
+                        "namespace": null,
+                        "name": "vendor\/laravel\/framework\/src\/Illuminate\/Cache\/DatabaseStore.php",
+                        "file": "C:\\Users\\pasha\\dev\\bazaar\\vendor\\laravel\\framework\\src\\Illuminate\\Cache\\DatabaseStore.php",
+                        "line": 266
+                    },
+                    {
+                        "index": 16,
+                        "namespace": null,
+                        "name": "vendor\/laravel\/framework\/src\/Illuminate\/Cache\/DatabaseStore.php",
+                        "file": "C:\\Users\\pasha\\dev\\bazaar\\vendor\\laravel\\framework\\src\\Illuminate\\Cache\\DatabaseStore.php",
+                        "line": 262
+                    },
+                    {
+                        "index": 17,
+                        "namespace": null,
+                        "name": "vendor\/laravel\/framework\/src\/Illuminate\/Cache\/DatabaseStore.php",
+                        "file": "C:\\Users\\pasha\\dev\\bazaar\\vendor\\laravel\\framework\\src\\Illuminate\\Cache\\DatabaseStore.php",
+                        "line": 233
+                    },
+                    {
+                        "index": 18,
+                        "namespace": null,
+                        "name": "vendor\/laravel\/framework\/src\/Illuminate\/Cache\/Repository.php",
+                        "file": "C:\\Users\\pasha\\dev\\bazaar\\vendor\\laravel\\framework\\src\\Illuminate\\Cache\\Repository.php",
+                        "line": 371
+                    },
+                    {
+                        "index": 19,
+                        "namespace": null,
+                        "name": "vendor\/laravel\/framework\/src\/Illuminate\/Cache\/RateLimiter.php",
+                        "file": "C:\\Users\\pasha\\dev\\bazaar\\vendor\\laravel\\framework\\src\\Illuminate\\Cache\\RateLimiter.php",
+                        "line": 173
+                    }
+                ],
+                "start": 1743684342.23,
+                "duration": 0.00023,
+                "duration_str": "230\u03bcs",
+                "memory": 0,
+                "memory_str": null,
+                "filename": "DatabaseStore.php:266",
+                "source": {
+                    "index": 14,
+                    "namespace": null,
+                    "name": "vendor\/laravel\/framework\/src\/Illuminate\/Cache\/DatabaseStore.php",
+                    "file": "C:\\Users\\pasha\\dev\\bazaar\\vendor\\laravel\\framework\\src\\Illuminate\\Cache\\DatabaseStore.php",
+                    "line": 266
+                },
+                "xdebug_link": {
+                    "url": "phpstorm:\/\/open?file=C%3A%2FUsers%2Fpasha%2Fdev%2Fbazaar%2Fvendor%2Flaravel%2Fframework%2Fsrc%2FIlluminate%2FCache%2FDatabaseStore.php&line=266",
+                    "ajax": false,
+                    "filename": "DatabaseStore.php",
+                    "line": "266"
+                },
+                "connection": "bazaar",
+                "explain": null,
+                "start_percent": 88.642,
+                "width_percent": 0.562
+            },
+            {
+                "sql": "update `cache` set `value` = 'i:1;' where `key` = 'laravel_cache_dabf0f260370f64da33ce3eab59699b6'",
+                "type": "query",
+                "params": [],
+                "bindings": ["i:1;", "laravel_cache_dabf0f260370f64da33ce3eab59699b6"],
+                "hints": null,
+                "show_copy": true,
+                "backtrace": [
+                    {
+                        "index": 11,
+                        "namespace": null,
+                        "name": "vendor\/laravel\/framework\/src\/Illuminate\/Cache\/DatabaseStore.php",
+                        "file": "C:\\Users\\pasha\\dev\\bazaar\\vendor\\laravel\\framework\\src\\Illuminate\\Cache\\DatabaseStore.php",
+                        "line": 291
+                    },
+                    {
+                        "index": 13,
+                        "namespace": null,
+                        "name": "vendor\/laravel\/framework\/src\/Illuminate\/Cache\/DatabaseStore.php",
+                        "file": "C:\\Users\\pasha\\dev\\bazaar\\vendor\\laravel\\framework\\src\\Illuminate\\Cache\\DatabaseStore.php",
+                        "line": 262
+                    },
+                    {
+                        "index": 14,
+                        "namespace": null,
+                        "name": "vendor\/laravel\/framework\/src\/Illuminate\/Cache\/DatabaseStore.php",
+                        "file": "C:\\Users\\pasha\\dev\\bazaar\\vendor\\laravel\\framework\\src\\Illuminate\\Cache\\DatabaseStore.php",
+                        "line": 233
+                    },
+                    {
+                        "index": 15,
+                        "namespace": null,
+                        "name": "vendor\/laravel\/framework\/src\/Illuminate\/Cache\/Repository.php",
+                        "file": "C:\\Users\\pasha\\dev\\bazaar\\vendor\\laravel\\framework\\src\\Illuminate\\Cache\\Repository.php",
+                        "line": 371
+                    },
+                    {
+                        "index": 16,
+                        "namespace": null,
+                        "name": "vendor\/laravel\/framework\/src\/Illuminate\/Cache\/RateLimiter.php",
+                        "file": "C:\\Users\\pasha\\dev\\bazaar\\vendor\\laravel\\framework\\src\\Illuminate\\Cache\\RateLimiter.php",
+                        "line": 173
+                    }
+                ],
+                "start": 1743684342.2308269,
+                "duration": 0.00091,
+                "duration_str": "910\u03bcs",
+                "memory": 0,
+                "memory_str": null,
+                "filename": "DatabaseStore.php:291",
+                "source": {
+                    "index": 11,
+                    "namespace": null,
+                    "name": "vendor\/laravel\/framework\/src\/Illuminate\/Cache\/DatabaseStore.php",
+                    "file": "C:\\Users\\pasha\\dev\\bazaar\\vendor\\laravel\\framework\\src\\Illuminate\\Cache\\DatabaseStore.php",
+                    "line": 291
+                },
+                "xdebug_link": {
+                    "url": "phpstorm:\/\/open?file=C%3A%2FUsers%2Fpasha%2Fdev%2Fbazaar%2Fvendor%2Flaravel%2Fframework%2Fsrc%2FIlluminate%2FCache%2FDatabaseStore.php&line=291",
+                    "ajax": false,
+                    "filename": "DatabaseStore.php",
+                    "line": "291"
+                },
+                "connection": "bazaar",
+                "explain": null,
+                "start_percent": 89.204,
+                "width_percent": 2.223
+            },
+            {
+                "sql": "Commit Transaction",
+                "type": "transaction",
+                "params": [],
+                "bindings": [],
+                "hints": null,
+                "show_copy": false,
+                "backtrace": [
+                    {
+                        "index": 7,
+                        "namespace": null,
+                        "name": "vendor\/laravel\/framework\/src\/Illuminate\/Cache\/DatabaseStore.php",
+                        "file": "C:\\Users\\pasha\\dev\\bazaar\\vendor\\laravel\\framework\\src\\Illuminate\\Cache\\DatabaseStore.php",
+                        "line": 262
+                    },
+                    {
+                        "index": 8,
+                        "namespace": null,
+                        "name": "vendor\/laravel\/framework\/src\/Illuminate\/Cache\/DatabaseStore.php",
+                        "file": "C:\\Users\\pasha\\dev\\bazaar\\vendor\\laravel\\framework\\src\\Illuminate\\Cache\\DatabaseStore.php",
+                        "line": 233
+                    },
+                    {
+                        "index": 9,
+                        "namespace": null,
+                        "name": "vendor\/laravel\/framework\/src\/Illuminate\/Cache\/Repository.php",
+                        "file": "C:\\Users\\pasha\\dev\\bazaar\\vendor\\laravel\\framework\\src\\Illuminate\\Cache\\Repository.php",
+                        "line": 371
+                    },
+                    {
+                        "index": 10,
+                        "namespace": null,
+                        "name": "vendor\/laravel\/framework\/src\/Illuminate\/Cache\/RateLimiter.php",
+                        "file": "C:\\Users\\pasha\\dev\\bazaar\\vendor\\laravel\\framework\\src\\Illuminate\\Cache\\RateLimiter.php",
+                        "line": 173
+                    },
+                    {
+                        "index": 11,
+                        "namespace": null,
+                        "name": "vendor\/laravel\/framework\/src\/Illuminate\/Cache\/RateLimiter.php",
+                        "file": "C:\\Users\\pasha\\dev\\bazaar\\vendor\\laravel\\framework\\src\\Illuminate\\Cache\\RateLimiter.php",
+                        "line": 150
+                    }
+                ],
+                "start": 1743684342.236939,
+                "duration": 0,
+                "duration_str": "",
+                "memory": 0,
+                "memory_str": null,
+                "filename": "DatabaseStore.php:262",
+                "source": {
+                    "index": 7,
+                    "namespace": null,
+                    "name": "vendor\/laravel\/framework\/src\/Illuminate\/Cache\/DatabaseStore.php",
+                    "file": "C:\\Users\\pasha\\dev\\bazaar\\vendor\\laravel\\framework\\src\\Illuminate\\Cache\\DatabaseStore.php",
+                    "line": 262
+                },
+                "xdebug_link": {
+                    "url": "phpstorm:\/\/open?file=C%3A%2FUsers%2Fpasha%2Fdev%2Fbazaar%2Fvendor%2Flaravel%2Fframework%2Fsrc%2FIlluminate%2FCache%2FDatabaseStore.php&line=262",
+                    "ajax": false,
+                    "filename": "DatabaseStore.php",
+                    "line": "262"
+                },
+                "connection": "bazaar",
+                "explain": null,
+                "start_percent": 91.426,
+                "width_percent": 0
+            },
+            {
+                "sql": "select * from `users` where `email` = 'carey38@example.net' limit 1",
+                "type": "query",
+                "params": [],
+                "bindings": ["carey38@example.net"],
+                "hints": null,
+                "show_copy": true,
+                "backtrace": [
+                    {
+                        "index": 16,
+                        "namespace": null,
+                        "name": "vendor\/laravel\/framework\/src\/Illuminate\/Auth\/EloquentUserProvider.php",
+                        "file": "C:\\Users\\pasha\\dev\\bazaar\\vendor\\laravel\\framework\\src\\Illuminate\\Auth\\EloquentUserProvider.php",
+                        "line": 139
+                    },
+                    {
+                        "index": 17,
+                        "namespace": null,
+                        "name": "vendor\/laravel\/framework\/src\/Illuminate\/Auth\/SessionGuard.php",
+                        "file": "C:\\Users\\pasha\\dev\\bazaar\\vendor\\laravel\\framework\\src\\Illuminate\\Auth\\SessionGuard.php",
+                        "line": 396
+                    },
+                    {
+                        "index": 18,
+                        "namespace": null,
+                        "name": "vendor\/laravel\/fortify\/src\/Actions\/AttemptToAuthenticate.php",
+                        "file": "C:\\Users\\pasha\\dev\\bazaar\\vendor\\laravel\\fortify\\src\\Actions\\AttemptToAuthenticate.php",
+                        "line": 53
+                    },
+                    {
+                        "index": 19,
+                        "namespace": null,
+                        "name": "vendor\/laravel\/framework\/src\/Illuminate\/Pipeline\/Pipeline.php",
+                        "file": "C:\\Users\\pasha\\dev\\bazaar\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php",
+                        "line": 209
+                    },
+                    {
+                        "index": 20,
+                        "namespace": null,
+                        "name": "vendor\/laravel\/fortify\/src\/Actions\/CanonicalizeUsername.php",
+                        "file": "C:\\Users\\pasha\\dev\\bazaar\\vendor\\laravel\\fortify\\src\\Actions\\CanonicalizeUsername.php",
+                        "line": 25
+                    }
+                ],
+                "start": 1743684342.250945,
+                "duration": 0.00047999999999999996,
+                "duration_str": "480\u03bcs",
+                "memory": 0,
+                "memory_str": null,
+                "filename": "EloquentUserProvider.php:139",
+                "source": {
+                    "index": 16,
+                    "namespace": null,
+                    "name": "vendor\/laravel\/framework\/src\/Illuminate\/Auth\/EloquentUserProvider.php",
+                    "file": "C:\\Users\\pasha\\dev\\bazaar\\vendor\\laravel\\framework\\src\\Illuminate\\Auth\\EloquentUserProvider.php",
+                    "line": 139
+                },
+                "xdebug_link": {
+                    "url": "phpstorm:\/\/open?file=C%3A%2FUsers%2Fpasha%2Fdev%2Fbazaar%2Fvendor%2Flaravel%2Fframework%2Fsrc%2FIlluminate%2FAuth%2FEloquentUserProvider.php&line=139",
+                    "ajax": false,
+                    "filename": "EloquentUserProvider.php",
+                    "line": "139"
+                },
+                "connection": "bazaar",
+                "explain": null,
+                "start_percent": 91.426,
+                "width_percent": 1.172
+            },
+            {
+                "sql": "delete from `sessions` where `id` = 'TBGJuoQ1Vdm10eIPYZoWcZepMd4PpABy9wHozR63'",
+                "type": "query",
+                "params": [],
+                "bindings": ["TBGJuoQ1Vdm10eIPYZoWcZepMd4PpABy9wHozR63"],
+                "hints": null,
+                "show_copy": true,
+                "backtrace": [
+                    {
+                        "index": 11,
+                        "namespace": null,
+                        "name": "vendor\/laravel\/framework\/src\/Illuminate\/Session\/DatabaseSessionHandler.php",
+                        "file": "C:\\Users\\pasha\\dev\\bazaar\\vendor\\laravel\\framework\\src\\Illuminate\\Session\\DatabaseSessionHandler.php",
+                        "line": 269
+                    },
+                    {
+                        "index": 12,
+                        "namespace": null,
+                        "name": "vendor\/laravel\/framework\/src\/Illuminate\/Session\/Store.php",
+                        "file": "C:\\Users\\pasha\\dev\\bazaar\\vendor\\laravel\\framework\\src\\Illuminate\\Session\\Store.php",
+                        "line": 609
+                    },
+                    {
+                        "index": 13,
+                        "namespace": null,
+                        "name": "vendor\/laravel\/framework\/src\/Illuminate\/Auth\/SessionGuard.php",
+                        "file": "C:\\Users\\pasha\\dev\\bazaar\\vendor\\laravel\\framework\\src\\Illuminate\\Auth\\SessionGuard.php",
+                        "line": 557
+                    },
+                    {
+                        "index": 14,
+                        "namespace": null,
+                        "name": "vendor\/laravel\/framework\/src\/Illuminate\/Auth\/SessionGuard.php",
+                        "file": "C:\\Users\\pasha\\dev\\bazaar\\vendor\\laravel\\framework\\src\\Illuminate\\Auth\\SessionGuard.php",
+                        "line": 528
+                    },
+                    {
+                        "index": 15,
+                        "namespace": null,
+                        "name": "vendor\/laravel\/framework\/src\/Illuminate\/Auth\/SessionGuard.php",
+                        "file": "C:\\Users\\pasha\\dev\\bazaar\\vendor\\laravel\\framework\\src\\Illuminate\\Auth\\SessionGuard.php",
+                        "line": 404
+                    }
+                ],
+                "start": 1743684342.4893658,
+                "duration": 0.00237,
+                "duration_str": "2.37ms",
+                "memory": 0,
+                "memory_str": null,
+                "filename": "DatabaseSessionHandler.php:269",
+                "source": {
+                    "index": 11,
+                    "namespace": null,
+                    "name": "vendor\/laravel\/framework\/src\/Illuminate\/Session\/DatabaseSessionHandler.php",
+                    "file": "C:\\Users\\pasha\\dev\\bazaar\\vendor\\laravel\\framework\\src\\Illuminate\\Session\\DatabaseSessionHandler.php",
+                    "line": 269
+                },
+                "xdebug_link": {
+                    "url": "phpstorm:\/\/open?file=C%3A%2FUsers%2Fpasha%2Fdev%2Fbazaar%2Fvendor%2Flaravel%2Fframework%2Fsrc%2FIlluminate%2FSession%2FDatabaseSessionHandler.php&line=269",
+                    "ajax": false,
+                    "filename": "DatabaseSessionHandler.php",
+                    "line": "269"
+                },
+                "connection": "bazaar",
+                "explain": null,
+                "start_percent": 92.599,
+                "width_percent": 5.789
+            },
+            {
+                "sql": "delete from `cache` where `key` in ('laravel_cache_carey38@example.net|127.0.0.1', 'laravel_cache_illuminate:cache:flexible:created:carey38@example.net|127.0.0.1')",
+                "type": "query",
+                "params": [],
+                "bindings": [
+                    "laravel_cache_carey38@example.net|127.0.0.1",
+                    "laravel_cache_illuminate:cache:flexible:created:carey38@example.net|127.0.0.1"
+                ],
+                "hints": null,
+                "show_copy": true,
+                "backtrace": [
+                    {
+                        "index": 11,
+                        "namespace": null,
+                        "name": "vendor\/laravel\/framework\/src\/Illuminate\/Cache\/DatabaseStore.php",
+                        "file": "C:\\Users\\pasha\\dev\\bazaar\\vendor\\laravel\\framework\\src\\Illuminate\\Cache\\DatabaseStore.php",
+                        "line": 387
+                    },
+                    {
+                        "index": 12,
+                        "namespace": null,
+                        "name": "vendor\/laravel\/framework\/src\/Illuminate\/Cache\/DatabaseStore.php",
+                        "file": "C:\\Users\\pasha\\dev\\bazaar\\vendor\\laravel\\framework\\src\\Illuminate\\Cache\\DatabaseStore.php",
+                        "line": 362
+                    },
+                    {
+                        "index": 13,
+                        "namespace": null,
+                        "name": "vendor\/laravel\/framework\/src\/Illuminate\/Cache\/Repository.php",
+                        "file": "C:\\Users\\pasha\\dev\\bazaar\\vendor\\laravel\\framework\\src\\Illuminate\\Cache\\Repository.php",
+                        "line": 536
+                    },
+                    {
+                        "index": 14,
+                        "namespace": null,
+                        "name": "vendor\/laravel\/framework\/src\/Illuminate\/Cache\/RateLimiter.php",
+                        "file": "C:\\Users\\pasha\\dev\\bazaar\\vendor\\laravel\\framework\\src\\Illuminate\\Cache\\RateLimiter.php",
+                        "line": 220
+                    },
+                    {
+                        "index": 15,
+                        "namespace": null,
+                        "name": "vendor\/laravel\/framework\/src\/Illuminate\/Cache\/RateLimiter.php",
+                        "file": "C:\\Users\\pasha\\dev\\bazaar\\vendor\\laravel\\framework\\src\\Illuminate\\Cache\\RateLimiter.php",
+                        "line": 261
+                    }
+                ],
+                "start": 1743684342.493012,
+                "duration": 0.00037,
+                "duration_str": "370\u03bcs",
+                "memory": 0,
+                "memory_str": null,
+                "filename": "DatabaseStore.php:387",
+                "source": {
+                    "index": 11,
+                    "namespace": null,
+                    "name": "vendor\/laravel\/framework\/src\/Illuminate\/Cache\/DatabaseStore.php",
+                    "file": "C:\\Users\\pasha\\dev\\bazaar\\vendor\\laravel\\framework\\src\\Illuminate\\Cache\\DatabaseStore.php",
+                    "line": 387
+                },
+                "xdebug_link": {
+                    "url": "phpstorm:\/\/open?file=C%3A%2FUsers%2Fpasha%2Fdev%2Fbazaar%2Fvendor%2Flaravel%2Fframework%2Fsrc%2FIlluminate%2FCache%2FDatabaseStore.php&line=387",
+                    "ajax": false,
+                    "filename": "DatabaseStore.php",
+                    "line": "387"
+                },
+                "connection": "bazaar",
+                "explain": null,
+                "start_percent": 98.388,
+                "width_percent": 0.904
+            },
+            {
+                "sql": "delete from `cache` where `key` in ('laravel_cache_carey38@example.net|127.0.0.1:timer', 'laravel_cache_illuminate:cache:flexible:created:carey38@example.net|127.0.0.1:timer')",
+                "type": "query",
+                "params": [],
+                "bindings": [
+                    "laravel_cache_carey38@example.net|127.0.0.1:timer",
+                    "laravel_cache_illuminate:cache:flexible:created:carey38@example.net|127.0.0.1:timer"
+                ],
+                "hints": null,
+                "show_copy": true,
+                "backtrace": [
+                    {
+                        "index": 11,
+                        "namespace": null,
+                        "name": "vendor\/laravel\/framework\/src\/Illuminate\/Cache\/DatabaseStore.php",
+                        "file": "C:\\Users\\pasha\\dev\\bazaar\\vendor\\laravel\\framework\\src\\Illuminate\\Cache\\DatabaseStore.php",
+                        "line": 387
+                    },
+                    {
+                        "index": 12,
+                        "namespace": null,
+                        "name": "vendor\/laravel\/framework\/src\/Illuminate\/Cache\/DatabaseStore.php",
+                        "file": "C:\\Users\\pasha\\dev\\bazaar\\vendor\\laravel\\framework\\src\\Illuminate\\Cache\\DatabaseStore.php",
+                        "line": 362
+                    },
+                    {
+                        "index": 13,
+                        "namespace": null,
+                        "name": "vendor\/laravel\/framework\/src\/Illuminate\/Cache\/Repository.php",
+                        "file": "C:\\Users\\pasha\\dev\\bazaar\\vendor\\laravel\\framework\\src\\Illuminate\\Cache\\Repository.php",
+                        "line": 536
+                    },
+                    {
+                        "index": 14,
+                        "namespace": null,
+                        "name": "vendor\/laravel\/framework\/src\/Illuminate\/Cache\/RateLimiter.php",
+                        "file": "C:\\Users\\pasha\\dev\\bazaar\\vendor\\laravel\\framework\\src\\Illuminate\\Cache\\RateLimiter.php",
+                        "line": 263
+                    },
+                    {
+                        "index": 15,
+                        "namespace": null,
+                        "name": "vendor\/laravel\/fortify\/src\/LoginRateLimiter.php",
+                        "file": "C:\\Users\\pasha\\dev\\bazaar\\vendor\\laravel\\fortify\\src\\LoginRateLimiter.php",
+                        "line": 81
+                    }
+                ],
+                "start": 1743684342.494213,
+                "duration": 0.00029,
+                "duration_str": "290\u03bcs",
+                "memory": 0,
+                "memory_str": null,
+                "filename": "DatabaseStore.php:387",
+                "source": {
+                    "index": 11,
+                    "namespace": null,
+                    "name": "vendor\/laravel\/framework\/src\/Illuminate\/Cache\/DatabaseStore.php",
+                    "file": "C:\\Users\\pasha\\dev\\bazaar\\vendor\\laravel\\framework\\src\\Illuminate\\Cache\\DatabaseStore.php",
+                    "line": 387
+                },
+                "xdebug_link": {
+                    "url": "phpstorm:\/\/open?file=C%3A%2FUsers%2Fpasha%2Fdev%2Fbazaar%2Fvendor%2Flaravel%2Fframework%2Fsrc%2FIlluminate%2FCache%2FDatabaseStore.php&line=387",
+                    "ajax": false,
+                    "filename": "DatabaseStore.php",
+                    "line": "387"
+                },
+                "connection": "bazaar",
+                "explain": null,
+                "start_percent": 99.292,
+                "width_percent": 0.708
+            }
+        ]
+    },
+    "models": {
+        "data": {
+            "App\\Models\\User": {
+                "value": 1,
+                "xdebug_link": {
+                    "url": "phpstorm:\/\/open?file=C%3A%2FUsers%2Fpasha%2Fdev%2Fbazaar%2Fapp%2FModels%2FUser.php&line=1",
+                    "ajax": false,
+                    "filename": "User.php",
+                    "line": "?"
+                }
+            }
+        },
+        "count": 1,
+        "is_counter": true
+    },
+    "symfonymailer_mails": { "count": 0, "mails": [] },
+    "gate": { "count": 0, "messages": [] },
+    "request": {
+        "data": {
+            "status": "302 Found",
+            "full_url": "http:\/\/127.0.0.1:8000\/login",
+            "action_name": "login.store",
+            "controller_action": "Laravel\\Fortify\\Http\\Controllers\\AuthenticatedSessionController@store",
+            "uri": "POST login",
+            "controller": "Laravel\\Fortify\\Http\\Controllers\\AuthenticatedSessionController@store<a href=\"phpstorm:\/\/open?file=C%3A%2FUsers%2Fpasha%2Fdev%2Fbazaar%2Fvendor%2Flaravel%2Ffortify%2Fsrc%2FHttp%2FControllers%2FAuthenticatedSessionController.php&line=58\" class=\"phpdebugbar-widgets-editor-link\"><\/a>",
+            "namespace": "Laravel\\Fortify\\Http\\Controllers",
+            "file": "<a href=\"phpstorm:\/\/open?file=C%3A%2FUsers%2Fpasha%2Fdev%2Fbazaar%2Fvendor%2Flaravel%2Ffortify%2Fsrc%2FHttp%2FControllers%2FAuthenticatedSessionController.php&line=58\" onclick=\"\" class=\"phpdebugbar-widgets-editor-link\">vendor\/laravel\/fortify\/src\/Http\/Controllers\/AuthenticatedSessionController.php:58-63<\/a>",
+            "middleware": "web, guest:web, throttle:login",
+            "duration": "430ms",
+            "peak_memory": "24MB",
+            "response": "Redirect to http:\/\/127.0.0.1:8000",
+            "request_format": "html",
+            "request_query": "<pre class=sf-dump id=sf-dump-781349178 data-indent-pad=\"  \">[]\n<\/pre><script>Sfdump(\"sf-dump-781349178\", {\"maxDepth\":0})<\/script>\n",
+            "request_request": "<pre class=sf-dump id=sf-dump-1560499216 data-indent-pad=\"  \"><span class=sf-dump-note>array:3<\/span> [<samp data-depth=1 class=sf-dump-expanded>\n  \"<span class=sf-dump-key>_token<\/span>\" => \"<span class=sf-dump-str title=\"40 characters\">K9cAK2T6DSpGJTitM3om2jWOVOoA8YfpKo1p0WwN<\/span>\"\n  \"<span class=sf-dump-key>email<\/span>\" => \"<span class=sf-dump-str title=\"19 characters\">carey38@example.net<\/span>\"\n  \"<span class=sf-dump-key>password<\/span>\" => \"<span class=sf-dump-str title=\"6 characters\">******<\/span>\"\n<\/samp>]\n<\/pre><script>Sfdump(\"sf-dump-1560499216\", {\"maxDepth\":0})<\/script>\n",
+            "request_headers": "<pre class=sf-dump id=sf-dump-1274009058 data-indent-pad=\"  \"><span class=sf-dump-note>array:20<\/span> [<samp data-depth=1 class=sf-dump-expanded>\n  \"<span class=sf-dump-key>host<\/span>\" => <span class=sf-dump-note>array:1<\/span> [<samp data-depth=2 class=sf-dump-compact>\n    <span class=sf-dump-index>0<\/span> => \"<span class=sf-dump-str title=\"14 characters\">127.0.0.1:8000<\/span>\"\n  <\/samp>]\n  \"<span class=sf-dump-key>connection<\/span>\" => <span class=sf-dump-note>array:1<\/span> [<samp data-depth=2 class=sf-dump-compact>\n    <span class=sf-dump-index>0<\/span> => \"<span class=sf-dump-str title=\"10 characters\">keep-alive<\/span>\"\n  <\/samp>]\n  \"<span class=sf-dump-key>content-length<\/span>\" => <span class=sf-dump-note>array:1<\/span> [<samp data-depth=2 class=sf-dump-compact>\n    <span class=sf-dump-index>0<\/span> => \"<span class=sf-dump-str title=\"2 characters\">96<\/span>\"\n  <\/samp>]\n  \"<span class=sf-dump-key>cache-control<\/span>\" => <span class=sf-dump-note>array:1<\/span> [<samp data-depth=2 class=sf-dump-compact>\n    <span class=sf-dump-index>0<\/span> => \"<span class=sf-dump-str title=\"9 characters\">max-age=0<\/span>\"\n  <\/samp>]\n  \"<span class=sf-dump-key>sec-ch-ua<\/span>\" => <span class=sf-dump-note>array:1<\/span> [<samp data-depth=2 class=sf-dump-compact>\n    <span class=sf-dump-index>0<\/span> => \"<span class=sf-dump-str title=\"65 characters\">&quot;Chromium&quot;;v=&quot;134&quot;, &quot;Not:A-Brand&quot;;v=&quot;24&quot;, &quot;Google Chrome&quot;;v=&quot;134&quot;<\/span>\"\n  <\/samp>]\n  \"<span class=sf-dump-key>sec-ch-ua-mobile<\/span>\" => <span class=sf-dump-note>array:1<\/span> [<samp data-depth=2 class=sf-dump-compact>\n    <span class=sf-dump-index>0<\/span> => \"<span class=sf-dump-str title=\"2 characters\">?0<\/span>\"\n  <\/samp>]\n  \"<span class=sf-dump-key>sec-ch-ua-platform<\/span>\" => <span class=sf-dump-note>array:1<\/span> [<samp data-depth=2 class=sf-dump-compact>\n    <span class=sf-dump-index>0<\/span> => \"<span class=sf-dump-str title=\"9 characters\">&quot;Windows&quot;<\/span>\"\n  <\/samp>]\n  \"<span class=sf-dump-key>origin<\/span>\" => <span class=sf-dump-note>array:1<\/span> [<samp data-depth=2 class=sf-dump-compact>\n    <span class=sf-dump-index>0<\/span> => \"<span class=sf-dump-str title=\"21 characters\">http:\/\/127.0.0.1:8000<\/span>\"\n  <\/samp>]\n  \"<span class=sf-dump-key>content-type<\/span>\" => <span class=sf-dump-note>array:1<\/span> [<samp data-depth=2 class=sf-dump-compact>\n    <span class=sf-dump-index>0<\/span> => \"<span class=sf-dump-str title=\"33 characters\">application\/x-www-form-urlencoded<\/span>\"\n  <\/samp>]\n  \"<span class=sf-dump-key>upgrade-insecure-requests<\/span>\" => <span class=sf-dump-note>array:1<\/span> [<samp data-depth=2 class=sf-dump-compact>\n    <span class=sf-dump-index>0<\/span> => \"<span class=sf-dump-str>1<\/span>\"\n  <\/samp>]\n  \"<span class=sf-dump-key>user-agent<\/span>\" => <span class=sf-dump-note>array:1<\/span> [<samp data-depth=2 class=sf-dump-compact>\n    <span class=sf-dump-index>0<\/span> => \"<span class=sf-dump-str title=\"119 characters\">Mozilla\/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit\/537.36 (KHTML, like Gecko) HeadlessChrome\/134.0.0.0 Safari\/537.36<\/span>\"\n  <\/samp>]\n  \"<span class=sf-dump-key>accept<\/span>\" => <span class=sf-dump-note>array:1<\/span> [<samp data-depth=2 class=sf-dump-compact>\n    <span class=sf-dump-index>0<\/span> => \"<span class=sf-dump-str title=\"135 characters\">text\/html,application\/xhtml+xml,application\/xml;q=0.9,image\/avif,image\/webp,image\/apng,*\/*;q=0.8,application\/signed-exchange;v=b3;q=0.7<\/span>\"\n  <\/samp>]\n  \"<span class=sf-dump-key>sec-fetch-site<\/span>\" => <span class=sf-dump-note>array:1<\/span> [<samp data-depth=2 class=sf-dump-compact>\n    <span class=sf-dump-index>0<\/span> => \"<span class=sf-dump-str title=\"11 characters\">same-origin<\/span>\"\n  <\/samp>]\n  \"<span class=sf-dump-key>sec-fetch-mode<\/span>\" => <span class=sf-dump-note>array:1<\/span> [<samp data-depth=2 class=sf-dump-compact>\n    <span class=sf-dump-index>0<\/span> => \"<span class=sf-dump-str title=\"8 characters\">navigate<\/span>\"\n  <\/samp>]\n  \"<span class=sf-dump-key>sec-fetch-user<\/span>\" => <span class=sf-dump-note>array:1<\/span> [<samp data-depth=2 class=sf-dump-compact>\n    <span class=sf-dump-index>0<\/span> => \"<span class=sf-dump-str title=\"2 characters\">?1<\/span>\"\n  <\/samp>]\n  \"<span class=sf-dump-key>sec-fetch-dest<\/span>\" => <span class=sf-dump-note>array:1<\/span> [<samp data-depth=2 class=sf-dump-compact>\n    <span class=sf-dump-index>0<\/span> => \"<span class=sf-dump-str title=\"8 characters\">document<\/span>\"\n  <\/samp>]\n  \"<span class=sf-dump-key>referer<\/span>\" => <span class=sf-dump-note>array:1<\/span> [<samp data-depth=2 class=sf-dump-compact>\n    <span class=sf-dump-index>0<\/span> => \"<span class=sf-dump-str title=\"27 characters\">http:\/\/127.0.0.1:8000\/login<\/span>\"\n  <\/samp>]\n  \"<span class=sf-dump-key>accept-encoding<\/span>\" => <span class=sf-dump-note>array:1<\/span> [<samp data-depth=2 class=sf-dump-compact>\n    <span class=sf-dump-index>0<\/span> => \"<span class=sf-dump-str title=\"23 characters\">gzip, deflate, br, zstd<\/span>\"\n  <\/samp>]\n  \"<span class=sf-dump-key>accept-language<\/span>\" => <span class=sf-dump-note>array:1<\/span> [<samp data-depth=2 class=sf-dump-compact>\n    <span class=sf-dump-index>0<\/span> => \"<span class=sf-dump-str title=\"26 characters\">en-GB,en-US;q=0.9,en;q=0.8<\/span>\"\n  <\/samp>]\n  \"<span class=sf-dump-key>cookie<\/span>\" => <span class=sf-dump-note>array:1<\/span> [<samp data-depth=2 class=sf-dump-compact>\n    <span class=sf-dump-index>0<\/span> => \"<span class=sf-dump-str title=\"713 characters\">XSRF-TOKEN=eyJpdiI6InlVSDB2Zm9UaXhQZnk3RWlGdTVLeVE9PSIsInZhbHVlIjoiWFRtVVZxMEgvdnVJcVlYQy9UdWR2bXpIU0xacmhjTFBjeWdzU0U2NUFKNjZCam5Sc3Q1R3FMWDgrd2dhZnREeGdyeHpXZUU5V0NJVHJHdncyNlVxdUFJQTIxZk5CcTIyc3NVdzh5blgyazMwMzByWjJnMnBleURnKzQvRy9pbnkiLCJtYWMiOiJmZWE5MjM3OWNmMGE1OWQ5ZjZhMGJiMWViMjkxMzM3ODYwZGQ3NzQ0ZWNhZmRhZTUwMDM1ZWQ3NWQ2NWM3YWY0IiwidGFnIjoiIn0%3D; laravel_session=eyJpdiI6IndsVmZzd1RUc1lRd0ladGZmMVJEdmc9PSIsInZhbHVlIjoieFNScnowTm1qTmdyMXJOTkVTUGpqcWlPcVJ3WHZ4VTdGcXozNHBRQUZkb2Y5OGx6NzUyOGs3aHRIWWRKSGhCZTN5M1FhVXlSOTlYN3hSVE85aUFRRTdqT3R5NkpzWDQvNi9hNUtNazRnaWswMmpMTnU1eWd2L085Vm1sQTRadHgiLCJtYWMiOiIwOGQ3M2IzZTI0MjVmYWNiOTUzYTI5MWZlYjhhOTY2MjRhYTFhN2VlMWVlNDhmNGM3NDVmYTc5MGZjZjNlMjRiIiwidGFnIjoiIn0%3D<\/span>\"\n  <\/samp>]\n<\/samp>]\n<\/pre><script>Sfdump(\"sf-dump-1274009058\", {\"maxDepth\":0})<\/script>\n",
+            "request_cookies": "<pre class=sf-dump id=sf-dump-894021222 data-indent-pad=\"  \"><span class=sf-dump-note>array:2<\/span> [<samp data-depth=1 class=sf-dump-expanded>\n  \"<span class=sf-dump-key>XSRF-TOKEN<\/span>\" => \"<span class=sf-dump-str title=\"40 characters\">K9cAK2T6DSpGJTitM3om2jWOVOoA8YfpKo1p0WwN<\/span>\"\n  \"<span class=sf-dump-key>laravel_session<\/span>\" => \"<span class=sf-dump-str title=\"40 characters\">TBGJuoQ1Vdm10eIPYZoWcZepMd4PpABy9wHozR63<\/span>\"\n<\/samp>]\n<\/pre><script>Sfdump(\"sf-dump-894021222\", {\"maxDepth\":0})<\/script>\n",
+            "response_headers": "<pre class=sf-dump id=sf-dump-311287294 data-indent-pad=\"  \"><span class=sf-dump-note>array:4<\/span> [<samp data-depth=1 class=sf-dump-expanded>\n  \"<span class=sf-dump-key>cache-control<\/span>\" => <span class=sf-dump-note>array:1<\/span> [<samp data-depth=2 class=sf-dump-compact>\n    <span class=sf-dump-index>0<\/span> => \"<span class=sf-dump-str title=\"17 characters\">no-cache, private<\/span>\"\n  <\/samp>]\n  \"<span class=sf-dump-key>date<\/span>\" => <span class=sf-dump-note>array:1<\/span> [<samp data-depth=2 class=sf-dump-compact>\n    <span class=sf-dump-index>0<\/span> => \"<span class=sf-dump-str title=\"29 characters\">Thu, 03 Apr 2025 12:45:42 GMT<\/span>\"\n  <\/samp>]\n  \"<span class=sf-dump-key>location<\/span>\" => <span class=sf-dump-note>array:1<\/span> [<samp data-depth=2 class=sf-dump-compact>\n    <span class=sf-dump-index>0<\/span> => \"<span class=sf-dump-str title=\"21 characters\">http:\/\/127.0.0.1:8000<\/span>\"\n  <\/samp>]\n  \"<span class=sf-dump-key>content-type<\/span>\" => <span class=sf-dump-note>array:1<\/span> [<samp data-depth=2 class=sf-dump-compact>\n    <span class=sf-dump-index>0<\/span> => \"<span class=sf-dump-str title=\"24 characters\">text\/html; charset=utf-8<\/span>\"\n  <\/samp>]\n<\/samp>]\n<\/pre><script>Sfdump(\"sf-dump-311287294\", {\"maxDepth\":0})<\/script>\n",
+            "session_attributes": "<pre class=sf-dump id=sf-dump-859924476 data-indent-pad=\"  \"><span class=sf-dump-note>array:5<\/span> [<samp data-depth=1 class=sf-dump-expanded>\n  \"<span class=sf-dump-key>_token<\/span>\" => \"<span class=sf-dump-str title=\"40 characters\">xw4ZA0QEhTU1WlmkQbaNQBu6BlW0iLNaTzVn31YG<\/span>\"\n  \"<span class=sf-dump-key>_previous<\/span>\" => <span class=sf-dump-note>array:1<\/span> [<samp data-depth=2 class=sf-dump-compact>\n    \"<span class=sf-dump-key>url<\/span>\" => \"<span class=sf-dump-str title=\"27 characters\">http:\/\/127.0.0.1:8000\/login<\/span>\"\n  <\/samp>]\n  \"<span class=sf-dump-key>_flash<\/span>\" => <span class=sf-dump-note>array:2<\/span> [<samp data-depth=2 class=sf-dump-compact>\n    \"<span class=sf-dump-key>old<\/span>\" => []\n    \"<span class=sf-dump-key>new<\/span>\" => []\n  <\/samp>]\n  \"<span class=sf-dump-key>PHPDEBUGBAR_STACK_DATA<\/span>\" => []\n  \"<span class=sf-dump-key>login_web_59ba36addc2b2f9401580f014c7f58ea4e30989d<\/span>\" => <span class=sf-dump-num>17<\/span>\n<\/samp>]\n<\/pre><script>Sfdump(\"sf-dump-859924476\", {\"maxDepth\":0})<\/script>\n"
+        },
+        "tooltip": {
+            "status": "302 Found",
+            "full_url": "http:\/\/127.0.0.1:8000\/login",
+            "action_name": "login.store",
+            "controller_action": "Laravel\\Fortify\\Http\\Controllers\\AuthenticatedSessionController@store"
+        },
+        "badge": "302 Found"
+    }
+}

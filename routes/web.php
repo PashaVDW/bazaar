@@ -1,7 +1,20 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\BusinessExportController;
+use App\Http\Controllers\AdminController;
+
 
 Route::get('/', function () {
     return view('welcome');
+});
+
+// BusinessExportController
+Route::middleware(['auth', 'role:Super Admin'])->prefix('admin')->name('admin.')->group(function () {
+        Route::get('/businesses/{id}/export-pdf', [BusinessExportController::class, 'export'])->name('business.export.pdf');
+});
+
+// AdminController
+Route::middleware(['auth', 'role:Super Admin'])->name('admin.')->prefix('admin')->group(function () {
+    Route::get('/contracts', [AdminController::class, 'contractIndex'])->name('contracts.index');
 });
