@@ -2,63 +2,90 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Http\Requests\StoreAdvertisementRequest;
+use App\Models\Ad;
+use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 
 class AdvertiserController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
-        //
+        $user = User::findOrFail(Auth::id());
+        $advertisements = $user->advertisements;
+
+        return view('ads.index', compact('advertisements'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
-        //
+        return view('ads.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
+    public function store(StoreAdvertisementRequest $request)
     {
-        //
+        $user = Auth::user();
+
+        if ($user->advertisements()->count() >= 4) {
+            return redirect()
+                ->route('advertisements.index')
+                ->with('error', 'You can only create a maximum of 4 advertisements.');
+        }
+
+        $imagePath = $request->file('image')->store('ads', 'public');
+
+        Ad::create([
+            'user_id' => $user->id,
+            'title' => $request->input('title'),
+            'description' => $request->input('description'),
+            'image' => $imagePath,
+            'ads_starttime' => $request->input('ads_starttime'),
+            'ads_endtime' => $request->input('ads_endtime'),
+            'type' => $request->input('type'),
+            'is_active' => $request->boolean('is_active'),
+        ]);
+
+        return redirect()->route('advertisements.index');
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
     public function edit(string $id)
     {
-        //
+        $ad = Ad::where('id', $id)->where('user_id', Auth::id())->firstOrFail();
+
+        return view('ads.edit', compact('ad'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
+    public function update(StoreAdvertisementRequest $request, string $id)
     {
-        //
+        $ad = Ad::where('id', $id)->where('user_id', Auth::id())->firstOrFail();
+
+        $data = $request->only([
+            'title',
+            'description',
+            'ads_starttime',
+            'ads_endtime',
+            'type',
+            'is_active',
+        ]);
+
+        // If a new image is uploaded, replace the old one
+        if ($request->hasFile('image')) {
+            $imagePath = $request->file('image')->store('ads', 'public');
+            $data['image'] = $imagePath;
+        }
+
+        $ad->update($data);
+
+        return redirect()->route('advertisements.index');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
+    public function show(string $id) {}
+
     public function destroy(string $id)
     {
-        //
+        $ad = Ad::where('id', $id)->where('user_id', Auth::id())->firstOrFail();
+        $ad->delete();
+
+        return redirect()->route('advertisements.index')->with('success', 'Advertisement deleted.');
     }
 }

@@ -2,11 +2,9 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Seeder;
-use App\Models\User;
-use Spatie\Permission\Models\Role;
 use App\Models\Business;
-
+use App\Models\User;
+use Illuminate\Database\Seeder;
 
 class UserRoleSeeder extends Seeder
 {
@@ -15,7 +13,7 @@ class UserRoleSeeder extends Seeder
      */
     public function run(): void
     {
-        
+
         $adminUser = User::create([
             'name' => 'Super Admin',
             'email' => 'admin@bazaar.test',
@@ -46,9 +44,9 @@ class UserRoleSeeder extends Seeder
             Business::create([
                 'user_id' => $bussinesUser->id,
                 'company_name' => "Business BV $i",
-                'kvk_number' => '12345678' . $i,
-                'vat_number' => 'NL00009999' . $i,
-                'phone' => '06123456' . $i,
+                'kvk_number' => '12345678'.$i,
+                'vat_number' => 'NL00009999'.$i,
+                'phone' => '06123456'.$i,
                 'notes' => 'Seeded test business',
                 'contract_status' => 'pending',
             ]);
