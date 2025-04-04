@@ -12,8 +12,9 @@ class AdminController extends Controller
     public function contractIndex()
     {
         $businesses = Business::with('user')->latest()->get();
+        $businessesWithContracts = Business::whereNotNull('contract_file_path')->get();
 
-        return view('admin.contracts.index', compact('businesses'));
+        return view('admin.contracts.index', compact('businesses', 'businessesWithContracts'));
     }
 
     public function uploadContract(Business $business)

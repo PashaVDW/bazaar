@@ -23,25 +23,19 @@ class BusinessExportController extends Controller
     public function showContract()
     {
         $business = Auth::user()?->business;
-
-        if (!$business || !$business->contract_file_path) {
-            abort(404, 'No contract found for this business.');
+        $fileSize = null;
+        $uploadTime = null;
+    
+        if ($business && $business->contract_file_path) {
+            $path = storage_path('app/public/' . $business->contract_file_path);
+            
+            if (file_exists($path)) {
+                $fileSize = round(filesize($path) / 1048576, 2);
+                $uploadTime = Carbon::parse($business->updated_at)->format('H:i');
+            }
         }
-        
-        $path = storage_path('app/public/' . $business->contract_file_path);
-        $fileSize = file_exists($path) ? round(filesize($path) / 1048576, 2) : null;
-        $uploadTime = Carbon::parse($business->updated_at)->format('H:i');
 
         return view('profile.contract', compact('business', 'fileSize', 'uploadTime'));
-    }
-    
-    public function uploadContract()
-    {
-        $business = Auth::user()->business;
-
-        if (!$business) abort(403);
-
-        return view('profile.upload-contract', compact('business'));
     }
 
     public function saveUploadedContract(Request $request)

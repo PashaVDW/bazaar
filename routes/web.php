@@ -24,7 +24,6 @@ Route::middleware(['auth', 'role:Super Admin'])->name('admin.')->prefix('admin')
 // ProfileController
 Route::middleware('auth')->name('profile.')->group(function () {
     Route::get('/profile', [ProfileController::class, 'index'])->name('index');
-    Route::get('/profile/contract/upload', [BusinessExportController::class, 'uploadContract'])->name('contract.upload');
     Route::post('/profile/contract/upload', [BusinessExportController::class, 'saveUploadedContract'])->name('contract.upload.save');
     Route::get('/profile/contract', [BusinessExportController::class, 'showContract'])->name('contract');
 });
