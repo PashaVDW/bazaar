@@ -54,6 +54,7 @@
                        type="number"
                        step="0.01"
                        min="0"
+                       max="999999.99"
                        name="hourly_price"
                        placeholder="Hourly price (e.g. 29.99)"
                        value="{{ old('hourly_price') }}"
@@ -86,6 +87,8 @@
                 <input class="w-full p-3 text-sm bg-gray-50 outline-none rounded"
                        type="datetime-local"
                        name="ads_starttime"
+                       min="{{ now()->format('Y-m-d\TH:i') }}"
+                       max="{{ now()->addMonths(3)->format('Y-m-d\TH:i') }}"
                        value="{{ old('ads_starttime') }}"
                        required>
                 @error('ads_starttime')
@@ -97,6 +100,8 @@
                 <input class="w-full p-3 text-sm bg-gray-50 outline-none rounded"
                        type="datetime-local"
                        name="ads_endtime"
+                       min="{{ now()->format('Y-m-d\TH:i') }}"
+                       max="{{ now()->addMonths(6)->format('Y-m-d\TH:i') }}"
                        value="{{ old('ads_endtime') }}"
                        required>
                 @error('ads_endtime')

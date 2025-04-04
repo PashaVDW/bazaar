@@ -76,6 +76,8 @@
                        type="datetime-local"
                        name="ads_starttime"
                        value="{{ old('ads_starttime', \Carbon\Carbon::parse($ad->ads_starttime)->format('Y-m-d\TH:i')) }}"
+                       min="{{ old('ads_starttime', \Carbon\Carbon::parse($ad->ads_starttime)->format('Y-m-d\TH:i')) }}"
+                       max="{{ old('ads_starttime', \Carbon\Carbon::parse($ad->ads_starttime)->addMonths(3)->format('Y-m-d\TH:i')) }}"
                        required>
             </div>
 
@@ -84,6 +86,8 @@
                        type="datetime-local"
                        name="ads_endtime"
                        value="{{ old('ads_endtime', \Carbon\Carbon::parse($ad->ads_endtime)->format('Y-m-d\TH:i')) }}"
+                       min="{{ old('ads_endtime', \Carbon\Carbon::parse($ad->ads_starttime)->format('Y-m-d\TH:i')) }}"
+                       max="{{ old('ads_endtime', \Carbon\Carbon::parse($ad->ads_endtime)->addMonths(6)->format('Y-m-d\TH:i')) }}"
                        required>
             </div>
 
