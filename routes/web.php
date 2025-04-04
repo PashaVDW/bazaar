@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BusinessExportController;
 use App\Http\Controllers\AdminController;
@@ -17,4 +18,9 @@ Route::middleware(['auth', 'role:Super Admin'])->prefix('admin')->name('admin.')
 // AdminController
 Route::middleware(['auth', 'role:Super Admin'])->name('admin.')->prefix('admin')->group(function () {
     Route::get('/contracts', [AdminController::class, 'contractIndex'])->name('contracts.index');
+});
+
+// ProfileController
+Route::middleware('auth')->name('profile.')->group(function () {
+    Route::get('/profile', [ProfileController::class, 'index'])->name('index');
 });

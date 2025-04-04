@@ -1,7 +1,7 @@
 <nav class="bg-white border-b border-gray-200 px-4 py-3 shadow-md">
     <div class="max-w-7xl mx-auto flex items-center justify-between">
         <div class="flex items-center space-x-3">
-            <x-logo class="w-34" />
+            <x-shared.logo class="w-34" />
         </div>
 
         <form action="" method="GET" class="flex-1 max-w-md mx-6">
@@ -32,17 +32,17 @@
                         <span class="ml-1">Admin</span>
                     </a>
                 @elserole('business_advertiser')
-                    <a href="#" class="text-gray-700 hover:text-blue-600">
+                    <a href="{{ route('profile.index')  }}" class="text-gray-700 hover:text-blue-600">
                         <i class="fas fa-building"></i>
                         <span class="ml-1">Business</span>
                     </a>
                 @elserole('private_advertiser')
-                    <a href="#" class="text-gray-700 hover:text-blue-600">
+                    <a href="{{ route('profile.index') }}" class="text-gray-700 hover:text-blue-600">
                         <i class="fas fa-user"></i>
                         <span class="ml-1">Profile</span>
                     </a>
                 @elserole('customer')
-                    <a href="#" class="text-gray-700 hover:text-blue-600">
+                    <a href="{{ route('profile.index') }}" class="text-gray-700 hover:text-blue-600">
                         <i class="fas fa-box"></i>
                         <span class="ml-1">My Orders</span>
                     </a>
