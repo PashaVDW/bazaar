@@ -1,7 +1,6 @@
 @extends('layouts.profile')
 
 @section('content')
-    {{-- ✅ Toast Notifications Fixed Top Right --}}
     <div class="fixed top-5 right-5 z-[9999] space-y-2">
         @if (session('success'))
             <div id="toast-success" class="flex items-center w-full max-w-xs p-4 text-gray-700 bg-white border border-green-200 rounded-lg shadow-sm transition-opacity duration-500" role="alert">
@@ -17,6 +16,7 @@
                     </svg>
                 </button>
             </div>
+
             <script>
                 setTimeout(() => {
                     const toast = document.getElementById('toast-success');
@@ -69,8 +69,10 @@
             <tbody>
             @foreach ($advertisements as $ad)
                 <tr class="group transition hover:bg-gray-100">
-                    <td class="pl-10 xl:pl-24 py-4 bg-blueGray-50 cursor-pointer" onclick="window.location='{{ route('advertisements.edit', $ad->id) }}'">
-                        <img src="{{ asset('storage/' . $ad->image) }}" alt="{{ $ad->title }}" class="w-16 h-16 object-cover rounded-md shadow-sm group-hover:scale-105 transition">
+                    <td class="pl-10 xl:pl-24 py-4 bg-blueGray-50 rounded-l-xl cursor-pointer" onclick="window.location='{{ route('advertisements.edit', $ad->id) }}'">
+                        <img src="{{ asset('storage/' . $ad->image) }}"
+                             alt="{{ $ad->title }}"
+                             class="w-16 h-16 object-cover rounded-md shadow-sm group-hover:scale-105 transition">
                     </td>
                     <td class="py-4 bg-blueGray-50 cursor-pointer" onclick="window.location='{{ route('advertisements.edit', $ad->id) }}'">
                         <span class="text-base font-medium text-gray-900">{{ $ad->title }}</span>
@@ -105,8 +107,44 @@
                         </button>
                     </td>
                 </tr>
-                {{-- Delete Modal --}}
-                {{-- [Your modal code stays unchanged here] --}}
+
+                <div id="delete-modal-{{ $ad->id }}" tabindex="-1"
+                     class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
+                    <div class="relative p-4 w-full max-w-md max-h-full">
+                        <div class="relative bg-white rounded-lg shadow">
+                            <button type="button"
+                                    class="absolute top-3 end-2.5 text-gray-400 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center"
+                                    data-modal-hide="delete-modal-{{ $ad->id }}">
+                                <svg class="w-3 h-3" fill="none" viewBox="0 0 14 14">
+                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                          d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
+                                </svg>
+                            </button>
+                            <div class="p-4 md:p-5 text-center">
+                                <svg class="mx-auto mb-4 text-gray-400 w-12 h-12" fill="none" viewBox="0 0 20 20">
+                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                          d="M10 11V6m0 8h.01M19 10a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/>
+                                </svg>
+                                <h3 class="mb-5 text-lg font-normal text-gray-500">
+                                    Are you sure you want to delete <strong>{{ $ad->title }}</strong>?
+                                </h3>
+                                <form method="POST" action="{{ route('advertisements.destroy', $ad->id) }}">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit"
+                                            class="text-white bg-red-600 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center mr-2">
+                                        Yes, I'm sure
+                                    </button>
+                                    <button type="button"
+                                            class="py-2.5 px-5 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700"
+                                            data-modal-hide="delete-modal-{{ $ad->id }}">
+                                        No, cancel
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             @endforeach
             </tbody>
         </table>

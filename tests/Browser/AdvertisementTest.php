@@ -42,6 +42,7 @@ class AdvertisementTest extends DuskTestCase
                 ->visit(route('advertisements.create'))
                 ->type('title', 'Test Ad')
                 ->type('description', 'Test Description')
+                ->type('hourly_price', '25.50')
                 ->attach('image', __DIR__.'/files/test-image.jpg')
                 ->type('ads_starttime', now()->format('Y-m-d\TH:i'))
                 ->type('ads_endtime', now()->addDay()->format('Y-m-d\TH:i'))
@@ -78,6 +79,7 @@ class AdvertisementTest extends DuskTestCase
                 ->visit(route('advertisements.create'))
                 ->type('title', 'Blocked Ad')
                 ->type('description', 'Too many ads')
+                ->type('hourly_price', '49.99')
                 ->attach('image', __DIR__.'/files/test-image.jpg')
                 ->type('ads_starttime', now()->format('Y-m-d\TH:i'))
                 ->type('ads_endtime', now()->addDay()->format('Y-m-d\TH:i'))
@@ -93,12 +95,17 @@ class AdvertisementTest extends DuskTestCase
     public function can_delete_advertisement()
     {
         $user = User::factory()->create()->assignRole('private_advertiser');
-        $ad = Ad::factory()->create(['user_id' => $user->id, 'title' => 'Delete Me']);
+        $ad = Ad::factory()->create([
+            'user_id' => $user->id,
+            'title' => 'Delete Me',
+            'hourly_price' => 15.00,
+        ]);
 
         $this->browse(function (Browser $browser) use ($user, $ad) {
             $browser->loginAs($user)
                 ->visit(route('advertisements.index'))
                 ->press('@delete-button-'.$ad->id)
+                ->pause(200)
                 ->whenAvailable('#delete-modal-'.$ad->id, function ($modal) {
                     $modal->press("Yes, I'm sure");
                 })

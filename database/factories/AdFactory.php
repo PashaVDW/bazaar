@@ -21,6 +21,7 @@ class AdFactory extends Factory
             'ads_endtime' => now()->addDay(),
             'type' => $this->faker->randomElement(['sale', 'rental', 'auction']),
             'is_active' => true,
+            'hourly_price' => $this->faker->randomFloat(2, 10, 100),
         ];
     }
 }
