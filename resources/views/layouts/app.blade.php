@@ -1,4 +1,4 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
     <x-head />
     <body class="font-sans antialiased text-gray-900 bg-gray-100">
