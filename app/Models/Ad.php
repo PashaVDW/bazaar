@@ -19,6 +19,7 @@ class Ad extends Model
         'ads_endtime',
         'type',
         'is_active',
+        'hourly_price',
     ];
 
     public function user(): BelongsTo

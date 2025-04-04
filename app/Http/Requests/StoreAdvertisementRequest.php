@@ -22,6 +22,7 @@ class StoreAdvertisementRequest extends FormRequest
             'ads_endtime' => 'required|date|after_or_equal:ads_starttime',
             'type' => 'required|in:sale,rental,auction',
             'is_active' => 'required|boolean',
+            'hourly_price' => 'required|numeric|min:0|max:999999.99',
         ];
     }
 }

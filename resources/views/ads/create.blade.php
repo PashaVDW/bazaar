@@ -49,7 +49,19 @@
                 <p class="text-sm text-red-600 mt-2">{{ $message }}</p>
                 @enderror
             </div>
-
+            <div class="mb-5">
+                <input class="w-full p-3 text-sm bg-gray-50 outline-none rounded"
+                       type="number"
+                       step="0.01"
+                       min="0"
+                       name="hourly_price"
+                       placeholder="Hourly price (e.g. 29.99)"
+                       value="{{ old('hourly_price') }}"
+                       required>
+                @error('hourly_price')
+                <p class="text-sm text-red-600 mt-2">{{ $message }}</p>
+                @enderror
+            </div>
             <div class="mb-5">
                 <label for="image" class="flex items-center justify-between w-full p-3 bg-gray-50 rounded cursor-pointer text-sm text-gray-600 hover:bg-gray-100 transition">
                     <span id="file-name">Upload an image</span>
