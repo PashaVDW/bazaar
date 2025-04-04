@@ -8,6 +8,6 @@
     <script src="https://kit.fontawesome.com/bb073b0d89.js" crossorigin="anonymous"></script>
 </head>
 <body class="font-sans antialiased text-gray-900 bg-gray-100">
-@yield('body')
+@yield('content')
 </body>
 </html>

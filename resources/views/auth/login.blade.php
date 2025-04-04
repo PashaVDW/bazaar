@@ -37,11 +37,6 @@
                     <input class="w-full p-3 text-sm bg-gray-50 outline-none rounded" id="password" type="password" name="password" placeholder="Password" required>
                 </div>
 
-                <div class="mb-5 flex items-center">
-                    <input type="checkbox" name="remember" id="remember" class="mr-2">
-                    <label for="remember" class="text-sm text-gray-600">Remember me</label>
-                </div>
-
                 <button type="submit" class="w-full py-3 bg-green-600 hover:bg-green-700 rounded text-sm font-bold text-white transition">Login</button>
 
                 <p class="mt-3 text-xs text-center text-gray-500">
