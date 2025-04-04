@@ -5,7 +5,7 @@
     <title>Contract</title>
     <style>
         body { font-family: DejaVu Sans, sans-serif; font-size: 14px; line-height: 1.6; }
-        h1 { color: #1E3A8A; }
+        h1 { color: #F55C1B; }
         .section { margin-bottom: 20px; }
     </style>
 </head>
@@ -28,7 +28,12 @@
     <div class="section">
         <strong>Date:</strong> {{ now()->format('d-m-Y') }}<br><br>
         ____________________________<br>
-        Signature
+        Admins Signature
+    </div>
+    <div class="section">
+        <strong>Date:</strong> {{ now()->format('d-m-Y') }}<br><br>
+        ____________________________<br>
+        {{ $business->user->name }} Signature
     </div>
 </body>
 </html>

@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Models\Business;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class AdminController extends Controller
 {
@@ -13,18 +15,31 @@ class AdminController extends Controller
 
         return view('admin.contracts.index', compact('businesses'));
     }
-    public function uploadContract()
-    {
-        $businesses = Business::with('user')->latest()->get();
 
-        return view('admin.contracts.upload', compact('businesses'));
-    }
-    public function showContract($id)
+    public function uploadContract(Business $business)
     {
-        $business = Business::with('user')->findOrFail($id);
-
-        return view('admin.contracts.show', compact('business'));
+        return view('admin.contracts.upload', compact('business'));
     }
+
+    public function saveUploadedContract(Request $request, Business $business)
+    {
+        $request->validate([
+            'contract_file' => 'required|file|mimes:pdf|max:2048',
+        ]);
+
+        $path = $request->file('contract_file')->store('contracts', 'public');
+
+        if ($business->contract_file_path) {
+            \Storage::disk('public')->delete($business->contract_file_path);
+        }
+        $business->contract_signed_by_admin = now();
+        $business->contract_file_path = $path;
+        $business->contract_status = 'signed';
+        $business->save();
+
+        return redirect()->route('admin.contracts.index')->with('success', 'Contract uploaded successfully.');
+    }
+    
     public function deleteContract($id)
     {
         $business = Business::with('user')->findOrFail($id);

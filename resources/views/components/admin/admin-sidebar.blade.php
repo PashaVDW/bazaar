@@ -1,6 +1,6 @@
  <aside class="w-64 bg-white shadow-md hidden md:block">
         <div class="p-4">
-            <x-logo />
+            <x-shared.logo />
         </div>
         <nav class="p-4 space-y-2 text-gray-700">
             <a href="#" class="flex items-center space-x-2 px-4 py-2 rounded hover:bg-gray-100">

@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use App\Models\Business;
 use Illuminate\Http\Request;
 use Barryvdh\DomPDF\Facade\Pdf;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Carbon;
 
 class BusinessExportController extends Controller
 {
@@ -16,4 +19,53 @@ class BusinessExportController extends Controller
 
         return $pdf->download("contract-{$business->id}.pdf");
     }
+
+    public function showContract()
+    {
+        $business = Auth::user()?->business;
+
+        if (!$business || !$business->contract_file_path) {
+            abort(404, 'No contract found for this business.');
+        }
+        
+        $path = storage_path('app/public/' . $business->contract_file_path);
+        $fileSize = file_exists($path) ? round(filesize($path) / 1048576, 2) : null;
+        $uploadTime = Carbon::parse($business->updated_at)->format('H:i');
+
+        return view('profile.contract', compact('business', 'fileSize', 'uploadTime'));
+    }
+    
+    public function uploadContract()
+    {
+        $business = Auth::user()->business;
+
+        if (!$business) abort(403);
+
+        return view('profile.upload-contract', compact('business'));
+    }
+
+    public function saveUploadedContract(Request $request)
+    {
+        $business = Auth::user()->business;
+
+        if (!$business) abort(403);
+
+        $request->validate([
+            'contract_file' => 'required|file|mimes:pdf|max:2048',
+        ]);
+
+        $path = $request->file('contract_file')->store('contracts', 'public');
+
+        if ($business->contract_file_path) {
+            Storage::disk('public')->delete($business->contract_file_path);
+        }
+
+        $business->contract_file_path = $path;
+        $business->contract_signed_by_business = now();
+        $business->contract_status = 'signed';
+        $business->save();
+
+        return redirect()->route('profile.contract')->with('success', 'Contract uploaded successfully.');
+    }
+
 }
