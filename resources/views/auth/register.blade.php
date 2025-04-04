@@ -6,7 +6,7 @@
     <div class="fixed inset-0 bg-gray-50 flex items-center justify-center">
         <section class="w-full max-w-md p-6 bg-white shadow rounded">
             <div class="text-center mb-6">
-                <x-logo class="w-34 mx-auto" />
+                <x-shared.logo class="w-34 mx-auto" />
                 <div class="mt-2">
                     <h3 class="text-xl font-semibold">Create an account</h3>
                     <p class="text-sm text-gray-500">Sign up to get started</p>

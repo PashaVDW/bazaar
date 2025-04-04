@@ -1,4 +1,4 @@
-<nav class="bg-white border-b border-gray-200 px-4 py-3 shadow-md">
+<nav class="px-4 py-3">
     <div class="max-w-7xl mx-auto flex items-center justify-between">
         <div class="flex items-center space-x-3">
             <x-shared.logo class="w-34" />
@@ -17,32 +17,32 @@
         </form>
 
         <div class="hidden md:flex items-center space-x-6">
-            <a class="text-gray-700  hover:text-blue-600">Home</a>
-            <a class="text-gray-700 hover:text-blue-600">Categories</a>
-            <a class="text-gray-700 hover:text-blue-600">Products</a>
-            <a class="text-gray-700 hover:text-blue-600">
+            <a class="text-gray-700 hover:text-primary">Home</a>
+            <a class="text-gray-700 hover:text-primary">Categories</a>
+            <a class="text-gray-700 hover:text-primary">Products</a>
+            <a class="text-gray-700 hover:text-primary">
                 <i class="fas fa-shopping-cart"></i>
             </a>
             @auth
 
 
                 @role('Super Admin')
-                    <a href="{{ route('admin.contracts.index') }}" class="text-gray-700 hover:text-blue-600">
+                    <a href="{{ route('admin.contracts.index') }}" class="text-gray-700 hover:text-primary">
                         <i class="fas fa-user-shield"></i>
                         <span class="ml-1">Admin</span>
                     </a>
                 @elserole('business_advertiser')
-                    <a href="{{ route('profile.index')  }}" class="text-gray-700 hover:text-blue-600">
+                    <a href="{{ route('profile.index')  }}" class="text-gray-700 hover:text-primary">
                         <i class="fas fa-building"></i>
                         <span class="ml-1">Business</span>
                     </a>
                 @elserole('private_advertiser')
-                    <a href="{{ route('profile.index') }}" class="text-gray-700 hover:text-blue-600">
+                    <a href="{{ route('profile.index') }}" class="text-gray-700 hover:text-primary">
                         <i class="fas fa-user"></i>
                         <span class="ml-1">Profile</span>
                     </a>
                 @elserole('customer')
-                    <a href="{{ route('profile.index') }}" class="text-gray-700 hover:text-blue-600">
+                    <a href="{{ route('profile.index') }}" class="text-gray-700 hover:text-primary">
                         <i class="fas fa-box"></i>
                         <span class="ml-1">My Orders</span>
                     </a>
@@ -57,7 +57,7 @@
 
 
             @else
-                <a href="{{ route('login') }}" class="text-gray-700 hover:text-blue-600">
+                <a href="{{ route('login') }}" class="text-gray-700 hover:text-primary">
                     <i class="fas fa-user-circle"></i>
                 </a>
             @endauth
