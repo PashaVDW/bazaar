@@ -21,10 +21,10 @@
             <i class="fa-solid fa-bookmark"></i>
             <span>Bookings</span>
         </a>
-
-        <a href="#" class="flex items-center gap-2 text-gray-600 hover:text-primary transition">
-            <i class="fa-regular fa-bell"></i>
-            <span>Activities</span>
+        
+        <a href="{{ route('profile.contract') }}" class="flex items-center gap-2 text-gray-600 hover:text-primary transition">
+            <i class="fa-solid fa-file-contract"></i>
+            <span>Contract</span>
         </a>
 
         <a href="#" class="flex items-center gap-2 text-gray-600 hover:text-primary transition">

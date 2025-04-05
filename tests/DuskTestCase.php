@@ -13,7 +13,7 @@ abstract class DuskTestCase extends BaseTestCase
 {
     protected function baseUrl(): string
     {
-        return 'http://127.0.0.1:8000';
+        return 'https://bazaar.test';
     }
 
     /**
