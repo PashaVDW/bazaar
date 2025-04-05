@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="flex">
-    <aside class="w-1/4 p-6 bg-gray-100 border-r">
+    <aside class="w-1/4 p-6 bg-gray-100 border-r border-gray-300 ">
         <x-landing-form
             :action="route('landing.store')"
             :components="$components"

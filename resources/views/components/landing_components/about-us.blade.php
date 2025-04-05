@@ -7,12 +7,12 @@
         ],
     ];
 @endphp
-<div class="bg-white py-10 px-6 rounded-lg shadow-md flex flex-col md:flex-row items-center">
+<div class="py-10 px-6 flex flex-col md:flex-row items-center">
     <div class="md:w-1/3 mb-6 md:mb-0">
         @if ($logo)
-            <img src="{{ $logo }}" alt="Preview Logo" class="max-w-xs">
+            <img src="{{ $logo }}" alt="Preview Logo" class="max-w-xs rounded-2xl">
         @else
-            Upload a logo and unceck and check checkbox to preview
+            Upload a logo and uncheck and check checkbox to preview
         @endif
     </div>
     <div class="md:ml-8 md:w-2/3">
