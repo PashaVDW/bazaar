@@ -33,7 +33,7 @@
             </thead>
             <tbody class="bg-white divide-y">
             @foreach ($advertisements as $ad)
-                <tr class="hover:bg-gray-50 transition cursor-pointer group" onclick="window.location='{{ route('advertisements.edit', $ad->id) }}'">
+                <tr class="hover:bg-gray-50 border-u border-gray-100 transition cursor-pointer group" onclick="window.location='{{ route('advertisements.edit', $ad->id) }}'">
                     <td class="px-6 py-4">
                         <img src="{{ asset('storage/' . $ad->image) }}"
                              alt="{{ $ad->title }}"
