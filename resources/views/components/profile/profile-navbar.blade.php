@@ -28,8 +28,8 @@
         </a>
 
         <a href="{{ route('landing.index')}}" class="flex items-center gap-2 text-gray-600 hover:text-primary transition">
-            <i class="fa-solid fa-chart-line"></i>
-            <span>Earnings</span>
+            <i class="fa-solid fa-rocket"></i>
+            <span>Landings page</span>
         </a>
 
         <a href="#" class="flex items-center gap-2 text-gray-600 hover:text-primary transition">
