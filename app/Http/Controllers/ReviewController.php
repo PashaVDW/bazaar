@@ -8,7 +8,6 @@ use Illuminate\Http\Request;
 
 class ReviewController extends Controller
 {
-
     public function create(Request $request)
     {
         $adId = $request->query('ad');
