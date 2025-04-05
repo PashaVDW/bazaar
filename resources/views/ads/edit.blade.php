@@ -42,19 +42,7 @@
                           rows="4"
                           required>{{ old('description', $ad->description) }}</textarea>
             </div>
-            <div class="mb-5">
-                <input class="w-full p-3 text-sm bg-gray-50 outline-none rounded"
-                       type="number"
-                       step="0.01"
-                       min="0"
-                       name="hourly_price"
-                       placeholder="Hourly price (e.g. 29.99)"
-                       value="{{ old('hourly_price', $ad->hourly_price) }}"
-                       required>
-                @error('hourly_price')
-                <p class="text-sm text-red-600 mt-2">{{ $message }}</p>
-                @enderror
-            </div>
+
             <div class="mb-5">
                 <label for="image"
                        class="flex items-center justify-between w-full p-3 bg-gray-50 rounded cursor-pointer text-sm text-gray-600 hover:bg-gray-100 transition">
@@ -92,11 +80,17 @@
             </div>
 
             <div class="mb-5">
-                <select name="type" class="w-full p-3 text-sm bg-gray-50 outline-none rounded" required>
-                    <option value="sale" {{ old('type', $ad->type) === 'sale' ? 'selected' : '' }}>Sale</option>
-                    <option value="rental" {{ old('type', $ad->type) === 'rental' ? 'selected' : '' }}>Rental</option>
-                    <option value="auction" {{ old('type', $ad->type) === 'auction' ? 'selected' : '' }}>Auction</option>
+                <select name="product_id" class="w-full p-3 text-sm bg-gray-50 outline-none rounded" required>
+                    <option value="" disabled {{ old('product_id') ? '' : 'selected' }}>Select a product</option>
+                    @foreach ($products as $product)
+                        <option value="{{ $product->id }}" {{ old('product_id', $ad->product->id ?? '') == $product->id ? 'selected' : '' }}>
+                            {{ $product->name }}
+                        </option>
+                    @endforeach
                 </select>
+                @error('product_id')
+                <p class="text-sm text-red-600 mt-2">{{ $message }}</p>
+                @enderror
             </div>
 
             <div class="mb-5 flex items-center space-x-2">

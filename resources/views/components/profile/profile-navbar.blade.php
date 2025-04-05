@@ -11,6 +11,12 @@
             <span>Dashboard</span>
         </a>
 
+        <a href="{{ route('products.index') }}"
+           class="flex items-center gap-2 {{ request()->routeIs('advertisements.index') ? 'text-primary' : 'text-gray-600 hover:text-primary' }} transition">
+            <i class="fas fa-cube"></i>
+            <span>Products</span>
+        </a>
+
         <a href="{{ route('advertisements.index') }}"
            class="flex items-center gap-2 {{ request()->routeIs('advertisements.index') ? 'text-primary' : 'text-gray-600 hover:text-primary' }} transition">
             <i class="fa-solid fa-rectangle-ad"></i>

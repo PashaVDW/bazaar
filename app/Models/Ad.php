@@ -17,9 +17,7 @@ class Ad extends Model
         'image',
         'ads_starttime',
         'ads_endtime',
-        'type',
         'is_active',
-        'hourly_price',
     ];
 
     public function user(): BelongsTo
@@ -37,8 +35,8 @@ class Ad extends Model
         return $this->belongsToMany(User::class, 'favorites')->withTimestamps();
     }
 
-    public function reviews()
+    public function products()
     {
-        return $this->hasMany(Review::class);
+        return $this->hasMany(Product::class);
     }
 }
