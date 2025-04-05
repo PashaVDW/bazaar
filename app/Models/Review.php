@@ -6,11 +6,11 @@ use Illuminate\Database\Eloquent\Model;
 
 class Review extends Model
 {
-    protected $fillable = ['user_id', 'ad_id', 'title', 'content', 'rating'];
+    protected $fillable = ['user_id', 'product_id', 'title', 'content', 'rating'];
 
-    public function ad()
+    public function product()
     {
-        return $this->belongsTo(Ad::class);
+        return $this->belongsTo(Product::class);
     }
 
     public function user()

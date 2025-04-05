@@ -5,7 +5,7 @@
     @if (session('success'))
         <x-shared.toast type="success" :message="session('success')" />
     @endif
-
+    
     @if (session('error'))
         <x-shared.toast type="error" :message="session('error')" />
     @endif
@@ -20,15 +20,13 @@
 
         <table class="w-full text-left table-auto">
             <thead>
-            <tr class="text-gray-500 text-sm uppercase">
-                <th class="px-6 py-4">Image</th>
-                <th class="px-6 py-4">Title</th>
-                <th class="px-6 py-4">Hourly Price</th>
-                <th class="px-6 py-4">Starttime</th>
-                <th class="px-6 py-4">Endtime</th>
-                <th class="px-6 py-4">Type</th>
-                <th class="px-6 py-4">Status</th>
-                <th class="px-6 py-4 text-right">Actions</th>
+            <tr>
+                <th class="pl-10 xl:pl-24 h-20 bg-white text-left text-sm font-semibold uppercase text-gray-500">Image</th>
+                <th class="text-left h-20 bg-white text-sm font-semibold uppercase text-gray-500">Title</th>
+                <th class="text-left h-20 bg-white text-sm font-semibold uppercase text-gray-500">Starttime</th>
+                <th class="text-left h-20 bg-white text-sm font-semibold uppercase text-gray-500">Endtime</th>
+                <th class="text-left h-20 bg-white text-sm font-semibold uppercase text-gray-500">Status</th>
+                <th class="text-right h-20 bg-white text-sm font-semibold uppercase text-gray-500 pr-10">Actions</th>
             </tr>
             </thead>
             <tbody class="bg-white divide-y">
@@ -40,11 +38,10 @@
                              class="w-14 h-14 object-cover rounded">
                     </td>
                     <td class="px-6 py-4 font-medium text-gray-900">{{ $ad->title }}</td>
-                    <td class="px-6 py-4 text-gray-700">€{{ number_format($ad->hourly_price, 2) }}</td>
                     <td class="px-6 py-4 text-gray-700">{{ $ad->ads_starttime }}</td>
                     <td class="px-6 py-4 text-gray-700">{{ $ad->ads_endtime }}</td>
-                    <td class="px-6 py-4 text-gray-700">{{ ucfirst($ad->type) }}</td>
                     <td class="px-6 py-4">
+
                         @if ($ad->is_active)
                             <span class="px-3 py-1 text-xs bg-green-100 text-green-700 rounded-full font-medium">Active</span>
                         @else

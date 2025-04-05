@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Purchase extends Model
 {
@@ -11,9 +12,7 @@ class Purchase extends Model
 
     protected $fillable = [
         'user_id',
-        'ad_id',
         'purchased_at',
-        'quantity',
     ];
 
     protected $casts = [
@@ -25,13 +24,8 @@ class Purchase extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function ad(): BelongsTo
+    public function products(): BelongsToMany
     {
-        return $this->belongsTo(Ad::class);
-    }
-
-    public function ads()
-    {
-        return $this->belongsToMany(Ad::class)->withPivot('quantity')->withTimestamps();
+        return $this->belongsToMany(Product::class)->withPivot('quantity')->withTimestamps();
     }
 }

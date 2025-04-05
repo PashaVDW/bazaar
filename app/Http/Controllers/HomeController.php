@@ -36,4 +36,13 @@ class HomeController extends Controller
 
         return back()->with('success', 'Verwijderd uit favorieten.');
     }
+
+    public function show(Ad $ad)
+    {
+        $ad->load('products.reviews');
+        $reviews = $ad->products->flatMap->reviews;
+        $averageRating = $reviews->count() ? round($reviews->pluck('rating')->avg()) : 0;
+
+        return view('ads.show', compact('ad', 'reviews', 'averageRating'));
+    }
 }

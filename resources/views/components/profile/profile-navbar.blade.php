@@ -1,12 +1,11 @@
 <nav class="bg-white shadow-sm text-center">
-
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12 py-4 flex items-center justify-between">
-        {{-- Left section --}}
         <div class="flex items-center space-x-4">
             <a href="{{ route('home') }}" class="inline-flex items-center px-4 py-2 bg-gray-100 border border-gray-300 text-gray-700 font-medium rounded-lg hover:bg-gray-200 transition">
                 <i class="fa-solid fa-arrow-left mr-2"></i>
                 Back
             </a>
+
         </div>
 
         <div class="lg:hidden">
@@ -19,6 +18,7 @@
             <x-shared.nav-link route="profile.index" icon="fa-house" label="Dashboard" />
             <x-shared.nav-link route="advertisements.index" icon="fa-rectangle-ad" label="Advertisements" />
             <x-shared.nav-link route="profile.purchaseHistory" icon="fa-receipt" label="Purchases" />
+            <x-shared.nav-link route="products.index" icon="fa-cube" label="Products" />
             <x-shared.nav-link route="profile.contract" icon="fa-file-contract" label="Contract" />
             <x-shared.nav-link route="landing.index" icon="fa-rocket" label="Landing" />
         </div>
@@ -50,12 +50,12 @@
 
     </div>
 
-    {{-- Mobile menu --}}
     <div id="mobile-nav" class="lg:hidden hidden px-4 pb-4">
         <div class="grid grid-cols-2 gap-4">
             <x-shared.nav-link route="profile.index" icon="fa-house" label="Dashboard" />
             <x-shared.nav-link route="advertisements.index" icon="fa-rectangle-ad" label="Ads" />
             <x-shared.nav-link route="profile.purchaseHistory" icon="fa-receipt" label="Purchases" />
+            <x-shared.nav-link route="products.index" icon="fa-cube" label="Products" />
             <x-shared.nav-link route="profile.contract" icon="fa-file-contract" label="Contract" />
             <x-shared.nav-link route="landing.index" icon="fa-rocket" label="Landing" />
         </div>
