@@ -17,11 +17,11 @@
             <span>Advertisements</span>
         </a>
 
-        <a href="#" class="flex items-center gap-2 text-gray-600 hover:text-primary transition">
-            <i class="fa-solid fa-bookmark"></i>
-            <span>Bookings</span>
+        <a href="{{ route('profile.purchaseHistory') }}" class="flex items-center gap-2 text-gray-600 hover:text-primary transition">
+            <i class="fas fa-receipt"></i>
+            <span>Purchase History</span>
         </a>
-        
+
         <a href="{{ route('profile.contract') }}" class="flex items-center gap-2 text-gray-600 hover:text-primary transition">
             <i class="fa-solid fa-file-contract"></i>
             <span>Contract</span>

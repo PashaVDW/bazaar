@@ -14,6 +14,27 @@ class ProfileController extends Controller
         return view('profile.index');
     }
 
+    public function purchaseHistory()
+    {
+        $purchases = auth()->user()
+            ->purchases()
+            ->with(['ad'])
+            ->whereNotNull('purchased_at')
+            ->orderByDesc('purchased_at')
+            ->paginate(5);
+
+        return view('purchases.index', compact('purchases'));
+    }
+
+    public function showPurchase(int $id)
+    {
+        $purchase = auth()->user()->purchases()->with('ad')->findOrFail($id);
+
+        return view('purchases.show', [
+            'purchase' => $purchase,
+        ]);
+    }
+
     /**
      * Show the form for creating a new resource.
      */
