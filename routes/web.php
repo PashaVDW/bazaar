@@ -52,3 +52,9 @@ Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
 Route::post('/cart/update/{ad}', [CartController::class, 'update'])->name('cart.update');
 Route::delete('/cart/remove/{ad}', [CartController::class, 'remove'])->name('cart.remove');
 Route::post('/checkout', [\App\Http\Controllers\CartController::class, 'checkout'])->name('cart.checkout')->middleware('auth');
+
+// ReviewController
+Route::middleware('auth')->group(function () {
+    Route::get('/review/create', [\App\Http\Controllers\ReviewController::class, 'create'])->name('review.create');
+    Route::post('/review/store', [\App\Http\Controllers\ReviewController::class, 'store'])->name('review.store');
+});
