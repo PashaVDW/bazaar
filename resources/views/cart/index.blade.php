@@ -61,23 +61,23 @@
                             @php $total = 0; @endphp
                             @forelse($cart as $item)
                                 @php
-                                    $ad = $item['ad'];
+                                    $product = $item['product'];
                                     $qty = $item['quantity'];
-                                    $price = $ad->hourly_price * $qty;
+                                    $price = $product->price * $qty;
                                     $total += $price;
                                 @endphp
                                 <div class="relative flex flex-wrap items-center xl:justify-between -mx-4 mb-8 pb-8 border-b border-gray-200 border-opacity-40">
                                     <div class="relative w-full md:w-auto px-4 mb-6 xl:mb-0">
                                         <a class="block mx-auto max-w-max" href="#">
-                                            <img class="h-28 object-cover" src="{{ asset('storage/' . $ad->image) }}" alt="{{ $ad->title }}">
+                                            <img class="h-28 object-cover" src="{{ asset('storage/' . $product->ad->image) }}" alt="{{ $product->name }}">
                                         </a>
                                     </div>
                                     <div class="w-full md:w-auto px-4 mb-6 xl:mb-0">
-                                        <a class="block mb-5 text-xl font-heading font-medium hover:underline" href="#">{{ $ad->title }}</a>
-                                        <p class="text-sm text-gray-400">Type: {{ ucfirst($ad->type) }}</p>
+                                        <a class="block mb-5 text-xl font-heading font-medium hover:underline" href="#">{{ $product->name }}</a>
+                                        <p class="text-sm text-gray-400">Type: {{ ucfirst($product->type) }}</p>
                                     </div>
                                     <div class="w-full xl:w-auto px-4 mb-6 xl:mb-0 mt-6 xl:mt-0">
-                                        <form action="{{ route('cart.update', $ad) }}" method="POST" class="flex items-center">
+                                        <form action="{{ route('cart.update', $product) }}" method="POST" class="flex items-center">
                                             @csrf
                                             <h4 class="mr-4 font-heading font-medium">Qty:</h4>
                                             <input type="number" name="quantity" value="{{ $qty }}" min="1"
@@ -90,7 +90,7 @@
                                             €{{ number_format($price, 2, ',', '.') }}
                                         </span>
                                     </div>
-                                    <form action="{{ route('cart.remove', $ad) }}" method="POST" class="absolute top-0 right-0 lg:mt-6 lg:-mr-4">
+                                    <form action="{{ route('cart.remove', $product) }}" method="POST" class="absolute top-0 right-0 lg:mt-6 lg:-mr-4">
                                         @csrf
                                         @method('DELETE')
                                         <button class="text-gray-300 hover:text-gray-500" title="Verwijderen">
@@ -134,34 +134,4 @@
             </div>
         </div>
     </section>
-
-    <script src="https://unpkg.com/flowbite@1.6.5/dist/flowbite.min.js"></script>
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            const toastSuccess = document.getElementById('toast-success');
-            const toastDanger = document.getElementById('toast-danger');
-
-            if (toastSuccess) {
-                setTimeout(() => {
-                    toastSuccess.classList.add('opacity-0');
-                    setTimeout(() => toastSuccess.remove(), 500);
-                }, 1500);
-            }
-
-            if (toastDanger) {
-                setTimeout(() => {
-                    toastDanger.classList.add('opacity-0');
-                    setTimeout(() => toastDanger.remove(), 500);
-                }, 1500);
-            }
-
-            document.querySelectorAll('[data-dismiss-target]').forEach(button => {
-                button.addEventListener('click', function () {
-                    const targetId = button.getAttribute('data-dismiss-target');
-                    const toast = document.querySelector(targetId);
-                    if (toast) toast.remove();
-                });
-            });
-        });
-    </script>
 @endsection

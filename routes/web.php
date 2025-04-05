@@ -5,6 +5,7 @@ use App\Http\Controllers\AdvertiserController;
 use App\Http\Controllers\BusinessExportController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LandingPageController;
@@ -17,6 +18,7 @@ Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::middleware('auth')->group(function () {
     Route::post('/ads/{ad}/favorite', [HomeController::class, 'favorite'])->name('ads.favorite');
     Route::delete('/ads/{ad}/unfavorite', [HomeController::class, 'unfavorite'])->name('ads.unfavorite');
+    Route::get('/ads/{ad}', [HomeController::class, 'show'])->name('ads.show');
 });
 
 // BusinessExportController
@@ -89,6 +91,17 @@ Route::post('/checkout', [\App\Http\Controllers\CartController::class, 'checkout
 Route::middleware('auth')->group(function () {
     Route::get('/review/create', [\App\Http\Controllers\ReviewController::class, 'create'])->name('review.create');
     Route::post('/review/store', [\App\Http\Controllers\ReviewController::class, 'store'])->name('review.store');
+});
+
+// ProductController
+Route::middleware('auth')->name('products.')->prefix('products')->group(function () {
+    Route::get('/', [ProductController::class, 'index'])->name('index');
+    Route::get('/create', [ProductController::class, 'create'])->name('create');
+    Route::post('/', [ProductController::class, 'store'])->name('store');
+    Route::get('/{product}', [ProductController::class, 'show'])->name('show');
+    Route::get('/{product}/edit', [ProductController::class, 'edit'])->name('edit');
+    Route::put('/{product}', [ProductController::class, 'update'])->name('update');
+    Route::delete('/{product}', [ProductController::class, 'destroy'])->name('destroy');
 });
 
 Route::get('/{slug}', [LandingPageController::class, 'show'])->name('landing.show');

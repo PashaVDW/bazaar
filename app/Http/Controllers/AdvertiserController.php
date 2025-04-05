@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreAdvertisementRequest;
+use App\Http\Requests\UpdateAdvertisementRequest;
 use App\Models\Ad;
+use App\Models\Product;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 
@@ -19,65 +21,54 @@ class AdvertiserController extends Controller
 
     public function create()
     {
-        return view('ads.create');
+        $products = Auth::user()->products;
+
+        return view('ads.create', compact('products'));
     }
 
     public function store(StoreAdvertisementRequest $request)
     {
-        $user = Auth::user();
+        $data = $request->validated();
 
-        if ($user->advertisements()->count() >= 4) {
-            return redirect()
-                ->route('advertisements.index')
-                ->with('error', 'You can only create a maximum of 4 advertisements.');
+        $data['image'] = $request->file('image')->store('ads', 'public');
+        $data['user_id'] = Auth::id();
+
+        $ad = Ad::create($data);
+
+        if ($request->has('product_id')) {
+            $product = Product::find($request->product_id);
+            if ($product) {
+                $product->ad_id = $ad->id;
+                $product->save();
+            }
         }
 
-        $imagePath = $request->file('image')->store('ads', 'public');
-
-        Ad::create([
-            'user_id' => $user->id,
-            'title' => $request->input('title'),
-            'description' => $request->input('description'),
-            'image' => $imagePath,
-            'ads_starttime' => $request->input('ads_starttime'),
-            'ads_endtime' => $request->input('ads_endtime'),
-            'type' => $request->input('type'),
-            'hourly_price' => $request->input('hourly_price'),
-            'is_active' => $request->boolean('is_active'),
-        ]);
-
-        return redirect()->route('advertisements.index');
+        return redirect()->route('advertisements.index')->with('success', 'Advertisement created successfully.');
     }
 
     public function edit(string $id)
     {
         $ad = Ad::where('id', $id)->where('user_id', Auth::id())->firstOrFail();
+        $products = Auth::user()->products;
 
-        return view('ads.edit', compact('ad'));
+        return view('ads.edit', compact('ad', 'products'));
     }
 
-    public function update(StoreAdvertisementRequest $request, string $id)
+    public function update(UpdateAdvertisementRequest $request, string $id)
     {
         $ad = Ad::where('id', $id)->where('user_id', Auth::id())->firstOrFail();
 
-        $data = $request->only([
-            'title',
-            'description',
-            'ads_starttime',
-            'ads_endtime',
-            'type',
-            'hourly_price',
-            'is_active',
-        ]);
+        $data = $request->validated();
 
         if ($request->hasFile('image')) {
-            $imagePath = $request->file('image')->store('ads', 'public');
-            $data['image'] = $imagePath;
+            $data['image'] = $request->file('image')->store('ads', 'public');
+        } else {
+            $data['image'] = $ad->image;
         }
 
         $ad->update($data);
 
-        return redirect()->route('advertisements.index');
+        return redirect()->route('advertisements.index')->with('success', 'Advertisement updated successfully.');
     }
 
     public function show(string $id) {}
