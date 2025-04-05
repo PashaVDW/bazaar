@@ -20,11 +20,11 @@
             <a class="text-gray-700 hover:text-primary">Home</a>
             <a class="text-gray-700 hover:text-primary">Categories</a>
             <a class="text-gray-700 hover:text-primary">Products</a>
-            <a class="text-gray-700 hover:text-primary">
+            <a href="{{ route('cart.index') }}" class="text-gray-700 hover:text-primary relative">
                 <i class="fas fa-shopping-cart"></i>
             </a>
-            @auth
-            
+        @auth
+
                 @role('Super Admin')
                     <a href="{{ route('admin.contracts.index') }}" class="text-gray-700 hover:text-primary">
                         <i class="fas fa-user-shield"></i>

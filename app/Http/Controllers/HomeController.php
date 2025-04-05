@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Models\Ad;
 use App\Services\AdSearchService;
+use Illuminate\Http\Request;
 
 class HomeController extends Controller
 {
@@ -19,5 +20,19 @@ class HomeController extends Controller
         $ads = $this->adSearchService->search($request);
 
         return view('welcome', compact('ads'));
+    }
+
+    public function favorite(Ad $ad)
+    {
+        auth()->user()->favorites()->syncWithoutDetaching([$ad->id]);
+
+        return back()->with('success', 'Toegevoegd aan favorieten.');
+    }
+
+    public function unfavorite(Ad $ad)
+    {
+        auth()->user()->favorites()->detach($ad->id);
+
+        return back()->with('success', 'Verwijderd uit favorieten.');
     }
 }

@@ -10,10 +10,10 @@ use Tests\DuskTestCase;
 
 class ContractAdminFlowTest extends DuskTestCase
 {
-    public function testAdminCanViewAndDownloadBusinessContract(): void
+    public function test_admin_can_view_and_download_business_contract(): void
     {
         $admin = User::where('email', 'admin@bazaar.test')->firstOrFail();
-        $business = Business::firstOrFail(); 
+        $business = Business::firstOrFail();
 
         $business->contract_file_path = 'contracts/sample.pdf';
         $business->contract_status = 'signed';

@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\Business;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
 
 class AdminController extends Controller
 {
@@ -39,7 +38,7 @@ class AdminController extends Controller
 
         return redirect()->route('admin.contracts.index')->with('success', 'Contract uploaded successfully.');
     }
-    
+
     public function deleteContract($id)
     {
         $business = Business::with('user')->findOrFail($id);
