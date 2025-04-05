@@ -4,10 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Models\Business;
 use Barryvdh\DomPDF\Facade\Pdf;
+use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
-use Illuminate\Support\Carbon;
-use Illuminate\Http\Request;
 
 class BusinessExportController extends Controller
 {
@@ -25,10 +25,10 @@ class BusinessExportController extends Controller
         $business = Auth::user()?->business;
         $fileSize = null;
         $uploadTime = null;
-    
+
         if ($business && $business->contract_file_path) {
-            $path = storage_path('app/public/' . $business->contract_file_path);
-            
+            $path = storage_path('app/public/'.$business->contract_file_path);
+
             if (file_exists($path)) {
                 $fileSize = round(filesize($path) / 1048576, 2);
                 $uploadTime = Carbon::parse($business->updated_at)->format('H:i');
@@ -42,7 +42,9 @@ class BusinessExportController extends Controller
     {
         $business = Auth::user()->business;
 
-        if (!$business) abort(403);
+        if (! $business) {
+            abort(403);
+        }
 
         $request->validate([
             'contract_file' => 'required|file|mimes:pdf|max:2048',
@@ -61,5 +63,4 @@ class BusinessExportController extends Controller
 
         return redirect()->route('profile.contract')->with('success', 'Contract uploaded successfully.');
     }
-
 }

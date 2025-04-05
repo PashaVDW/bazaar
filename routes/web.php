@@ -3,14 +3,21 @@
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AdvertiserController;
 use App\Http\Controllers\BusinessExportController;
+use App\Http\Controllers\CartController;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LandingPageController;
 use App\Models\Component;
 use Illuminate\Http\Request;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
+
+// HomeController
+Route::middleware('auth')->group(function () {
+    Route::post('/ads/{ad}/favorite', [HomeController::class, 'favorite'])->name('ads.favorite');
+    Route::delete('/ads/{ad}/unfavorite', [HomeController::class, 'unfavorite'])->name('ads.unfavorite');
+});
 
 // BusinessExportController
 Route::middleware(['auth', 'role:Super Admin'])->prefix('admin')->name('admin.')->group(function () {
@@ -26,11 +33,12 @@ Route::middleware(['auth', 'role:Super Admin'])->name('admin.')->prefix('admin')
 
 // ProfileController
 Route::middleware('auth')->name('profile.')->group(function () {
+    Route::get('/profile/purchases/{timestamp}', [ProfileController::class, 'showPurchase'])->name('purchases.show');
+    Route::get('/purchaseHistory', [ProfileController::class, 'purchaseHistory'])->name('purchaseHistory');
     Route::get('/profile', [ProfileController::class, 'index'])->name('index');
     Route::post('/profile/contract/upload', [BusinessExportController::class, 'saveUploadedContract'])->name('contract.upload.save');
     Route::get('/profile/contract', [BusinessExportController::class, 'showContract'])->name('contract');
 });
-
 
 // AdvertisementController
 Route::middleware(['permission:create advertisements'])->name('advertisements.')->prefix('advertisements')->group(function () {
@@ -69,5 +77,18 @@ Route::post('/component-preview/multi', function (Request $request) {
         'logo' => $logo,
     ]);
 })->name('component.preview.multi');
+
+// CartController
+Route::post('/cart/add/{ad}', [CartController::class, 'add'])->name('cart.add');
+Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
+Route::post('/cart/update/{ad}', [CartController::class, 'update'])->name('cart.update');
+Route::delete('/cart/remove/{ad}', [CartController::class, 'remove'])->name('cart.remove');
+Route::post('/checkout', [\App\Http\Controllers\CartController::class, 'checkout'])->name('cart.checkout')->middleware('auth');
+
+// ReviewController
+Route::middleware('auth')->group(function () {
+    Route::get('/review/create', [\App\Http\Controllers\ReviewController::class, 'create'])->name('review.create');
+    Route::post('/review/store', [\App\Http\Controllers\ReviewController::class, 'store'])->name('review.store');
+});
 
 Route::get('/{slug}', [LandingPageController::class, 'show'])->name('landing.show');

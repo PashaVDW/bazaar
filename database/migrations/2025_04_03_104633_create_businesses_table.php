@@ -22,9 +22,8 @@ return new class extends Migration
             $table->text('notes')->nullable();
             $table->string('contract_signed_by_admin')->nullable();
             $table->string('contract_signed_by_business')->nullable();
-            $table->string('contract_status')->default('pending'); 
-            $table->string('contract_file_path')->nullable();      
-
+            $table->string('contract_status')->default('pending');
+            $table->string('contract_file_path')->nullable();
 
             $table->timestamps();
         });

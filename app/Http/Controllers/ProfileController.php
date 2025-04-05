@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Auth;
 use Illuminate\Http\Request;
 
 class ProfileController extends Controller
@@ -12,6 +13,27 @@ class ProfileController extends Controller
     public function index()
     {
         return view('profile.index');
+    }
+
+    public function purchaseHistory()
+    {
+        $purchases = Auth::user()
+            ->purchases()
+            ->with(['ad'])
+            ->whereNotNull('purchased_at')
+            ->orderByDesc('purchased_at')
+            ->paginate(5);
+
+        return view('purchases.index', compact('purchases'));
+    }
+
+    public function showPurchase(int $id)
+    {
+        $purchase = Auth::user()->purchases()->with('ads')->findOrFail($id);
+
+        return view('purchases.show', [
+            'purchase' => $purchase,
+        ]);
     }
 
     /**

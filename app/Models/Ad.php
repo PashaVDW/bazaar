@@ -26,4 +26,19 @@ class Ad extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    public function purchases()
+    {
+        return $this->belongsToMany(Purchase::class)->withPivot('quantity')->withTimestamps();
+    }
+
+    public function favoritedBy()
+    {
+        return $this->belongsToMany(User::class, 'favorites')->withTimestamps();
+    }
+
+    public function reviews()
+    {
+        return $this->hasMany(Review::class);
+    }
 }
