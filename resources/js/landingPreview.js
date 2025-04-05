@@ -19,6 +19,7 @@ export function initLandingPageBuilder(previewRoute, csrfToken) {
         form.action = previewRoute;
         form.target = 'preview-iframe';
         form.style.display = 'none';
+        
 
         const csrf = document.createElement('input');
         csrf.name = '_token';

@@ -12,29 +12,50 @@
         @method($method)
     @endif
 
-    <div class="mb-4">
+    @if ($errors->any())
+        <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-6">
+            <strong class="font-bold">Whoops!</strong>
+            <span class="block">There were some problems with your input.</span>
+        </div>
+    @endif
+
+   <div class="mb-4">
         <label for="slug" class="block font-medium">Custom URL (slug)</label>
         <input type="text" name="slug" id="slug"
-               value="{{ old('slug', $landingPage?->slug) }}"
-               class="w-full border border-gray-300 rounded p-2 mt-1" placeholder="e.g. company-x">
+            value="{{ old('slug', $landingPage?->slug) }}"
+            class="w-full border {{ $errors->has('slug') ? 'border-red-500' : 'border-gray-300' }} rounded p-2 mt-1"
+            placeholder="e.g. company-x">       
+        <span class="text-sm text-gray-500">Only lowercase letters, numbers, and hyphens are allowed (e.g. my-company or MyLanding1).</span>
+        @error('slug')
+            <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
+        @enderror
     </div>
+
 
     <div class="mb-4">
         <label for="logo" class="block font-medium">Upload Logo</label>
-        <input type="file" name="logo" id="logo" class="w-full mt-1 rounded p-2"
-               accept="image/*">
+        <input type="file" name="logo" id="logo"
+            class="w-full mt-1 rounded p-2 {{ $errors->has('logo') ? 'border-red-500' : '' }}"
+            accept="image/*">
         <div class="mt-2" id="logo-preview">
             @if ($landingPage?->logo_path)
                 <img src="{{ Storage::url($landingPage->logo_path) }}" class="h-16">
             @endif
         </div>
+        @error('logo')
+            <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
+        @enderror
     </div>
+
 
     <div class="mb-4">
         <label for="color" class="block font-medium">Primary Color</label>
         <input type="color" name="color" id="color"
-               value="{{ old('color', $landingPage->primary_color ?? '#f97316') }}"
-               class="w-full h-10">
+            value="{{ old('color', $landingPage->primary_color ?? '#f97316') }}"
+            class="w-full h-10 {{ $errors->has('color') ? 'border-red-500' : 'border-gray-300' }}">
+        @error('color')
+            <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
+        @enderror
     </div>
 
     <h3 class="font-semibold mb-2">Available Components</h3>

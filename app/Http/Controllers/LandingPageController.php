@@ -48,7 +48,12 @@ class LandingPageController extends Controller
     {
 
         $request->validate([
-            'slug' => 'required|string|unique:landing_pages,slug',
+            'slug' => [
+            'required',
+            'string',
+            'regex:/^[a-z0-9\-]+$/i',
+            'unique:landing_pages,slug',
+            ],
             'logo' => 'nullable|image|max:2048',
             'color' => 'nullable|string|max:20',
             'components' => 'nullable|array',
@@ -84,7 +89,12 @@ class LandingPageController extends Controller
         $landingPage = Auth::user()->business->landingPage;
 
         $validated = $request->validate([
-            'slug' => 'required|string|unique:landing_pages,slug,' . $landingPage->id,
+            'slug' => [
+            'required',
+            'string',
+            'regex:/^[a-z0-9\-]+$/i',
+            'unique:landing_pages,slug,' . $landingPage->id,
+            ],
             'logo' => 'nullable|image|max:2048',
             'color' => 'nullable|string|max:20',
             'components' => 'nullable|array',
