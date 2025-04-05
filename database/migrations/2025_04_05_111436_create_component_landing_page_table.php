@@ -13,9 +13,10 @@ return new class extends Migration
     {
         Schema::create('component_landing_page', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('business_id')->constrained()->cascadeOnDelete();
-            $table->string('slug')->unique(); 
-            $table->string('logo_path')->nullable();
+            $table->foreignId('component_id')->constrained()->cascadeOnDelete();
+            $table->foreignId('landing_page_id')->constrained()->cascadeOnDelete();
+            $table->integer('order')->default(0); 
+            $table->json('settings')->nullable();
             $table->timestamps();
         });
     }

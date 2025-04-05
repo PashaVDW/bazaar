@@ -6,7 +6,9 @@ use App\Http\Controllers\BusinessExportController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
-
+use App\Http\Controllers\LandingPageController;
+use App\Models\Component;
+use Illuminate\Http\Request;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
@@ -39,3 +41,33 @@ Route::middleware(['permission:create advertisements'])->name('advertisements.')
     Route::put('/{id}', [AdvertiserController::class, 'update'])->name('update');
     Route::delete('/{id}', [AdvertiserController::class, 'destroy'])->name('destroy');
 });
+
+
+Route::middleware(['auth', 'role:business_advertiser'])->group(function () {
+    Route::get('/landing-page', [LandingPageController::class, 'index'])->name('landing.index');
+    Route::get('/landing-page/create', [LandingPageController::class, 'create'])->name('landing.create');
+    Route::post('/landing-page/create', [LandingPageController::class, 'store'])->name('landing.store');
+    Route::get('/landing-page/edit', [LandingPageController::class, 'edit'])->name('landing.edit');
+    Route::post('/landing-page/update', [LandingPageController::class, 'update'])->name('landing.update');
+});
+
+Route::post('/component-preview/multi', function (Request $request) {
+    $orderedIds = collect($request->input('components', []));
+    $components = \App\Models\Component::whereIn('id', $orderedIds)->get()->sortBy(function ($c) use ($orderedIds) {
+        return $orderedIds->search($c->id);
+    });
+
+    $settings = $request->input('component_settings', []);
+    $logo = $settings['global']['logo_base64'] ?? Auth::user()?->business?->landingPage?->logo_path;
+
+    return view('components.landing_components.component-preview-multi', [
+        'components' => $components,
+        'settings' => $settings,
+        'ads' => \App\Models\Ad::where('user_id', Auth::id())->take(4)->get(),
+        'reviews' => [],
+        'business' => Auth::user()?->business,
+        'logo' => $logo,
+    ]);
+})->name('component.preview.multi');
+
+Route::get('/{slug}', [LandingPageController::class, 'show'])->name('landing.show');
