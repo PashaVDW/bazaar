@@ -5,10 +5,10 @@ use App\Http\Controllers\AdvertiserController;
 use App\Http\Controllers\BusinessExportController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\HomeController;
 
-Route::get('/', function () {
-    return view('welcome');
-})->name('home');
+
+Route::get('/', [HomeController::class, 'index'])->name('home');
 
 // BusinessExportController
 Route::middleware(['auth', 'role:Super Admin'])->prefix('admin')->name('admin.')->group(function () {
