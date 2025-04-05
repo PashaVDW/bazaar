@@ -15,6 +15,7 @@ abstract class DuskTestCase extends BaseTestCase
     {
         return 'https://bazaar.test';
     }
+
     /**
      * Prepare for Dusk test execution.
      */

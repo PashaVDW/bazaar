@@ -6,23 +6,23 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-class Business extends Model
+class Ad extends Model
 {
     use HasFactory;
 
     protected $fillable = [
         'user_id',
-        'company_name',
-        'kvk_number',
-        'vat_number',
-        'phone',
-        'address',
-        'notes',
-        'contract_status',
-        'contract_file_path',
+        'title',
+        'description',
+        'image',
+        'ads_starttime',
+        'ads_endtime',
+        'type',
+        'is_active',
+        'hourly_price',
     ];
 
-    public function user(): belongsTo
+    public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
     }
