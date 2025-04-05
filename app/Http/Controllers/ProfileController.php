@@ -28,7 +28,7 @@ class ProfileController extends Controller
 
     public function showPurchase(int $id)
     {
-        $purchase = auth()->user()->purchases()->with('ad')->findOrFail($id);
+        $purchase = auth()->user()->purchases()->with('ads')->findOrFail($id);
 
         return view('purchases.show', [
             'purchase' => $purchase,
