@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Ad;
 use App\Models\Review;
+use Auth;
 use Illuminate\Http\Request;
 
 class ReviewController extends Controller
@@ -12,10 +13,10 @@ class ReviewController extends Controller
     {
         $adId = $request->query('ad');
         $ad = Ad::whereHas('purchases', function ($q) {
-            $q->where('user_id', auth()->id());
+            $q->where('user_id', Auth::id());
         })->findOrFail($adId);
 
-        $review = Review::where('user_id', auth()->id())
+        $review = Review::where('user_id', Auth::id())
             ->where('ad_id', $adId)
             ->first();
 
@@ -32,7 +33,7 @@ class ReviewController extends Controller
         ]);
 
         Review::create([
-            'user_id' => auth()->id(),
+            'user_id' => Auth::id(),
             'ad_id' => $validated['ad_id'],
             'title' => $validated['title'],
             'content' => $validated['content'],

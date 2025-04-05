@@ -1,4 +1,5 @@
 import './bootstrap';
+import { initLandingPageBuilder } from './landingPreview';
 
 document.addEventListener('DOMContentLoaded', function () {
     const fileInput = document.getElementById('contract_file');
@@ -22,3 +23,15 @@ setTimeout(() => {
         setTimeout(() => toast.remove(), 500);
     }
 }, 3000);
+
+
+
+document.addEventListener('DOMContentLoaded', () => {
+    const previewRoute = document.querySelector('[data-preview-route]')?.dataset.previewRoute;
+    const csrfToken = document.querySelector('meta[name="csrf-token"]')?.content;
+
+    if (previewRoute && csrfToken) {
+        initLandingPageBuilder(previewRoute, csrfToken);
+    }
+});
+
