@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Ad;
 use App\Services\AdSearchService;
+use Auth;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -24,14 +25,14 @@ class HomeController extends Controller
 
     public function favorite(Ad $ad)
     {
-        auth()->user()->favorites()->syncWithoutDetaching([$ad->id]);
+        Auth::user()->favorites()->syncWithoutDetaching([$ad->id]);
 
         return back()->with('success', 'Toegevoegd aan favorieten.');
     }
 
     public function unfavorite(Ad $ad)
     {
-        auth()->user()->favorites()->detach($ad->id);
+        Auth::user()->favorites()->detach($ad->id);
 
         return back()->with('success', 'Verwijderd uit favorieten.');
     }
