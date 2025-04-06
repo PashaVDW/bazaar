@@ -8,10 +8,8 @@ use App\Http\Requests\UploadCsvRequest;
 use App\Imports\AdsImport;
 use App\Models\Ad;
 use App\Models\Product;
-use App\Models\User;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use App\Services\QrCodeService;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Maatwebsite\Excel\Facades\Excel;
 
@@ -32,7 +30,6 @@ class AdvertiserController extends Controller
 
         return view('ads.index', compact('advertisements'));
     }
-
 
     public function create()
     {
@@ -114,5 +111,4 @@ class AdvertiserController extends Controller
 
         return redirect()->route('advertisements.index')->with('success', 'Advertisements imported successfully.');
     }
-
 }

@@ -20,6 +20,7 @@ class StoreProductRequest extends FormRequest
             'price' => 'required|numeric|min:0|max:999999.99',
             'type' => 'required|in:sale,rental,auction',
             'stock' => 'required|integer|min:0',
+            'image' => 'nullable|image|max:8192',
         ];
     }
 }

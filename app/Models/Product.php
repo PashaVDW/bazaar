@@ -34,4 +34,9 @@ class Product extends Model
     {
         return $this->belongsToMany(Purchase::class)->withPivot('quantity')->withTimestamps();
     }
+
+    public function reservations()
+    {
+        return $this->hasMany(Reservation::class);
+    }
 }

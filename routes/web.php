@@ -3,24 +3,27 @@
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AdvertiserController;
 use App\Http\Controllers\BusinessExportController;
+use App\Http\Controllers\BusinessSettingsController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LandingPageController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\ReservationController;
 use App\Http\Controllers\ReviewController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\BusinessSettingsController;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
+// HomeController
 Route::middleware('auth')->group(function () {
     Route::post('/ads/{ad}/favorite', [HomeController::class, 'favorite'])->name('ads.favorite');
     Route::delete('/ads/{ad}/unfavorite', [HomeController::class, 'unfavorite'])->name('ads.unfavorite');
     Route::get('/ads/{ad}', [HomeController::class, 'show'])->name('ads.show');
 });
 
+// BusinessExportController & AdminController
 Route::middleware(['auth', 'role:Super Admin'])->prefix('admin')->name('admin.')->group(function () {
     Route::get('/businesses/{id}/export-pdf', [BusinessExportController::class, 'export'])->name('business.export.pdf');
     Route::get('/contracts', [AdminController::class, 'contractIndex'])->name('contracts.index');
@@ -28,6 +31,7 @@ Route::middleware(['auth', 'role:Super Admin'])->prefix('admin')->name('admin.')
     Route::post('/contracts/{business}/upload', [AdminController::class, 'saveUploadedContract'])->name('contracts.upload.save');
 });
 
+// ProfileController
 Route::middleware('auth')->name('profile.')->group(function () {
     Route::get('/profile/purchases/{timestamp}', [ProfileController::class, 'showPurchase'])->name('purchases.show');
     Route::get('/purchaseHistory', [ProfileController::class, 'purchaseHistory'])->name('purchaseHistory');
@@ -36,6 +40,7 @@ Route::middleware('auth')->name('profile.')->group(function () {
     Route::get('/profile/contract', [BusinessExportController::class, 'showContract'])->name('contract');
 });
 
+// AdvertiserController
 Route::middleware(['permission:create advertisements'])->name('advertisements.')->prefix('advertisements')->group(function () {
     Route::get('/', [AdvertiserController::class, 'index'])->name('index');
     Route::get('/create', [AdvertiserController::class, 'create'])->name('create');
@@ -45,10 +50,12 @@ Route::middleware(['permission:create advertisements'])->name('advertisements.')
     Route::delete('/{id}', [AdvertiserController::class, 'destroy'])->name('destroy');
 });
 
+// CSV Import - AdvertiserController
 Route::middleware(['auth', 'role:business_advertiser'])->group(function () {
     Route::post('/advertisements/import', [AdvertiserController::class, 'importCsv'])->name('advertisements.import');
 });
 
+// LandingPageController
 Route::middleware(['auth', 'role:business_advertiser'])->group(function () {
     Route::get('/landing-page', [LandingPageController::class, 'index'])->name('landing.index');
     Route::get('/landing-page/create', [LandingPageController::class, 'create'])->name('landing.create');
@@ -57,6 +64,7 @@ Route::middleware(['auth', 'role:business_advertiser'])->group(function () {
     Route::post('/landing-page/update', [LandingPageController::class, 'update'])->name('landing.update');
 });
 
+// Component preview (Blade based)
 Route::post('/component-preview/multi', function (Request $request) {
     $orderedIds = collect($request->input('components', []));
     $components = \App\Models\Component::whereIn('id', $orderedIds)->get()->sortBy(function ($c) use ($orderedIds) {
@@ -76,17 +84,20 @@ Route::post('/component-preview/multi', function (Request $request) {
     ]);
 })->name('component.preview.multi');
 
+// CartController
 Route::post('/cart/add/{product}', [CartController::class, 'add'])->name('cart.add');
 Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
 Route::post('/cart/update/{product}', [CartController::class, 'update'])->name('cart.update');
-Route::delete('/cart/remove/{ad}', [CartController::class, 'remove'])->name('cart.remove');
+Route::delete('/cart/remove/{product}', [CartController::class, 'remove'])->name('cart.remove');
 Route::post('/checkout', [CartController::class, 'checkout'])->name('cart.checkout')->middleware('auth');
 
+// ReviewController
 Route::middleware('auth')->group(function () {
     Route::get('/review/create', [ReviewController::class, 'create'])->name('review.create');
     Route::post('/review/store', [ReviewController::class, 'store'])->name('review.store');
 });
 
+// ProductController
 Route::middleware('auth')->name('products.')->prefix('products')->group(function () {
     Route::get('/', [ProductController::class, 'index'])->name('index');
     Route::get('/create', [ProductController::class, 'create'])->name('create');
@@ -97,9 +108,16 @@ Route::middleware('auth')->name('products.')->prefix('products')->group(function
     Route::delete('/{product}', [ProductController::class, 'destroy'])->name('destroy');
 });
 
+// BusinessSettingsController
 Route::middleware(['auth'])->prefix('profile')->group(function () {
     Route::get('/settings', [BusinessSettingsController::class, 'edit'])->name('profile.settings');
     Route::put('/settings', [BusinessSettingsController::class, 'update'])->name('profile.settings.update');
 });
 
+// ReservationController
+Route::middleware(['auth'])->group(function () {
+    Route::post('/reservations', [ReservationController::class, 'store'])->name('reservations.store');
+});
+
+// Catch-all for public landing pages
 Route::get('/{slug}', [LandingPageController::class, 'show'])->name('landing.show');

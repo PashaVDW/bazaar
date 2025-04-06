@@ -62,6 +62,12 @@
                                             </figure>
                                             <div class="px-5 py-4">
                                                 <h5 class="text-lg font-semibold text-gray-900 mb-2">{{ $ad->title }}</h5>
+                                                @php
+                                                    $product = $ad->products->first();
+                                                @endphp
+                                                @if ($product && $product->stock < 5)
+                                                    <p class="text-xs text-red-600 font-medium mb-1">({{ $product->stock }} left)</p>
+                                                @endif
                                                 <div class="flex items-center mb-3">
                                                     <div class="flex items-center space-x-1">
                                                         @for ($i = 1; $i <= 5; $i++)
