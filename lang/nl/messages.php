@@ -7,7 +7,7 @@ return [
     'admin' => 'Beheerder',
     'ads' => 'Advertenties',
     'apply_filters' => 'Filters toepassen',
-    'auction' => 'Veiling',
+    'auctions' => 'Veiling',
     'cancel' => 'Annuleren',
     'company' => 'Bedrijf',
     'contact_us' => 'Neem contact op',
@@ -256,5 +256,13 @@ return [
     'edit_product' => 'Product bewerken',
     'update_product' => 'Product bijwerken',
     'update_your_product_below' => 'Werk je product hieronder bij',
+    'your_auctions' => 'Your Auctions',
+    'highest_bid' => 'Highest Bid',
+    'winning_bidder' => 'Winning Bidder',
+    'open' => 'Open',
+    'closed' => 'Closed',
+    'close_auction' => 'Close Auction',
+    'no_auctions_found' => 'You have no auction products.',
+    'place_bid' => 'Place Bid',
 
 ];

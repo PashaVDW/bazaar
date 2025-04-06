@@ -96,7 +96,7 @@
                     <option value="" disabled {{ old('type') ? '' : 'selected' }}>{{ __('messages.select_type') }}</option>
                     <option value="sale" {{ old('type') === 'sale' ? 'selected' : '' }}>{{ __('messages.sale') }}</option>
                     <option value="rental" {{ old('type') === 'rental' ? 'selected' : '' }}>{{ __('messages.rental') }}</option>
-                    <option value="auction" {{ old('type') === 'auction' ? 'selected' : '' }}>{{ __('messages.auction') }}</option>
+                    <option value="auction" {{ old('type') === 'auctions' ? 'selected' : '' }}>{{ __('messages.auctions') }}</option>
                 </select>
                 @error('type')
                 <p class="text-sm text-red-600 mt-2">{{ $message }}</p>

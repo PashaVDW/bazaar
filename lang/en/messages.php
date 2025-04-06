@@ -7,7 +7,7 @@ return [
     'admin' => 'Admin',
     'ads' => 'Advertisements',
     'apply_filters' => 'Apply Filters',
-    'auction' => 'Auction',
+    'auctions' => 'Auction',
     'cancel' => 'Cancel',
     'company' => 'Company',
     'contact_us' => 'Contact Us',
@@ -257,4 +257,13 @@ return [
     'edit_product' => 'Edit Product',
     'update_product' => 'Update Product',
     'update_your_product_below' => 'Update your product below',
+    'your_auctions' => 'Your Auctions',
+    'highest_bid' => 'Highest Bid',
+    'winning_bidder' => 'Winning Bidder',
+    'open' => 'Open',
+    'closed' => 'Closed',
+    'close_auction' => 'Close Auction',
+    'no_auctions_found' => 'You have no auction products.',
+    'place_bid' => 'Place Bid',
+
 ];

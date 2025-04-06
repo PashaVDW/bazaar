@@ -28,6 +28,9 @@
             @role(['private_advertiser', 'business_advertiser'])
             <x-shared.nav-link route="products.index" icon="fa-cube" :label="__('messages.products')" />
             @endrole
+            @role(['private_advertiser', 'business_advertiser'])
+            <x-shared.nav-link route="auctions.index" icon="fa-gavel" :label="__('messages.auctions')" />
+            @endrole
             @role('business_advertiser')
             <x-shared.nav-link route="profile.contract" icon="fa-file-contract" :label="__('messages.contract')" />
             <x-shared.nav-link route="landing.index" icon="fa-rocket" :label="__('messages.landing')" />
