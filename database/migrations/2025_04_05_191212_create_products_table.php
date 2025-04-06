@@ -11,12 +11,13 @@ return new class extends Migration
         Schema::create('products', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
-            $table->foreignId('ad_id')->nullable()->constrained()->nullOnDelete();
+            $table->foreignId('ad_id')->nullable()->constrained()->onDelete('cascade');
+            $table->boolean('is_main')->default(false);
             $table->string('name');
             $table->text('description')->nullable();
-            $table->decimal('price');
-            $table->enum('type', ['sale', 'rental', 'auction'])->default('sale');
-            $table->integer('stock')->default(0);
+            $table->decimal('price', 10, 2);
+            $table->enum('type', ['sale', 'rental', 'auction']);
+            $table->integer('stock')->default(1);
             $table->string('image')->nullable();
             $table->timestamps();
         });

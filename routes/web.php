@@ -22,6 +22,7 @@ Route::middleware('auth')->group(function () {
     Route::post('/ads/{ad}/favorite', [HomeController::class, 'favorite'])->name('ads.favorite');
     Route::delete('/ads/{ad}/unfavorite', [HomeController::class, 'unfavorite'])->name('ads.unfavorite');
     Route::get('/ads/{ad}', [HomeController::class, 'show'])->name('ads.show');
+
 });
 
 // BusinessExportController & AdminController

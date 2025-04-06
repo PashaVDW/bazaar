@@ -47,12 +47,18 @@ class AdvertiserController extends Controller
 
         $ad = Ad::create($data);
 
-        if ($request->has('product_id')) {
-            $product = Product::find($request->product_id);
-            if ($product) {
-                $product->ad_id = $ad->id;
-                $product->save();
-            }
+        if ($request->has('main_product_id')) {
+            Product::where('id', $request->main_product_id)->update([
+                'ad_id' => $ad->id,
+                'is_main' => true,
+            ]);
+        }
+
+        if ($request->has('sub_product_ids')) {
+            Product::whereIn('id', $request->sub_product_ids)->update([
+                'ad_id' => $ad->id,
+                'is_main' => false,
+            ]);
         }
 
         $qrPath = $qrCodeService->generateForAd($ad);

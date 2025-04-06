@@ -5,10 +5,8 @@
 @section('content')
     <div class="w-full max-w-2xl mx-auto px-6 py-10">
         <div class="text-center mb-6">
-            <div class="mt-2">
-                <h3 class="text-2xl font-semibold">Create Advertisement</h3>
-                <p class="text-sm text-gray-500">Fill in the details below to publish your ad</p>
-            </div>
+            <h3 class="text-2xl font-semibold">Create Advertisement</h3>
+            <p class="text-sm text-gray-500">Fill in the details below to publish your ad</p>
         </div>
 
         @if ($errors->any())
@@ -95,15 +93,32 @@
             </div>
 
             <div class="mb-5">
-                <select name="product_id" class="w-full p-3 text-sm bg-gray-50 outline-none rounded" required>
-                    <option value="" disabled {{ old('product_id') ? '' : 'selected' }}>Select a product</option>
+                <label class="block mb-2 text-sm font-medium text-gray-700">Main Product</label>
+                <select name="main_product_id" class="w-full p-3 text-sm bg-gray-50 outline-none rounded" required>
+                    <option value="" disabled {{ old('main_product_id') ? '' : 'selected' }}>Select a product</option>
                     @foreach ($products as $product)
-                        <option value="{{ $product->id }}" {{ old('product_id') == $product->id ? 'selected' : '' }}>
+                        <option value="{{ $product->id }}" {{ old('main_product_id') == $product->id ? 'selected' : '' }}>
                             {{ $product->name }}
                         </option>
                     @endforeach
                 </select>
-                @error('product_id')
+                @error('main_product_id')
+                <p class="text-sm text-red-600 mt-2">{{ $message }}</p>
+                @enderror
+            </div>
+
+            <div class="mb-5">
+                <label class="block mb-2 text-sm font-medium text-gray-700">Sub Products (optional)</label>
+                <select name="sub_product_ids[]" multiple
+                        class="w-full p-3 text-sm bg-gray-50 outline-none rounded h-40 overflow-y-auto">
+                    @foreach ($products as $product)
+                        <option value="{{ $product->id }}"
+                            {{ (collect(old('sub_product_ids'))->contains($product->id)) ? 'selected' : '' }}>
+                            {{ $product->name }}
+                        </option>
+                    @endforeach
+                </select>
+                @error('sub_product_ids')
                 <p class="text-sm text-red-600 mt-2">{{ $message }}</p>
                 @enderror
             </div>

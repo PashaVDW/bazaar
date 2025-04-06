@@ -40,9 +40,12 @@ class HomeController extends Controller
     public function show(Ad $ad)
     {
         $ad->load('products.reviews');
+
+        $mainProduct = $ad->products->firstWhere('is_main', true);
+        $subProducts = $ad->products->where('is_main', false);
         $reviews = $ad->products->flatMap->reviews;
         $averageRating = $reviews->count() ? round($reviews->pluck('rating')->avg()) : 0;
 
-        return view('ads.show', compact('ad', 'reviews', 'averageRating'));
+        return view('ads.show', compact('ad', 'mainProduct', 'subProducts', 'reviews', 'averageRating'));
     }
 }
