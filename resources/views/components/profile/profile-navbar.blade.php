@@ -49,6 +49,10 @@
                    class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
                    <i class="fa-solid fa-palette mr-2"></i> Style settings
                 </a>
+                <a href="{{ route('developer.index') }}"
+                   class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+                    <i class="fas fa-code mr-2"></i> Developer Settings
+                </a>
                 <form method="POST" action="{{ route('logout') }}">
                     @csrf
                     <button type="submit"
