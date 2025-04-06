@@ -9,11 +9,17 @@ class BusinessSettingsController extends Controller
 {
     public function edit()
     {
-        $business = Auth::user()->business;
+        $user = Auth::user();
+
+        $business = $user->business ?? $user->business()->create([
+            'company_name' => 'My Company', 
+        ]);
+
         $fonts = ['Instrument Sans', 'Poppins', 'Inter', 'Roboto', 'Lato'];
 
         return view('profile.settings', compact('business', 'fonts'));
     }
+
 
     public function update(Request $request)
     {

@@ -9,25 +9,33 @@ class AdSearchService
 {
     public function search(Request $request)
     {
-        $query = Ad::query();
+        $query = Ad::with('products');
 
         if ($search = $request->input('search')) {
             $query->where(function ($q) use ($search) {
                 $q->where('title', 'like', "%{$search}%")
-                    ->orWhere('description', 'like', "%{$search}%");
+                    ->orWhere('description', 'like', "%{$search}%")
+                    ->orWhereHas('products', function ($sub) use ($search) {
+                        $sub->where('name', 'like', "%{$search}%");
+                    });
             });
         }
 
         if ($type = $request->input('type')) {
-            $query->where('type', $type);
+            $query->whereHas('products', function ($q) use ($type) {
+                $q->where('type', $type);
+            });
         }
 
-        if ($priceMin = $request->input('price_min')) {
-            $query->where('hourly_price', '>=', $priceMin);
-        }
-
-        if ($priceMax = $request->input('price_max')) {
-            $query->where('hourly_price', '<=', $priceMax);
+        if ($request->filled('price_min') || $request->filled('price_max')) {
+            $query->whereHas('products', function ($q) use ($request) {
+                if ($request->filled('price_min')) {
+                    $q->where('price', '>=', $request->input('price_min'));
+                }
+                if ($request->filled('price_max')) {
+                    $q->where('price', '<=', $request->input('price_max'));
+                }
+            });
         }
 
         if ($dateStart = $request->input('date_start')) {
@@ -40,14 +48,17 @@ class AdSearchService
 
         switch ($request->input('sort')) {
             case 'price_low_high':
-                $query->orderBy('hourly_price', 'asc');
+                $query->withMin('products', 'price')->orderBy('products_min_price');
                 break;
+
             case 'price_high_low':
-                $query->orderBy('hourly_price', 'desc');
+                $query->withMax('products', 'price')->orderByDesc('products_max_price');
                 break;
+
             case 'oldest':
                 $query->orderBy('created_at', 'asc');
                 break;
+
             default:
                 $query->orderBy('created_at', 'desc');
                 break;

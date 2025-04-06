@@ -1,38 +1,54 @@
 <nav class="bg-white border-b border-gray-100 shadow-sm">
     <div class="max-w-7xl mx-auto px-4 lg:px-8 py-4 flex flex-wrap items-center justify-between gap-4">
         
-        {{-- Logo --}}
         <div class="flex items-center space-x-3">
             <a href="/" class="flex items-center">
                 <x-shared.logo class="w-28 sm:w-36" />
             </a>
         </div>
 
-        {{-- Searchbar --}}
         <div class="w-full md:flex-1 md:max-w-md">
-            <form action="" method="GET">
+            <form action="{{ route('home') }}" method="GET">
                 <div class="relative">
-                    <input type="text" name="search" id="search"
+                    <input type="text"
+                        name="search"
+                        id="search"
+                        value="{{ request('search') }}"
                         class="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-xl shadow-sm text-sm focus:outline-none focus:ring-2 focus:ring-primary"
                         placeholder="Search products..." />
                     <div class="absolute inset-y-0 left-0 flex items-center pl-3">
                         <i class="fas fa-search text-gray-400"></i>
                     </div>
+                    @foreach(request()->except('search', 'page') as $key => $value)
+                        <input type="hidden" name="{{ $key }}" value="{{ $value }}">
+                    @endforeach
                 </div>
             </form>
+
         </div>
 
-        {{-- Navigation Links --}}
-        <div class="hidden lg:flex items-center space-x-6 text-sm text-gray-700">
-            <a href="#" class="hover:text-primary transition">Home</a>
-            <a href="#" class="hover:text-primary transition">Categories</a>
-            <a href="#" class="hover:text-primary transition">Products</a>
-            <a href="{{ route('cart.index') }}" class="hover:text-primary transition relative">
-                <i class="fas fa-shopping-cart text-lg"></i>
-            </a>
-        </div>
+     @php
+        $cartCount = session('cart') ? collect(session('cart'))->sum('quantity') : 0;
+    @endphp
 
-        {{-- User Section --}}
+    <div class="hidden lg:flex items-center space-x-6 text-sm text-gray-700">
+        <a href="#" class="hover:text-primary transition">Home</a>
+        <a href="#" class="hover:text-primary transition">Categories</a>
+        <a href="#" class="hover:text-primary transition">Products</a>
+
+        <a href="{{ route('cart.index') }}" class="hover:text-primary transition relative">
+            <i class="fas fa-shopping-cart text-lg"></i>
+
+            @if ($cartCount > 0)
+                <span
+                    class="absolute -top-2 -right-3 text-xs font-semibold bg-red-500 text-white rounded-full px-1.5 py-0.5 shadow-sm">
+                    {{ $cartCount }}
+                </span>
+            @endif
+        </a>
+    </div>
+
+
         <div class="flex items-center gap-4">
             @auth
                 @role('Super Admin')
@@ -61,7 +77,6 @@
                     </a>
                 @endrole
 
-                {{-- Logout --}}
                 <a href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"
                    class="text-gray-600 hover:text-red-600 transition" title="Logout">
                     <i class="fas fa-sign-out-alt text-lg"></i>
