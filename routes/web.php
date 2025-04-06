@@ -5,12 +5,12 @@ use App\Http\Controllers\AdvertiserController;
 use App\Http\Controllers\BusinessExportController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\LandingPageController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
-use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\LandingPageController;
-use App\Models\Component;
+use App\Http\Controllers\ReviewController;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Route;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
@@ -52,7 +52,6 @@ Route::middleware(['permission:create advertisements'])->name('advertisements.')
     Route::delete('/{id}', [AdvertiserController::class, 'destroy'])->name('destroy');
 });
 
-
 Route::middleware(['auth', 'role:business_advertiser'])->group(function () {
     Route::get('/landing-page', [LandingPageController::class, 'index'])->name('landing.index');
     Route::get('/landing-page/create', [LandingPageController::class, 'create'])->name('landing.create');
@@ -81,16 +80,16 @@ Route::post('/component-preview/multi', function (Request $request) {
 })->name('component.preview.multi');
 
 // CartController
-Route::post('/cart/add/{ad}', [CartController::class, 'add'])->name('cart.add');
+Route::post('/cart/add/{product}', [CartController::class, 'add'])->name('cart.add');
 Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
-Route::post('/cart/update/{ad}', [CartController::class, 'update'])->name('cart.update');
+Route::post('/cart/update/{product}', [CartController::class, 'update'])->name('cart.update');
 Route::delete('/cart/remove/{ad}', [CartController::class, 'remove'])->name('cart.remove');
-Route::post('/checkout', [\App\Http\Controllers\CartController::class, 'checkout'])->name('cart.checkout')->middleware('auth');
+Route::post('/checkout', [CartController::class, 'checkout'])->name('cart.checkout')->middleware('auth');
 
 // ReviewController
 Route::middleware('auth')->group(function () {
-    Route::get('/review/create', [\App\Http\Controllers\ReviewController::class, 'create'])->name('review.create');
-    Route::post('/review/store', [\App\Http\Controllers\ReviewController::class, 'store'])->name('review.store');
+    Route::get('/review/create', [ReviewController::class, 'create'])->name('review.create');
+    Route::post('/review/store', [ReviewController::class, 'store'])->name('review.store');
 });
 
 // ProductController
@@ -104,4 +103,5 @@ Route::middleware('auth')->name('products.')->prefix('products')->group(function
     Route::delete('/{product}', [ProductController::class, 'destroy'])->name('destroy');
 });
 
+// LandingPageController
 Route::get('/{slug}', [LandingPageController::class, 'show'])->name('landing.show');

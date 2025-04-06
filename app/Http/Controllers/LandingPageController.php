@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use Illuminate\Contracts\View\View;
-use App\Models\LandingPage;
-use Illuminate\Support\Facades\Auth;
 use App\Models\Component;
+use App\Models\LandingPage;
+use Illuminate\Contracts\View\View;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
 
 class LandingPageController extends Controller
@@ -18,12 +18,14 @@ class LandingPageController extends Controller
         if ($landingPage) {
             $landingPage->load('components');
         }
+
         return view('landing.index', compact('landingPage'));
     }
 
     public function show(string $slug): View
     {
         $landingPage = LandingPage::where('slug', $slug)->with('components')->firstOrFail();
+
         return view('landing.preview', compact('landingPage'));
     }
 
@@ -49,10 +51,10 @@ class LandingPageController extends Controller
 
         $request->validate([
             'slug' => [
-            'required',
-            'string',
-            'regex:/^[a-z0-9\-]+$/i',
-            'unique:landing_pages,slug',
+                'required',
+                'string',
+                'regex:/^[a-z0-9\-]+$/i',
+                'unique:landing_pages,slug',
             ],
             'logo' => 'nullable|image|max:2048',
             'color' => 'nullable|string|max:20',
@@ -60,7 +62,6 @@ class LandingPageController extends Controller
             'components.*.id' => 'required|exists:components,id',
             'components.*.settings' => 'nullable|array',
         ]);
-        
 
         $path = $request->hasFile('logo')
             ? $request->file('logo')->store('logos', 'public')
@@ -82,18 +83,17 @@ class LandingPageController extends Controller
 
         return redirect()->route('landing.index')->with('success', 'Landing page created!');
     }
-   
-    
+
     public function update(Request $request)
     {
         $landingPage = Auth::user()->business->landingPage;
 
         $validated = $request->validate([
             'slug' => [
-            'required',
-            'string',
-            'regex:/^[a-z0-9\-]+$/i',
-            'unique:landing_pages,slug,' . $landingPage->id,
+                'required',
+                'string',
+                'regex:/^[a-z0-9\-]+$/i',
+                'unique:landing_pages,slug,'.$landingPage->id,
             ],
             'logo' => 'nullable|image|max:2048',
             'color' => 'nullable|string|max:20',
@@ -121,7 +121,6 @@ class LandingPageController extends Controller
         return redirect()->route('landing.index')->with('success', 'Landing page updated!');
     }
 
-
     protected function loadComponentInputDefinitions($components): array
     {
         $definitions = [];
@@ -134,7 +133,7 @@ class LandingPageController extends Controller
                 $content = File::get($file);
                 if (preg_match('/\$__inputs\s*=\s*(\[.*?\]);/s', $content, $matches)) {
                     try {
-                        $inputs = eval('return ' . $matches[1] . ';');
+                        $inputs = eval('return '.$matches[1].';');
                         $definitions[$component->id] = is_array($inputs) ? $inputs : [];
                     } catch (\Throwable $e) {
                         $definitions[$component->id] = [];
@@ -145,13 +144,16 @@ class LandingPageController extends Controller
 
         return $definitions;
     }
+
     protected function syncLandingPageComponents($landingPage, string $ordered, array $components)
     {
         $orderedIds = explode(',', $ordered);
         $componentsById = collect($components)->keyBy('id');
 
         foreach ($orderedIds as $index => $id) {
-            if (!isset($componentsById[$id])) continue;
+            if (! isset($componentsById[$id])) {
+                continue;
+            }
 
             $settings = $componentsById[$id]['settings'] ?? null;
 
