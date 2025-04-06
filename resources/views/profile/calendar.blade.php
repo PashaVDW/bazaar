@@ -4,7 +4,6 @@
     :weekDates="$weekDates"
     :events="$events"
     title="My Rental Calendar"
-    {{-- addButtonRoute="{{ route('your.add.route') }}" --}}
     addButtonLabel="+ Add Event"
     routeName="profile.calendar"
 />
