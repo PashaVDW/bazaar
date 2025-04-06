@@ -4,12 +4,15 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreAdvertisementRequest;
 use App\Http\Requests\UpdateAdvertisementRequest;
+use App\Imports\AdsImport;
 use App\Models\Ad;
 use App\Models\Product;
 use App\Models\User;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Services\QrCodeService;
 use Illuminate\Support\Facades\Storage;
+use Maatwebsite\Excel\Facades\Excel;
 
 class AdvertiserController extends Controller
 {
@@ -93,5 +96,16 @@ class AdvertiserController extends Controller
         $ad->delete();
 
         return redirect()->route('advertisements.index')->with('success', 'Advertisement deleted.');
+    }
+
+    public function importCsv(UploadCsvRequest $request)
+    {
+        $validated = $request->validated();
+
+        $file = $request->file('csv_file');
+
+        Excel::import(new AdsImport, $file);
+
+        return redirect()->route('advertisements.index')->with('success', 'Advertisements imported successfully.');
     }
 }

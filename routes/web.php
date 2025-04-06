@@ -53,6 +53,10 @@ Route::middleware(['permission:create advertisements'])->name('advertisements.')
 });
 
 Route::middleware(['auth', 'role:business_advertiser'])->group(function () {
+    Route::post('advertisements/import', [AdvertiserController::class, 'importCsv'])->name('advertisements.import');
+});
+
+Route::middleware(['auth', 'role:business_advertiser'])->group(function () {
     Route::get('/landing-page', [LandingPageController::class, 'index'])->name('landing.index');
     Route::get('/landing-page/create', [LandingPageController::class, 'create'])->name('landing.create');
     Route::post('/landing-page/create', [LandingPageController::class, 'store'])->name('landing.store');
