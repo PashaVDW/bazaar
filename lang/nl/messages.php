@@ -249,5 +249,8 @@ return [
     'main_product' => 'Hoofdproduct',
     'sub_products_optional' => 'Subproducten (optioneel)',
     'create' => 'Advertentie aanmaken',
-
+    'search' => 'Zoeken',
+    'search_placeholder' => 'Zoek advertenties of producten...',
+    'all_types' => 'Alle types',
+    'price_euro' => 'Prijs (€)',
 ];
