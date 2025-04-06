@@ -35,3 +35,33 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 });
 
+   // Toast fade-out
+   setTimeout(() => {
+    document.querySelectorAll('[id^="toast-"]').forEach(toast => {
+        toast.classList.add('opacity-0');
+        setTimeout(() => toast.remove(), 500);
+    });
+}, 3000);
+
+// Delete modal toggle
+document.querySelectorAll('[data-modal-toggle]').forEach(btn => {
+    const targetId = btn.getAttribute('data-modal-toggle');
+    const modal = document.getElementById(targetId);
+
+    btn.addEventListener('click', () => {
+        if (modal.classList.contains('hidden')) {
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+        } else {
+            modal.classList.add('hidden');
+            modal.classList.remove('flex');
+        }
+    });
+
+    modal?.querySelectorAll('[data-modal-hide]').forEach(closeBtn => {
+        closeBtn.addEventListener('click', () => {
+            modal.classList.add('hidden');
+            modal.classList.remove('flex');
+        });
+    });
+});

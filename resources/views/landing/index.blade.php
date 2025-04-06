@@ -15,7 +15,7 @@
             <h2 class="text-2xl font-bold">Your Landing Page</h2>
             <a href="{{ route('landing.edit') }}" class="bg-primary text-white px-4 py-2 rounded hover:bg-orange-600">Edit Page</a>
         </div>
-        <div class="border border border-gray-300  rounded p-4 shadow-sm">
+        <div class="border border-gray-300  rounded p-4 shadow-sm">
             @include('layouts.app')
             @foreach ($landingPage->components as $component)
                 @php
