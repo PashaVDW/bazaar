@@ -30,29 +30,29 @@
                         <div class="p-8 xl:py-12 xl:px-16 mb-10 xl:mb-16 bg-white rounded-3xl">
                             <p class="sm:pl-7 mb-11 text-gray-400 font-medium">What you ordered:</p>
 
-                            @forelse ($purchase->ads as $ad)
+                            @forelse ($purchase->products as $product)
                                 <div class="sm:flex sm:items-center pb-7 mb-7">
                                     <a href="#">
                                         <img class="h-16 sm:pl-7 mb-6 sm:mb-0 sm:mr-12 mx-auto sm:ml-0 object-cover"
-                                             src="{{ asset('storage/' . $ad->image) }}"
-                                             alt="{{ $ad->title }}"/>
+                                             src="{{ asset('storage/' . $product->ad->image) }}"
+                                             alt="{{ $product->name }}"/>
                                     </a>
                                     <div>
-                                        <a class="inline-block mb-1 text-lg hover:underline font-heading font-medium" href="#">{{ $ad->title }}</a>
+                                        <a class="inline-block mb-1 text-lg hover:underline font-heading font-medium" href="#">{{ $product->name }}</a>
                                         <div class="flex flex-wrap">
                                             <p class="mr-4 text-sm font-medium">
                                                 <span class="font-heading">Type:</span>
-                                                <span class="ml-2 text-gray-400">{{ $ad->type }}</span>
+                                                <span class="ml-2 text-gray-400">{{ $product->type }}</span>
                                             </p>
                                             <p class="text-sm font-medium">
                                                 <span>Qty:</span>
-                                                <span class="ml-2 text-gray-400">{{ $ad->pivot->quantity }}</span>
+                                                <span class="ml-2 text-gray-400">{{ $product->pivot->quantity }}</span>
                                             </p>
                                         </div>
                                     </div>
                                 </div>
                             @empty
-                                <p class="text-red-500">No ads found for this order.</p>
+                                <p class="text-red-500">No products found for this order.</p>
                             @endforelse
                         </div>
 
@@ -65,7 +65,7 @@
                         <h2 class="mb-7 md:mt-6 text-3xl font-heading font-medium">Details</h2>
 
                         @php
-                            $subtotal = $purchase->ads->sum(fn($ad) => $ad->hourly_price * $ad->pivot->quantity);
+                            $subtotal = $purchase->products->sum(fn($p) => $p->price * $p->pivot->quantity);
                         @endphp
 
                         <div class="flex items-center justify-between py-4 px-10 mb-3 leading-8 bg-white bg-opacity-50 font-heading font-medium rounded-3xl">

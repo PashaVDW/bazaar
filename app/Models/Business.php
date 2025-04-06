@@ -27,9 +27,9 @@ class Business extends Model
     {
         return $this->belongsTo(User::class);
     }
+
     public function landingPage(): HasOne
     {
         return $this->hasOne(LandingPage::class);
     }
-
 }
