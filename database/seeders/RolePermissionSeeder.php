@@ -12,6 +12,7 @@ class RolePermissionSeeder extends Seeder
     {
         $permissions = [
             'create advertisements',
+            'create products',
             'create rental advertisements',
             'create bids',
             'link advertisements',
@@ -32,6 +33,7 @@ class RolePermissionSeeder extends Seeder
         $privateAdvertiser = Role::firstOrCreate(['name' => 'private_advertiser']);
         $privateAdvertiser->givePermissionTo([
             'create advertisements',
+            'create products',
             'create rental advertisements',
             'create bids',
             'link advertisements',
