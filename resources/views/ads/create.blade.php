@@ -94,7 +94,7 @@
 
             <div class="mb-5">
                 <label class="block mb-2 text-sm font-medium text-gray-700">{{ __('messages.main_product') }}</label>
-                <select name="main_product_id" class="w-full p-3 text-sm bg-gray-50 outline-none rounded" required>
+                    <select name="main_product_id" id="main_product_id" class="w-full p-3 text-sm bg-gray-50 outline-none rounded" required>
                     <option value="" disabled {{ old('main_product_id') ? '' : 'selected' }}>{{ __('messages.select_a_product') }}</option>
                     @foreach ($products as $product)
                         <option value="{{ $product->id }}" {{ old('main_product_id') == $product->id ? 'selected' : '' }}>
@@ -109,8 +109,8 @@
 
             <div class="mb-5">
                 <label class="block mb-2 text-sm font-medium text-gray-700">{{ __('messages.sub_products_optional') }}</label>
-                <select name="sub_product_ids[]" multiple
-                        class="w-full p-3 text-sm bg-gray-50 outline-none rounded h-40 overflow-y-auto">
+               <select name="sub_product_ids[]" id="sub_product_ids" multiple
+                    class="w-full p-3 text-sm bg-gray-50 outline-none rounded h-40 overflow-y-auto">
                     @foreach ($products as $product)
                         <option value="{{ $product->id }}"
                             {{ (collect(old('sub_product_ids'))->contains($product->id)) ? 'selected' : '' }}>
@@ -138,7 +138,7 @@
             </div>
 
             <button type="submit"
-                    class="w-full py-3 bg-green-600 hover:bg-green-700 rounded text-sm font-bold text-white transition">
+                    class="w-full py-3 bg-primary hover:bg-primy/80 rounded text-sm font-bold text-white transition">
                 {{ __('messages.create') }}
             </button>
 
@@ -157,5 +157,28 @@
                 label.textContent = '{{ __('messages.upload_image') }}';
             }
         }
+        document.addEventListener('DOMContentLoaded', () => {
+            const mainProductSelect = document.getElementById('main_product_id');
+            const subProductSelect = document.getElementById('sub_product_ids');
+
+            function updateSubProductOptions() {
+                const selectedMainId = mainProductSelect.value;
+
+                Array.from(subProductSelect.options).forEach(option => {
+                    if (option.value === selectedMainId) {
+                        option.disabled = true;
+                        option.selected = false;
+                        option.classList.add('text-gray-400');
+                    } else {
+                        option.disabled = false;
+                        option.classList.remove('text-gray-400');
+                    }
+                });
+            }
+
+            mainProductSelect.addEventListener('change', updateSubProductOptions);
+
+            updateSubProductOptions();
+        });
     </script>
 @endsection
