@@ -9,12 +9,22 @@
         @if (session('error'))
             <x-shared.toast type="error" :message="session('error')" />
         @endif
+
         <x-shared.table title="Your Advertisements">
             <x-slot:actions>
                 <a href="{{ route('advertisements.create') }}"
                    class="inline-block px-6 py-3 bg-primary text-white text-sm font-medium rounded-lg hover:bg-primary/80 transition">
                     <i class="fa-solid fa-plus mr-1"></i> Create Advertisement
                 </a>
+                @role('business_advertiser')
+                <form id="import-csv-form" method="POST" action="{{ route('advertisements.import') }}" enctype="multipart/form-data" class="inline-block ml-3">
+                    @csrf
+                    <label for="csv-upload" class="inline-block px-6 py-3 bg-blue-600 text-white text-sm font-medium rounded-lg hover:bg-blue-700 transition cursor-pointer">
+                        <i class="fa-solid fa-upload mr-1"></i> Import CSV
+                    </label>
+                    <input id="csv-upload" name="csv_file" type="file" accept=".csv" class="hidden" onchange="document.getElementById('import-csv-form').submit()">
+                </form>
+                @endrole
             </x-slot:actions>
 
             <table class="w-full text-left table-auto">
