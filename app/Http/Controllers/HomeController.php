@@ -19,7 +19,6 @@ class HomeController extends Controller
     public function index(Request $request)
     {
         $ads = $this->adSearchService->search($request);
-
         return view('welcome', compact('ads'));
     }
 

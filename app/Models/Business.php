@@ -21,6 +21,9 @@ class Business extends Model
         'notes',
         'contract_status',
         'contract_file_path',
+        'logo_path',
+        'primary_color',
+        'font_family',
     ];
 
     public function user(): belongsTo
