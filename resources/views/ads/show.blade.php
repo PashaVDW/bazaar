@@ -11,7 +11,7 @@
                                  alt="{{ $mainProduct->name }}"
                                  class="rounded-2xl w-full object-cover shadow-md max-h-[400px] mx-auto">
                         @else
-                            <p class="text-lg text-gray-500">No main product found for this ad.</p>
+                            <p class="text-lg text-gray-500">{{ __('messages.no_main_product_found') }}</p>
                         @endif
                     </div>
 
@@ -30,7 +30,7 @@
                                             </svg>
                                         @endfor
                                     </div>
-                                    <span class="ml-3 text-sm text-gray-600">{{ $reviews->count() }} reviews</span>
+                                    <span class="ml-3 text-sm text-gray-600">{{ $reviews->count() }} {{ __('messages.reviews') }}</span>
                                 </div>
                             @endif
 
@@ -43,13 +43,13 @@
 
                                 @if ($mainProduct->type === 'rental')
                                     <div class="mb-4">
-                                        <label for="start_date_{{ $mainProduct->id }}" class="block mb-2 text-sm font-medium text-gray-700">Start Date</label>
+                                        <label for="start_date_{{ $mainProduct->id }}" class="block mb-2 text-sm font-medium text-gray-700">{{ __('messages.start_date') }}</label>
                                         <input type="datetime-local" name="start_date" id="start_date_{{ $mainProduct->id }}" required
                                                class="w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500">
                                     </div>
 
                                     <div class="mb-6">
-                                        <label for="end_date_{{ $mainProduct->id }}" class="block mb-2 text-sm font-medium text-gray-700">End Date</label>
+                                        <label for="end_date_{{ $mainProduct->id }}" class="block mb-2 text-sm font-medium text-gray-700">{{ __('messages.end_date') }}</label>
                                         <input type="datetime-local" name="end_date" id="end_date_{{ $mainProduct->id }}" required
                                                class="w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500">
                                     </div>
@@ -61,7 +61,7 @@
                                          viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
                                         <path d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2 9h14l-2-9M10 21a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm8 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2z" />
                                     </svg>
-                                    Add to Cart
+                                    {{ __('messages.add_to_cart') }}
                                 </button>
                             </form>
                         @endif
@@ -71,7 +71,7 @@
 
             @if ($subProducts->isNotEmpty())
                 <div class="mt-16">
-                    <h2 class="text-2xl font-semibold text-gray-900 mb-6">Other Products in this Ad</h2>
+                    <h2 class="text-2xl font-semibold text-gray-900 mb-6">{{ __('messages.other_products_in_this_ad') }}</h2>
                     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                         @foreach ($subProducts as $product)
                             <div class="bg-white p-4 rounded-xl shadow">
@@ -86,10 +86,10 @@
 
                                     @if ($product->type === 'rental')
                                         <div class="mb-2">
-                                            <label class="block text-xs text-gray-500">Start Date</label>
+                                            <label class="block text-xs text-gray-500">{{ __('messages.start_date') }}</label>
                                             <input type="datetime-local" name="start_date" required
                                                    class="w-full px-3 py-2 border border-gray-300 rounded mb-2 text-sm">
-                                            <label class="block text-xs text-gray-500">End Date</label>
+                                            <label class="block text-xs text-gray-500">{{ __('messages.end_date') }}</label>
                                             <input type="datetime-local" name="end_date" required
                                                    class="w-full px-3 py-2 border border-gray-300 rounded mb-3 text-sm">
                                         </div>
@@ -97,7 +97,7 @@
 
                                     <button type="submit"
                                             class="w-full py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition text-sm font-medium">
-                                        Add to Cart
+                                        {{ __('messages.add_to_cart') }}
                                     </button>
                                 </form>
                             </div>
@@ -107,18 +107,18 @@
             @endif
 
             <div class="mt-16 bg-white rounded-2xl shadow p-8">
-                <h2 class="text-2xl font-semibold text-gray-900 mb-6">Product Reviews</h2>
+                <h2 class="text-2xl font-semibold text-gray-900 mb-6">{{ __('messages.product_reviews') }}</h2>
                 <div class="space-y-4">
                     @forelse ($reviews as $review)
                         <div class="border p-5 rounded-lg bg-gray-50">
                             <div class="flex items-center justify-between mb-2">
                                 <h3 class="text-lg font-medium text-gray-800">{{ $review->title }}</h3>
-                                <span class="text-sm text-gray-500">Rating: {{ $review->rating }}/5</span>
+                                <span class="text-sm text-gray-500">{{ __('messages.rating') }}: {{ $review->rating }}/5</span>
                             </div>
                             <p class="text-gray-600">{{ $review->content }}</p>
                         </div>
                     @empty
-                        <p class="text-gray-500">No reviews yet.</p>
+                        <p class="text-gray-500">{{ __('messages.no_reviews_yet') }}</p>
                     @endforelse
                 </div>
             </div>

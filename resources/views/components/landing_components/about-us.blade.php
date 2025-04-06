@@ -1,9 +1,9 @@
 @php
     $__inputs = [
         'description' => [
-            'label' => 'Company description',
+            'label' => __('messages.company_description'),
             'type' => 'textarea',
-            'placeholder' => 'Tell us about your company...',
+            'placeholder' => __('messages.company_description_placeholder'),
         ],
     ];
 @endphp
@@ -12,11 +12,11 @@
         @if ($logo)
             <img src="{{ is_array($logo) ? ($logo['logo_base64'] ?? '') : $logo }}">
         @else
-            Upload a logo and uncheck and check checkbox to preview
+            {{ __('messages.upload_logo_and_preview') }}
         @endif
     </div>
     <div class="md:ml-8 md:w-2/3">
-        <h2 class="text-2xl font-bold text-gray-800 mb-4">About Us</h2>
-        <p class="text-gray-600 leading-relaxed">{{ $description ?? 'No description set yet.' }}</p>
+        <h2 class="text-2xl font-bold text-gray-800 mb-4">{{ __('messages.about_us') }}</h2>
+        <p class="text-gray-600 leading-relaxed">{{ $description ?? __('messages.no_description_set') }}</p>
     </div>
 </div>
