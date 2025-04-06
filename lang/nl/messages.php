@@ -253,4 +253,8 @@ return [
     'search_placeholder' => 'Zoek advertenties of producten...',
     'all_types' => 'Alle types',
     'price_euro' => 'Prijs (€)',
+    'edit_product' => 'Product bewerken',
+    'update_product' => 'Product bijwerken',
+    'update_your_product_below' => 'Werk je product hieronder bij',
+
 ];

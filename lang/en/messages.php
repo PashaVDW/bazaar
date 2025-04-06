@@ -254,5 +254,7 @@ return [
     'search_placeholder' => 'Search ads or products...',
     'all_types' => 'All types',
     'price_euro' => 'Price (€)',
-
+    'edit_product' => 'Edit Product',
+    'update_product' => 'Update Product',
+    'update_your_product_below' => 'Update your product below',
 ];
