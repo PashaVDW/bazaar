@@ -38,6 +38,7 @@ Route::middleware('auth')->name('profile.')->group(function () {
     Route::get('/profile', [ProfileController::class, 'index'])->name('index');
     Route::post('/profile/contract/upload', [BusinessExportController::class, 'saveUploadedContract'])->name('contract.upload.save');
     Route::get('/profile/contract', [BusinessExportController::class, 'showContract'])->name('contract');
+    Route::get('/rentalHistory', [ProfileController::class, 'rentalHistory'])->name('rentalHistory');
 });
 
 // AdvertiserController
@@ -114,10 +115,14 @@ Route::middleware(['auth'])->prefix('profile')->group(function () {
     Route::put('/settings', [BusinessSettingsController::class, 'update'])->name('profile.settings.update');
 });
 
-// ReservationController
-Route::middleware(['auth'])->group(function () {
-    Route::post('/reservations', [ReservationController::class, 'store'])->name('reservations.store');
-});
-
 // Catch-all for public landing pages
 Route::get('/{slug}', [LandingPageController::class, 'show'])->name('landing.show');
+
+Route::middleware('auth')->group(function () {
+    Route::get('/reservations/{reservation}/return', [ReservationController::class, 'returnForm'])->name('reservations.return.form');
+    Route::post('/reservations/{reservation}/return', [ReservationController::class, 'submitReturn'])->name('reservations.return.submit');
+
+    Route::get('/return-requests/{reservation}/review', [ReservationController::class, 'reviewReturn'])->name('return.review');
+    Route::post('/return-requests/{reservation}/finalize', [ReservationController::class, 'finalizeReturn'])->name('return.finalize');
+
+});

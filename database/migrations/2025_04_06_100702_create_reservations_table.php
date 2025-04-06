@@ -15,6 +15,9 @@ return new class extends Migration
             $table->unsignedInteger('stock_index')->default(0);
             $table->timestamp('start_time');
             $table->timestamp('end_time');
+            $table->timestamp('returned_at')->nullable();
+            $table->string('return_photo_path')->nullable();
+            $table->decimal('wear_percentage')->nullable();
             $table->timestamps();
         });
     }

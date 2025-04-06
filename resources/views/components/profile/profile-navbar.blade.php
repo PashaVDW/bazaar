@@ -22,6 +22,7 @@
             <x-shared.nav-link route="profile.index" icon="fa-house" label="Dashboard" />
             <x-shared.nav-link route="advertisements.index" icon="fa-rectangle-ad" label="Ads" />
             <x-shared.nav-link route="profile.purchaseHistory" icon="fa-receipt" label="Purchases" />
+            <x-shared.nav-link route="profile.rentalHistory" icon="fas fa-clock" label="Rentals" />
             <x-shared.nav-link route="products.index" icon="fa-cube" label="Products" />
             <x-shared.nav-link route="profile.contract" icon="fa-file-contract" label="Contract" />
             <x-shared.nav-link route="landing.index" icon="fa-rocket" label="Landing" />
