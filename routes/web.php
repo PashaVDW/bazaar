@@ -103,12 +103,9 @@ Route::middleware(['auth'])->prefix('profile')->group(function () {
     Route::put('/settings', [BusinessSettingsController::class, 'update'])->name('profile.settings.update');
 });
 // return view calendar
-Route::get('/calendar', function () {
-    return view('profile.calendar');
-})->name('calendar');
 Route::middleware(['auth', 'role:business_advertiser'])->group(function () {
     Route::get('/profile/calendar', [CalendarController::class, 'index'])->name('profile.calendar');
-    Route::get('/profile/ads-calendar', [CalendarController::class, 'adsCalendar'])->name('profile.ads.calendar');
+    Route::get('/ads-calendar', [CalendarController::class, 'adsCalendar'])->name('advertisements.ad-calendar');
 });
 
 

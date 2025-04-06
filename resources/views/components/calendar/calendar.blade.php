@@ -114,12 +114,70 @@
             </div>
         </div>
     </div>
+    <div class="mt-10 bg-white shadow-sm rounded-lg border border-gray-200">
+        <div class="px-6 py-4 border-b border-gray-100">
+            <h3 class="text-lg font-semibold text-gray-800">Week overview</h3>
+        </div>
+
+        <div class="divide-y divide-gray-100">
+            @foreach ($weekDates as $day)
+                @php
+                    $dayEvents = collect($events)->filter(function ($event) use ($day) {
+                        return Carbon::parse($event['start_datetime'])->isSameDay($day) ||
+                            Carbon::parse($event['end_datetime'])->isSameDay($day);
+                    })->sortBy(fn($e) => Carbon::parse($e['start_datetime']));
+                @endphp
+
+                <div class="px-6 py-4">
+                    <div class="text-sm font-semibold text-gray-500 mb-2">
+                        {{ $day->format('l, M d') }}
+                    </div>
+
+                    @if ($dayEvents->isEmpty())
+                        <p class="text-sm text-gray-400 italic">No events</p>
+                    @else
+                        <ul class="space-y-2">
+                            @foreach ($dayEvents as $event)
+                                @php
+                                    $pickup = Carbon::parse($event['start_datetime']);
+                                    $return = Carbon::parse($event['end_datetime']);
+                                @endphp
+                                <li class="flex justify-between items-center p-3  {{ $event['color']['bg'] }} {{ $event['color']['text'] }} rounded-lg ">
+                                    <div>
+                                        <p class="text-sm font-medium">
+                                            {{ $event['product'] }}
+                                        </p>
+                                        <p class="text-xs text-gray-500">
+                                            @if ($pickup->isSameDay($day))
+                                               {{ $firstEventName }} {{ $pickup->format('H:i') }} ->
+                                               {{ $secondEventName }}{{ $return->format('H:i') }}
+                                            @endif
+                                            @if ($return->isSameDay($day))
+                                                @if (!$pickup->isSameDay($day))
+                                                   {{ $secondEventName }}{{ $return->format('H:i') }}
+                                                @else
+                                                    • {{ $secondEventName }} {{ $return->format('H:i') }}
+                                                @endif
+                                            @endif
+                                        </p>
+                                    </div>                                        
+                                     @if(!empty($event['customer']))
+                                        <span class="text-xs text-gray-500">Customer: {{ $event['customer'] }}</span>
+                                    @endif
+                                </li>
+                            @endforeach
+                        </ul>
+                    @endif
+                </div>
+            @endforeach
+        </div>
+    </div>
 </div>
+
 <script>
     document.addEventListener('DOMContentLoaded', function () {
         const scrollContainer = document.querySelector('.calendar-scroll-container');
         if (scrollContainer) {
-            // Scroll naar ongeveer 7x de hoogte van een uurblok (bijv. 80px per blok)
             scrollContainer.scrollTop = 7 * 80;
         }
     });

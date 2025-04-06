@@ -71,11 +71,11 @@ class CalendarController extends Controller
             'start_datetime' => $ad->ads_starttime,
             'end_datetime' => $ad->ads_endtime,
             'product' => $ad->title,
-            'customer' => 'Your Ad', // desgewenst aanpassen
+            'customer' => 'Your Ad',
             'color' => $colorMap[(string) $ad->id],
         ]);
 
-        return view('profile.ads-calendar', [
+        return view('ads.ads-calendar', [
             'weekDates' => $weekDates,
             'startOfWeek' => $startOfWeek,
             'events' => $events,
