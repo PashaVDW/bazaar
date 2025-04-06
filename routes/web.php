@@ -108,6 +108,8 @@ Route::get('/calendar', function () {
 })->name('calendar');
 Route::middleware(['auth', 'role:business_advertiser'])->group(function () {
     Route::get('/profile/calendar', [CalendarController::class, 'index'])->name('profile.calendar');
+    Route::get('/profile/ads-calendar', [CalendarController::class, 'adsCalendar'])->name('profile.ads.calendar');
 });
+
 
 Route::get('/{slug}', [LandingPageController::class, 'show'])->name('landing.show');

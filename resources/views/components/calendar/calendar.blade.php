@@ -4,7 +4,9 @@
     'title' => 'Agenda Overview',
     'addButtonRoute' => null,
     'addButtonLabel' => '+ Add Booking',
-    'routeName' => 'profile.calendar'
+    'routeName' => 'profile.calendar',
+    'firstEventName' => 'Pickup: ',
+    'secondEventName' => 'Return: ',
 ])
 
 @php
@@ -90,14 +92,16 @@
                                                         – {{ $return->format($pickup->isSameYear(now()) ? 'm-d H:i' : 'y-m-d H:i') }}
                                                     </span>
                                             </div>
-                                            Pickup: {{ $event['product'] }}
+                                            {{ $firstEventName }} {{ $event['product'] }}
+                                            @if(!empty($event['customer']))
                                             <span class="block text-[10px] text-gray-600">Customer: {{ $event['customer'] }}</span>
+                                            @endif
                                         </a>
                                     @endif
                                     @if ($return->isSameDay($day) && $return->hour === $hour)
                                         <a href="" class="absolute inset-1 px-2 py-1 rounded-md text-xs font-medium {{ $event['color']['bg'] }} {{ $event['color']['text'] }} opacity-70 shadow-sm">
                                             <span class="block font-semibold text-xs">{{ $return->format('H:i') }}</span>
-                                            Return: {{ $event['product'] }}
+                                            {{ $secondEventName }} {{ $event['product'] }}
                                             <span class="block text-[10px] text-gray-600">← {{ $event['customer'] }}</span>
                                         </a>
                                     @endif
