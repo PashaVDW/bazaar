@@ -17,44 +17,7 @@
                 </span>
                 </div>
 
-                <div class="grid grid-cols-12 gap-6">
-                    <div class="col-span-12 lg:col-span-2 md:col-span-3">
-                        <form method="GET" action="{{ route('home') }}">
-                            <div class="rounded-xl border border-gray-300 bg-white p-4 w-full">
-                                <label for="type" class="block mb-2 text-sm font-medium text-gray-600">{{ __('messages.type') }}</label>
-                                <select id="type" name="type" class="mb-4 h-10 border border-gray-300 rounded-full block w-full px-3 bg-white">
-                                    <option value="">{{ __('messages.all') }}</option>
-                                    <option value="sale" @selected(request('type') === 'sale')>{{ __('messages.sale') }}</option>
-                                    <option value="rental" @selected(request('type') === 'rental')>{{ __('messages.rental') }}</option>
-                                    <option value="auction" @selected(request('type') === 'auction')>{{ __('messages.auction') }}</option>
-                                </select>
-
-                                <label for="sort" class="block mb-2 text-sm font-medium text-gray-600">{{ __('messages.sort_by') }}</label>
-                                <select id="sort" name="sort" class="mb-4 h-10 border border-gray-300 rounded-full block w-full px-3 bg-white">
-                                    <option value="latest" @selected(request('sort') === 'latest')>{{ __('messages.latest') }}</option>
-                                    <option value="price_low_high" @selected(request('sort') === 'price_low_high')>{{ __('messages.price_low_high') }}</option>
-                                    <option value="price_high_low" @selected(request('sort') === 'price_high_low')>{{ __('messages.price_high_low') }}</option>
-                                </select>
-
-                                <label class="block mb-2 text-sm font-medium text-gray-600">{{ __('messages.price_range') }}</label>
-                                <div class="flex space-x-2 mb-4">
-                                    <input type="number" step="0.01" name="price_min" placeholder="{{ __('messages.min') }}" value="{{ request('price_min') }}" class="h-10 border border-gray-300 rounded-full w-1/2 px-3 bg-white">
-                                    <input type="number" step="0.01" name="price_max" placeholder="{{ __('messages.max') }}" value="{{ request('price_max') }}" class="h-10 border border-gray-300 rounded-full w-1/2 px-3 bg-white">
-                                </div>
-
-                                <label class="block mb-2 text-sm font-medium text-gray-600">{{ __('messages.date_range') }}</label>
-                                <div class="mb-4 space-y-2">
-                                    <input type="date" name="date_start" value="{{ request('date_start') }}" class="h-10 border border-gray-300 rounded-full w-full px-3 bg-white">
-                                    <input type="date" name="date_end" value="{{ request('date_end') }}" class="h-10 border border-gray-300 rounded-full w-full px-3 bg-white">
-                                </div>
-
-                                <button type="submit" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white rounded-full py-2 px-4 transition duration-300">
-                                    {{ __('messages.apply_filters') }}
-                                </button>
-                            </div>
-                        </form>
-                    </div>
-
+                <div class="grid gap-6">
                     <div class="col-span-12 lg:col-span-10 md:col-span-9">
                         @if ($ads->count() > 0)
                             <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
