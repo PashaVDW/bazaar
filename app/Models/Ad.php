@@ -18,6 +18,7 @@ class Ad extends Model
         'ads_starttime',
         'ads_endtime',
         'is_active',
+        'qr_code_path',
     ];
 
     public function user(): BelongsTo
