@@ -13,7 +13,7 @@
     <x-shared.table title="Your Advertisements">
         <x-slot:actions>
             <a href="{{ route('advertisements.create') }}"
-               class="inline-block px-6 py-3 bg-primary text-white text-sm font-medium rounded-lg hover:bg-orange-600 transition">
+               class="inline-block px-6 py-3 bg-primary text-white text-sm font-medium rounded-lg hover:bg-primary/80 transition">
                 <i class="fa-solid fa-plus mr-1"></i> Create Advertisement
             </a>
         </x-slot:actions>
@@ -48,7 +48,7 @@
                         @endif
                     </td>
                     <td class="px-6 py-4 text-right" onclick="event.stopPropagation()">
-                        <a href="{{ route('advertisements.edit', $ad->id) }}" class="text-primary hover:text-primary transition" title="Edit">
+                        <a href="{{ route('advertisements.edit', $ad->id) }}" class="text-primary hover:text-primary/80 transition" title="Edit">
                             <i class="fas fa-edit text-lg px-2"></i>
                         </a>
                         <a data-modal-target="delete-modal-{{ $ad->id }}" data-modal-toggle="delete-modal-{{ $ad->id }}" class="text-red-600 hover:text-red-800 transition" title="Delete">
