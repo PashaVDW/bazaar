@@ -5,9 +5,7 @@
         </div>
 
         <nav class="p-4 space-y-2 text-sm font-medium text-gray-700">
-            {{-- <x-shared.nav-link route="home" icon="fa-tachometer-alt" label="Dashboard" /> --}}
-            <x-shared.nav-link route="admin.contracts.index" icon="fa-file-contract" label="Contracts" />
-            {{-- <x-shared.nav-link route="home" icon="fa-users" label="Users" /> --}}
+            <x-shared.nav-link route="admin.contracts.index" icon="fa-file-contract" :label="__('messages.contracts')" />
         </nav>
     </div>
     <div class="p-4 border-t border-gray-100">
@@ -21,7 +19,7 @@
             </div>
             <form method="POST" action="{{ route('logout') }}">
                 @csrf
-                <button title="Logout"
+                <button title="{{ __('messages.logout') }}"
                         class="text-gray-500 hover:text-red-500 transition">
                     <i class="fas fa-sign-out-alt text-lg"></i>
                 </button>

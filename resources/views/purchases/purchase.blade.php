@@ -2,15 +2,15 @@
 
 @section('content')
     <div class="max-w-7xl mx-auto mt-8 space-y-16">
-        <x-shared.table title="Recent Orders">
+        <x-shared.table title="{{ __('messages.recent_orders') }}">
             <div class="overflow-x-auto rounded-lg shadow">
                 <table class="w-full text-left table-auto">
                     <thead class="bg-gray-50">
                     <tr class="text-gray-500 text-sm uppercase">
-                        <th class="px-6 py-4">Order ID</th>
-                        <th class="px-6 py-4">Date</th>
-                        <th class="px-6 py-4">Products</th>
-                        <th class="px-6 py-4 text-right">Action</th>
+                        <th class="px-6 py-4">{{ __('messages.order_id') }}</th>
+                        <th class="px-6 py-4">{{ __('messages.date') }}</th>
+                        <th class="px-6 py-4">{{ __('messages.products') }}</th>
+                        <th class="px-6 py-4 text-right">{{ __('messages.action') }}</th>
                     </tr>
                     </thead>
                     <tbody class="bg-white divide-y">
@@ -28,7 +28,7 @@
                                             @endphp
                                             <a href="{{ route('review.create', ['product' => $product->id]) }}"
                                                class="ml-2 text-sm text-indigo-600 hover:underline">
-                                                {{ $review ? 'Edit review' : 'Review' }}
+                                                {{ $review ? __('messages.edit_review') : __('messages.review') }}
                                             </a>
                                         </li>
                                     @endforeach
@@ -37,13 +37,13 @@
                             <td class="px-6 py-4 text-right">
                                 <a href="{{ route('profile.purchases.show', $purchase->id) }}"
                                    class="inline-flex items-center px-4 py-1 text-sm font-medium text-indigo-700 bg-indigo-100 hover:bg-indigo-200 rounded-full transition">
-                                    View
+                                    {{ __('messages.view') }}
                                 </a>
                             </td>
                         </tr>
                     @empty
                         <tr>
-                            <td colspan="4" class="px-6 py-6 text-center text-gray-500">No purchases found.</td>
+                            <td colspan="4" class="px-6 py-6 text-center text-gray-500">{{ __('messages.no_purchases_found') }}</td>
                         </tr>
                     @endforelse
                     </tbody>

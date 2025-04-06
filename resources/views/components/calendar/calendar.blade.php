@@ -1,12 +1,12 @@
 @props([
     'weekDates',
     'events' => [],
-    'title' => 'Agenda Overview',
+    'title' => __('messages.agenda_overview'),
     'addButtonRoute' => null,
-    'addButtonLabel' => '+ Add Booking',
+    'addButtonLabel' => __('messages.add_booking'),
     'routeName' => 'profile.calendar',
-    'firstEventName' => 'Pickup: ',
-    'secondEventName' => 'Return: ',
+    'firstEventName' => __('messages.pickup') . ': ',
+    'secondEventName' => __('messages.return') . ': ',
 ])
 
 @php
@@ -20,7 +20,7 @@
 
 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
     <div class="flex items-center justify-between mb-6">
-        <h2 class="text-2xl font-bold text-gray-800">{{ $title }}</h2>
+        <h2 class="text-2xl font-bold text-gray-800 mb-2">{{ $title }}</h2>
 
         <div class="flex items-center space-x-2">
             <a href="{{ route($routeName, ['week_start' => $prevWeek]) }}"
@@ -39,7 +39,7 @@
 
             <a href="{{ route($routeName) }}"
                class="ml-3 px-4 py-2 bg-gray-100 text-gray-700 text-sm rounded-md hover:bg-gray-200 transition">
-                Today
+                {{ __('messages.today') }}
             </a>
 
             @if ($addButtonRoute)
@@ -54,7 +54,7 @@
     <div class="overflow-x-auto rounded-lg shadow-sm border border-gray-200 bg-white">
         <div class="min-w-[900px]">
             <div class="grid grid-cols-8 border-b border-gray-200 bg-gray-50 text-xs font-semibold text-gray-600">
-                <div class="px-4 py-3 text-left">Time</div>
+                <div class="px-4 py-3 text-left">{{ __('messages.time') }}</div>
                 @foreach ($weekDates as $date)
                     <div class="py-3 text-center {{ $date->isToday() ? 'bg-primary text-white rounded' : 'text-gray-600' }}">
                         {{ Str::substr($date->format('l'), 0, 2) }}<br>
@@ -88,13 +88,13 @@
                                         <a href="" class="absolute inset-1 px-2 py-1 rounded-md text-xs font-medium {{ $event['color']['bg'] }} {{ $event['color']['text'] }} shadow-sm">
                                             <div class="text-xs flex justify-between">
                                                 <span class="text-xs font-semibold">{{ $pickup->format('H:i') }}</span>
-                                                    <span class="block text-[10px] text-gray-600">
+                                                <span class="block text-[10px] text-gray-600">
                                                         – {{ $return->format($pickup->isSameYear(now()) ? 'm-d H:i' : 'y-m-d H:i') }}
                                                     </span>
                                             </div>
                                             {{ $firstEventName }} {{ $event['product'] }}
                                             @if(!empty($event['customer']))
-                                            <span class="block text-[10px] text-gray-600">Customer: {{ $event['customer'] }}</span>
+                                                <span class="block text-[10px] text-gray-600">{{ __('messages.customer') }}: {{ $event['customer'] }}</span>
                                             @endif
                                         </a>
                                     @endif
@@ -116,7 +116,7 @@
     </div>
     <div class="mt-10 bg-white shadow-sm rounded-lg border border-gray-200">
         <div class="px-6 py-4 border-b border-gray-100">
-            <h3 class="text-lg font-semibold text-gray-800">Week overview</h3>
+            <h3 class="text-lg font-semibold text-gray-800">{{ __('messages.week_overview') }}</h3>
         </div>
 
         <div class="divide-y divide-gray-100">
@@ -134,7 +134,7 @@
                     </div>
 
                     @if ($dayEvents->isEmpty())
-                        <p class="text-sm text-gray-400 italic">No events</p>
+                        <p class="text-sm text-gray-400 italic">{{ __('messages.no_events') }}</p>
                     @else
                         <ul class="space-y-2">
                             @foreach ($dayEvents as $event)
@@ -149,20 +149,20 @@
                                         </p>
                                         <p class="text-xs text-gray-500">
                                             @if ($pickup->isSameDay($day))
-                                               {{ $firstEventName }} {{ $pickup->format('H:i') }} ->
-                                               {{ $secondEventName }}{{ $return->format('H:i') }}
+                                                {{ $firstEventName }} {{ $pickup->format('H:i') }} ->
+                                                {{ $secondEventName }}{{ $return->format('H:i') }}
                                             @endif
                                             @if ($return->isSameDay($day))
                                                 @if (!$pickup->isSameDay($day))
-                                                   {{ $secondEventName }}{{ $return->format('H:i') }}
+                                                    {{ $secondEventName }}{{ $return->format('H:i') }}
                                                 @else
                                                     • {{ $secondEventName }} {{ $return->format('H:i') }}
                                                 @endif
                                             @endif
                                         </p>
-                                    </div>                                        
-                                     @if(!empty($event['customer']))
-                                        <span class="text-xs text-gray-500">Customer: {{ $event['customer'] }}</span>
+                                    </div>
+                                    @if(!empty($event['customer']))
+                                        <span class="text-xs text-gray-500">{{ __('messages.customer') }}: {{ $event['customer'] }}</span>
                                     @endif
                                 </li>
                             @endforeach

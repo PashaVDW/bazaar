@@ -4,7 +4,7 @@
             <a href="{{ route('home') }}">
                 @if(Auth::user()?->business?->logo_path)
                     <img src="{{ Storage::url(Auth::user()->business->logo_path) }}"
-                         alt="Company Logo"
+                         alt="{{ __('messages.company_logo') }}"
                          class="h-10 w-auto object-contain max-w-[140px]">
                 @else
                     <x-shared.logo class="h-8 w-auto" />
@@ -19,13 +19,15 @@
         </div>
 
         <div class="hidden lg:flex items-center space-x-6">
-            <x-shared.nav-link route="profile.index" icon="fa-house" label="Dashboard" />
-            <x-shared.nav-link route="advertisements.index" icon="fa-rectangle-ad" label="Ads" />
-            <x-shared.nav-link route="profile.purchaseHistory" icon="fa-receipt" label="Purchases" />
-            <x-shared.nav-link route="profile.rentalHistory" icon="fas fa-clock" label="Rentals" />
-            <x-shared.nav-link route="products.index" icon="fa-cube" label="Products" />
-            <x-shared.nav-link route="profile.contract" icon="fa-file-contract" label="Contract" />
-            <x-shared.nav-link route="landing.index" icon="fa-rocket" label="Landing" />
+            <x-shared.nav-link route="profile.index" icon="fa-house" :label="__('messages.dashboard')" />
+            <x-shared.nav-link route="advertisements.index" icon="fa-rectangle-ad" :label="__('messages.ads')" />
+            <x-shared.nav-link route="profile.purchaseHistory" icon="fa-receipt" :label="__('messages.purchases')" />
+            <x-shared.nav-link route="profile.rentalHistory" icon="fas fa-clock" :label="__('messages.rentals')" />
+            <x-shared.nav-link route="products.index" icon="fa-cube" :label="__('messages.products')" />
+            @role('business_advertiser')
+            <x-shared.nav-link route="profile.contract" icon="fa-file-contract" :label="__('messages.contract')" />
+            <x-shared.nav-link route="landing.index" icon="fa-rocket" :label="__('messages.landing')" />
+            @endrole
         </div>
 
         <div class="relative ml-4">
@@ -34,7 +36,7 @@
                     aria-expanded="false" aria-haspopup="true">
                 <img class="w-8 h-8 rounded-full object-cover"
                      src="https://ui-avatars.com/api/?name={{ urlencode(Auth::user()->name) }}&background=random&color=fff"
-                     alt="Avatar">
+                     alt="{{ __('messages.avatar') }}">
                 <span class="hidden sm:block text-gray-700 font-medium">{{ Auth::user()->name }}</span>
                 <i class="fa-solid fa-caret-down text-xs ml-1 text-gray-500"></i>
             </button>
@@ -47,17 +49,19 @@
                 </div>
                 <a href="{{ route('profile.settings') }}"
                    class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
-                   <i class="fa-solid fa-palette mr-2"></i> Style settings
+                    <i class="fa-solid fa-palette mr-2"></i> {{ __('messages.style_settings') }}
                 </a>
-                <a href="{{ route('developer.index') }}"
-                   class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
-                    <i class="fas fa-code mr-2"></i> Developer Settings
-                </a>
+                @role('business_advertiser')
+                    <a href="{{ route('developer.index') }}"
+                       class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+                        <i class="fas fa-code mr-2"></i> {{ __('messages.developer_settings') }}
+                    </a>
+                @endrole
                 <form method="POST" action="{{ route('logout') }}">
                     @csrf
                     <button type="submit"
                             class="w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 rounded-b-lg">
-                        <i class="fa-solid fa-sign-out-alt mr-2"></i> Logout
+                        <i class="fa-solid fa-sign-out-alt mr-2"></i> {{ __('messages.logout') }}
                     </button>
                 </form>
             </div>
@@ -65,12 +69,14 @@
     </div>
     <div id="mobile-nav" class="lg:hidden hidden px-4 pb-4">
         <div class="grid grid-cols-2 gap-4">
-            <x-shared.nav-link route="profile.index" icon="fa-house" label="Dashboard" />
-            <x-shared.nav-link route="advertisements.index" icon="fa-rectangle-ad" label="Ads" />
-            <x-shared.nav-link route="profile.purchaseHistory" icon="fa-receipt" label="Purchases" />
-            <x-shared.nav-link route="products.index" icon="fa-cube" label="Products" />
-            <x-shared.nav-link route="profile.contract" icon="fa-file-contract" label="Contract" />
-            <x-shared.nav-link route="landing.index" icon="fa-rocket" label="Landing" />
+            <x-shared.nav-link route="profile.index" icon="fa-house" :label="__('messages.dashboard')" />
+            <x-shared.nav-link route="advertisements.index" icon="fa-rectangle-ad" :label="__('messages.ads')" />
+            <x-shared.nav-link route="profile.purchaseHistory" icon="fa-receipt" :label="__('messages.purchases')" />
+            <x-shared.nav-link route="products.index" icon="fa-cube" :label="__('messages.products')" />
+            <x-shared.nav-link route="profile.contract" icon="fa-file-contract" :label="__('messages.contract')" />
+            @role('business_advertiser')
+            <x-shared.nav-link route="landing.index" icon="fa-rocket" :label="__('messages.landing')" />
+            @endrole
         </div>
     </div>
 </nav>
