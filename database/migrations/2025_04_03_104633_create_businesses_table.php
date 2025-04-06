@@ -24,7 +24,9 @@ return new class extends Migration
             $table->string('contract_signed_by_business')->nullable();
             $table->string('contract_status')->default('pending');
             $table->string('contract_file_path')->nullable();
-
+            $table->string('primary_color')->nullable();
+            $table->string('font_family')->nullable();
+            $table->string('logo_path')->nullable();
             $table->timestamps();
         });
     }
