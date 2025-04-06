@@ -250,5 +250,9 @@ return [
     'main_product' => 'Main Product',
     'sub_products_optional' => 'Sub Products (optional)',
     'create' => 'Create Advertisement',
+    'search' => 'Search',
+    'search_placeholder' => 'Search ads or products...',
+    'all_types' => 'All types',
+    'price_euro' => 'Price (€)',
 
 ];
