@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('ads_starttime');
             $table->string('ads_endtime');
             $table->boolean('is_active')->default(false);
+            $table->string('qr_code_path')->nullable();
             $table->timestamps();
         });
     }

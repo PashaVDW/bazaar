@@ -10,10 +10,14 @@ class ProductController extends Controller
 {
     public function index()
     {
-        $products = Product::with('ad')->latest()->paginate(10);
+        $products = Product::with('ad')
+            ->where('user_id', auth()->id())
+            ->latest()
+            ->paginate(10);
 
         return view('products.index', compact('products'));
     }
+
 
     public function create()
     {

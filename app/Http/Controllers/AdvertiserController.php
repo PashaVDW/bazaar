@@ -8,16 +8,27 @@ use App\Models\Ad;
 use App\Models\Product;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
+use App\Services\QrCodeService;
+use Illuminate\Support\Facades\Storage;
 
 class AdvertiserController extends Controller
 {
     public function index()
     {
-        $user = User::findOrFail(Auth::id());
-        $advertisements = $user->advertisements;
+        $user = Auth::user();
+        $advertisements = $user->advertisements()->latest()->get();
+
+        foreach ($advertisements as $ad) {
+            if ($ad->qr_code_path && Storage::disk('public')->exists(str_replace('storage/', '', $ad->qr_code_path))) {
+                $ad->qr_svg = Storage::disk('public')->get(str_replace('storage/', '', $ad->qr_code_path));
+            } else {
+                $ad->qr_svg = null;
+            }
+        }
 
         return view('ads.index', compact('advertisements'));
     }
+
 
     public function create()
     {
@@ -26,7 +37,7 @@ class AdvertiserController extends Controller
         return view('ads.create', compact('products'));
     }
 
-    public function store(StoreAdvertisementRequest $request)
+    public function store(StoreAdvertisementRequest $request, QrCodeService $qrCodeService)
     {
         $data = $request->validated();
 
@@ -42,6 +53,9 @@ class AdvertiserController extends Controller
                 $product->save();
             }
         }
+
+        $qrPath = $qrCodeService->generateForAd($ad);
+        $ad->update(['qr_code_path' => $qrPath]);
 
         return redirect()->route('advertisements.index')->with('success', 'Advertisement created successfully.');
     }

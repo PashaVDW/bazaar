@@ -9,8 +9,8 @@
                         Ads
                     </h2>
                     <span class="md:absolute md:right-0 md:bottom-3 text-sm text-gray-400 font-medium">
-                        {{ $ads->total() }} {{ Str::plural('ad', $ads->total()) }} gevonden
-                    </span>
+                    {{ $ads->total() }} {{ Str::plural('ad', $ads->total()) }} gevonden
+                </span>
                 </div>
 
                 <div class="grid grid-cols-12 gap-6">
@@ -55,25 +55,62 @@
                         @if ($ads->count() > 0)
                             <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
                                 @foreach ($ads as $ad)
-                                    <a href="{{ route('ads.show', $ad) }}" class="block bg-white border border-gray-200 rounded-3xl shadow-md overflow-hidden hover:shadow-lg transition-all duration-200">
-                                        <figure class="w-full h-48 overflow-hidden">
-                                            <img src="{{ asset('storage/' . $ad->image) }}" alt="{{ $ad->title }}" class="w-full h-full object-cover" />
-                                        </figure>
-                                        <div class="px-5 py-4">
-                                            <h5 class="text-lg font-semibold text-gray-900 mb-2">{{ $ad->title }}</h5>
-
-                                            <div class="flex items-center mb-3">
-                                                <div class="flex items-center space-x-1">
-                                                    @for ($i = 1; $i <= 5; $i++)
-                                                        <svg class="w-4 h-4 {{ $i <= 4 ? 'text-yellow-300' : 'text-gray-200' }}" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 22 20">
-                                                            <path d="M20.924 7.625a1.523 1.523 0 00-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 00-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 001.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 002.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 002.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 00.387-1.575z"/>
-                                                        </svg>
-                                                    @endfor
+                                    <div class="relative bg-white border border-gray-200 rounded-3xl shadow-md overflow-hidden hover:shadow-lg transition-all duration-200">
+                                        <a href="{{ route('ads.show', $ad) }}">
+                                            <figure class="w-full h-48 overflow-hidden">
+                                                <img src="{{ asset('storage/' . $ad->image) }}" alt="{{ $ad->title }}" class="w-full h-full object-cover" />
+                                            </figure>
+                                            <div class="px-5 py-4">
+                                                <h5 class="text-lg font-semibold text-gray-900 mb-2">{{ $ad->title }}</h5>
+                                                <div class="flex items-center mb-3">
+                                                    <div class="flex items-center space-x-1">
+                                                        @for ($i = 1; $i <= 5; $i++)
+                                                            <svg class="w-4 h-4 {{ $i <= 4 ? 'text-yellow-300' : 'text-gray-200' }}" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 22 20">
+                                                                <path d="M20.924 7.625a1.523 1.523 0 00-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 00-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 001.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 002.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 002.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 00.387-1.575z"/>
+                                                            </svg>
+                                                        @endfor
+                                                    </div>
+                                                    <span class="bg-blue-100 text-blue-800 text-xs font-semibold px-2.5 py-0.5 rounded-sm ml-3">4.0</span>
                                                 </div>
-                                                <span class="bg-blue-100 text-blue-800 text-xs font-semibold px-2.5 py-0.5 rounded-sm ml-3">4.0</span>
+                                            </div>
+                                        </a>
+
+                                        <div class="px-5 pb-5">
+                                            <button data-modal-target="modal-{{ $ad->id }}" data-modal-toggle="modal-{{ $ad->id }}"
+                                                    class="w-full text-sm bg-indigo-600 hover:bg-indigo-700 text-white py-2 rounded-full transition">
+                                                Share
+                                            </button>
+                                        </div>
+
+                                        <div id="modal-{{ $ad->id }}" tabindex="-1" aria-hidden="true"
+                                             class="fixed top-0 left-0 right-0 z-50 hidden w-full p-4 overflow-x-hidden overflow-y-auto h-[100vh] bg-black/50">
+                                            <div class="relative w-full max-w-lg mx-auto mt-24">
+                                                <div class="bg-white rounded-2xl shadow-lg p-6">
+                                                    <div class="flex items-start justify-between pb-4">
+                                                        <h3 class="text-xl font-semibold text-gray-900">
+                                                            Share QR Code
+                                                        </h3>
+                                                        <button type="button"
+                                                                class="text-gray-400 hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center"
+                                                                data-modal-hide="modal-{{ $ad->id }}">
+                                                            <svg class="w-3 h-3" xmlns="http://www.w3.org/2000/svg" fill="none"
+                                                                 viewBox="0 0 14 14">
+                                                                <path stroke="currentColor" stroke-linecap="round"
+                                                                      stroke-linejoin="round" stroke-width="2"
+                                                                      d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
+                                                            </svg>
+                                                        </button>
+                                                    </div>
+                                                    <div class="mt-6 flex justify-center items-center">
+                                                        <div class="w-48 h-48 flex justify-center items-center">
+                                                            {!! Storage::disk('public')->get(str_replace('storage/', '', $ad->qr_code_path)) !!}
+                                                        </div>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
-                                    </a>
+
+                                    </div>
                                 @endforeach
                             </div>
                         @else

@@ -7,12 +7,14 @@ use App\Models\Product;
 use App\Models\Review;
 use App\Models\User;
 use Illuminate\Database\Seeder;
+use App\Services\QrCodeService;
 
 class AdSeeder extends Seeder
 {
     public function run(): void
     {
         $user = User::first() ?? User::factory()->create();
+        $qrCodeService = app(QrCodeService::class);
 
         for ($i = 1; $i <= 20; $i++) {
             $ad = Ad::create([
@@ -24,6 +26,9 @@ class AdSeeder extends Seeder
                 'ads_endtime' => now()->addDays(10),
                 'is_active' => true,
             ]);
+
+            $qrPath = $qrCodeService->generateForAd($ad);
+            $ad->update(['qr_code_path' => $qrPath]);
 
             $product = Product::create([
                 'user_id' => $user->id,
