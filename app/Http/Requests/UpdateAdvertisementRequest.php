@@ -20,6 +20,12 @@ class UpdateAdvertisementRequest extends FormRequest
             'ads_starttime' => 'required|date',
             'ads_endtime' => 'required|date|after_or_equal:ads_starttime',
             'is_active' => 'required|boolean',
+            'main_product_id' => 'required|exists:products,id',
+            'sub_product_ids' => 'nullable|array',
+            'sub_product_ids.*' => 'exists:products,id|distinct|different:main_product_id',
         ];
     }
+    
+
+    
 }

@@ -1,6 +1,15 @@
 @extends('layouts.profile')
 
 @section('content')
+    <div class="max-w-7xl mx-auto mt-8">
+        <x-shared.view-switch
+        left-label="Rentals Overview"
+        right-label="Rentals Calendar"
+        left-route="profile.rentalHistory"
+        right-route="profile.rentalCalendar"
+        switch-key="switch"
+        />
+    </div>
     <div class="max-w-7xl mx-auto mt-8 space-y-16">
         <x-shared.table title="{{ __('messages.your_rentals') }}">
             <div class="overflow-x-auto rounded-lg shadow">

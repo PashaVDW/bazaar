@@ -19,7 +19,7 @@
         </div>
 
         <div class="hidden lg:flex items-center space-x-6">
-            <x-shared.nav-link route="profile.index" icon="fa-house" :label="__('messages.dashboard')" />
+            {{-- <x-shared.nav-link route="profile.index" icon="fa-house" :label="__('messages.dashboard')" /> --}}
             @role(['private_advertiser', 'business_advertiser'])
             <x-shared.nav-link route="advertisements.index" icon="fa-rectangle-ad" :label="__('messages.ads')" />
             @endrole

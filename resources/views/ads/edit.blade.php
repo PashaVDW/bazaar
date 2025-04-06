@@ -5,10 +5,8 @@
 @section('content')
     <div class="w-full max-w-2xl mx-auto px-6 py-10">
         <div class="text-center mb-6">
-            <div class="mt-2">
-                <h3 class="text-2xl font-semibold">{{ __('messages.edit_advertisement') }}</h3>
-                <p class="text-sm text-gray-500">{{ __('messages.update_your_advertisement_below') }}</p>
-            </div>
+            <h3 class="text-2xl font-semibold">{{ __('messages.edit_advertisement') }}</h3>
+            <p class="text-sm text-gray-500">{{ __('messages.update_your_advertisement_below') }}</p>
         </div>
 
         @if ($errors->any())
@@ -33,6 +31,9 @@
                        placeholder="{{ __('messages.title') }}"
                        value="{{ old('title', $ad->title) }}"
                        required>
+                @error('title')
+                <p class="text-sm text-red-600 mt-2">{{ $message }}</p>
+                @enderror
             </div>
 
             <div class="mb-5">
@@ -41,6 +42,9 @@
                           placeholder="{{ __('messages.description') }}"
                           rows="4"
                           required>{{ old('description', $ad->description) }}</textarea>
+                @error('description')
+                <p class="text-sm text-red-600 mt-2">{{ $message }}</p>
+                @enderror
             </div>
 
             <div class="mb-5">
@@ -57,6 +61,9 @@
                        onchange="updateFileName(this)">
                 <p class="text-xs text-gray-400 mt-2">{{ __('messages.current_image') }}</p>
                 <img src="{{ asset('storage/' . $ad->image) }}" alt="Current ad image" class="w-32 mt-2 rounded shadow">
+                @error('image')
+                <p class="text-sm text-red-600 mt-2">{{ $message }}</p>
+                @enderror
             </div>
 
             <div class="mb-5">
@@ -64,9 +71,10 @@
                        type="datetime-local"
                        name="ads_starttime"
                        value="{{ old('ads_starttime', \Carbon\Carbon::parse($ad->ads_starttime)->format('Y-m-d\TH:i')) }}"
-                       min="{{ old('ads_starttime', \Carbon\Carbon::parse($ad->ads_starttime)->format('Y-m-d\TH:i')) }}"
-                       max="{{ old('ads_starttime', \Carbon\Carbon::parse($ad->ads_starttime)->addMonths(3)->format('Y-m-d\TH:i')) }}"
                        required>
+                @error('ads_starttime')
+                <p class="text-sm text-red-600 mt-2">{{ $message }}</p>
+                @enderror
             </div>
 
             <div class="mb-5">
@@ -74,21 +82,46 @@
                        type="datetime-local"
                        name="ads_endtime"
                        value="{{ old('ads_endtime', \Carbon\Carbon::parse($ad->ads_endtime)->format('Y-m-d\TH:i')) }}"
-                       min="{{ old('ads_endtime', \Carbon\Carbon::parse($ad->ads_starttime)->format('Y-m-d\TH:i')) }}"
-                       max="{{ old('ads_endtime', \Carbon\Carbon::parse($ad->ads_endtime)->addMonths(6)->format('Y-m-d\TH:i')) }}"
                        required>
+                @error('ads_endtime')
+                <p class="text-sm text-red-600 mt-2">{{ $message }}</p>
+                @enderror
             </div>
 
             <div class="mb-5">
-                <select name="product_id" class="w-full p-3 text-sm bg-gray-50 outline-none rounded" required>
-                    <option value="" disabled {{ old('product_id') ? '' : 'selected' }}>{{ __('messages.select_a_product') }}</option>
+                <label class="block mb-2 text-sm font-medium text-gray-700">{{ __('messages.main_product') }}</label>
+                <select name="main_product_id" id="main_product_id"
+                        class="w-full p-3 text-sm bg-gray-50 outline-none rounded" required>
+                    <option value="" disabled {{ old('main_product_id', optional($ad->mainProduct)->id) ? '' : 'selected' }}>
+                        {{ __('messages.select_a_product') }}
+                    </option>
                     @foreach ($products as $product)
-                        <option value="{{ $product->id }}" {{ old('product_id', $ad->product->id ?? '') == $product->id ? 'selected' : '' }}>
+                        <option value="{{ $product->id }}"
+                            {{ old('main_product_id', optional($ad->mainProduct)->id) == $product->id ? 'selected' : '' }}>
                             {{ $product->name }}
                         </option>
                     @endforeach
                 </select>
-                @error('product_id')
+                @error('main_product_id')
+                <p class="text-sm text-red-600 mt-2">{{ $message }}</p>
+                @enderror
+            </div>
+
+            <div class="mb-5">
+                <label class="block mb-2 text-sm font-medium text-gray-700">{{ __('messages.sub_products_optional') }}</label>
+                @php
+                    $selectedSubs = old('sub_product_ids', $ad->subProducts->pluck('id')->toArray());
+                @endphp
+                <select name="sub_product_ids[]" id="sub_product_ids" multiple
+                        class="w-full p-3 text-sm bg-gray-50 outline-none rounded h-40 overflow-y-auto">
+                    @foreach ($products as $product)
+                        <option value="{{ $product->id }}"
+                            {{ in_array($product->id, $selectedSubs) ? 'selected' : '' }}>
+                            {{ $product->name }}
+                        </option>
+                    @endforeach
+                </select>
+                @error('sub_product_ids')
                 <p class="text-sm text-red-600 mt-2">{{ $message }}</p>
                 @enderror
             </div>
@@ -100,8 +133,11 @@
                        id="is_active"
                        value="1"
                        class="accent-green-600"
-                    {{ old('is_active', $ad->is_active) ? 'checked' : '' }}>
+                       {{ old('is_active', $ad->is_active) ? 'checked' : '' }}>
                 <label for="is_active" class="text-sm text-gray-700">{{ __('messages.activate_immediately') }}</label>
+                @error('is_active')
+                <p class="text-sm text-red-600 mt-2">{{ $message }}</p>
+                @enderror
             </div>
 
             <button type="submit"
@@ -110,7 +146,9 @@
             </button>
 
             <p class="mt-4 text-sm text-center text-gray-500">
-                <a href="{{ route('advertisements.index') }}" class="text-purple-600 hover:underline">← {{ __('messages.back_to_overview') }}</a>
+                <a href="{{ route('advertisements.index') }}" class="text-purple-600 hover:underline">
+                    ← {{ __('messages.back_to_overview') }}
+                </a>
             </p>
         </form>
     </div>
@@ -124,5 +162,26 @@
                 label.textContent = '{{ __('messages.change_image_optional') }}';
             }
         }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const mainSelect = document.getElementById('main_product_id');
+            const subSelect = document.getElementById('sub_product_ids');
+
+            function updateSubSelect() {
+                const mainId = mainSelect.value;
+                Array.from(subSelect.options).forEach(option => {
+                    option.disabled = option.value === mainId;
+                    if (option.disabled) {
+                        option.classList.add('text-gray-400');
+                        option.selected = false;
+                    } else {
+                        option.classList.remove('text-gray-400');
+                    }
+                });
+            }
+
+            mainSelect.addEventListener('change', updateSubSelect);
+            updateSubSelect();
+        });
     </script>
 @endsection

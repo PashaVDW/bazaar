@@ -3,55 +3,67 @@
 namespace App\Http\Controllers;
 
 use App\Models\Ad;
+use App\Models\Reservation;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class CalendarController extends Controller
 {
-    public function index(Request $request)
-    {
-        $startOfWeek = $request->query('week_start')
-            ? Carbon::parse($request->query('week_start'))->startOfWeek()
-            : now()->startOfWeek();
+    public function rentalCalendar(Request $request)
+{
+    $startOfWeek = $request->query('week_start')
+        ? Carbon::parse($request->query('week_start'))->startOfWeek()
+        : now()->startOfWeek();
 
-        $dates = collect(range(0, 6))->map(fn ($i) => $startOfWeek->copy()->addDays($i));
+    $weekDates = collect(range(0, 6))->map(fn ($i) => $startOfWeek->copy()->addDays($i));
 
-        $eventsRaw = [
-            [
-                'start_datetime' => '2025-04-10 10:00',
-                'end_datetime' => '2025-04-12 16:00',
-                'product' => 'Canon EOS 250D',
-                'customer' => 'Jane Doe',
-            ],
-            [
-                'start_datetime' => '2025-04-11 09:00',
-                'end_datetime' => '2025-04-13 15:00',
-                'product' => 'Nikon D5600',
-                'customer' => 'John Smith',
-            ],
-            [
-                'start_datetime' => '2025-04-12 13:00',
-                'end_datetime' => '2025-04-14 10:00',
-                'product' => 'Sony A6400',
-                'customer' => 'Alice Johnson',
-            ],
-        ];
+    $user = Auth::user();
 
-        $customers = collect($eventsRaw)->pluck('customer')->unique()->toArray();
-        $colorMap = $this->assignUniqueColors($customers);
+    // Reserveringen van huidige gebruiker (als huurder)
+    $ownReservations = $user->reservations()->with('product')->get();
 
-        $events = collect($eventsRaw)->map(fn ($event) => [
-            ...$event,
-            'color' => $colorMap[$event['customer']],
-        ]);
+    // Reserveringen van producten die de gebruiker aanbiedt (als verhuurder)
+    $productReservations = \App\Models\Reservation::with(['product', 'user'])
+        ->whereHas('product', fn($query) => $query->where('user_id', $user->id)->where('type', 'rental'))
+        ->get();
 
-        return view('profile.calendar', [
-            'weekDates' => $dates,
-            'startOfWeek' => $startOfWeek,
-            'events' => $events,
+    // Kleurenschema’s
+    $colors = [
+        'own' => ['bg' => 'bg-blue-100', 'text' => 'text-blue-800'],
+        'customer' => ['bg' => 'bg-green-100', 'text' => 'text-green-800'],
+    ];
+
+    // Combineer beide
+    $events = collect();
+
+    foreach ($ownReservations as $res) {
+        $events->push([
+            'start_datetime' => $res->start_time,
+            'end_datetime' => $res->end_time,
+            'product' => $res->product->name ?? 'Unknown',
+            'customer' => $user->name,
+            'color' => $colors['own'],
         ]);
     }
+
+    foreach ($productReservations as $res) {
+        $events->push([
+            'start_datetime' => $res->start_time,
+            'end_datetime' => $res->end_time,
+            'product' => $res->product->name ?? 'Unknown',
+            'customer' => $res->user->name ?? 'Customer',
+            'color' => $colors['customer'],
+        ]);
+    }
+
+    return view('profile.rentalCalendar', [
+        'weekDates' => $weekDates,
+        'startOfWeek' => $startOfWeek,
+        'events' => $events,
+    ]);
+}
+
 
     public function adsCalendar(Request $request)
     {

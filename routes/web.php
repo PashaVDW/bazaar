@@ -39,6 +39,7 @@ Route::middleware('auth')->name('profile.')->group(function () {
     Route::middleware(['role:business_advertiser', 'permission:upload contracts'])->post('/profile/contract/upload', [BusinessExportController::class, 'saveUploadedContract'])->name('contract.upload.save');
     Route::middleware(['role:business_advertiser'])->get('/profile/contract', [BusinessExportController::class, 'showContract'])->name('contract');
     Route::get('/rentalHistory', [ProfileController::class, 'rentalHistory'])->name('rentalHistory');
+    Route::get('/rentalCalendar', [CalendarController::class, 'rentalCalendar'])->name('rentalCalendar');
 });
 
 Route::middleware(['auth', 'permission:create advertisements'])->name('advertisements.')->prefix('advertisements')->group(function () {
