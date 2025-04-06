@@ -12,6 +12,7 @@ use App\Http\Controllers\ReviewController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BusinessSettingsController;
+use App\Http\Controllers\CalendarController;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
@@ -100,6 +101,13 @@ Route::middleware('auth')->name('products.')->prefix('products')->group(function
 Route::middleware(['auth'])->prefix('profile')->group(function () {
     Route::get('/settings', [BusinessSettingsController::class, 'edit'])->name('profile.settings');
     Route::put('/settings', [BusinessSettingsController::class, 'update'])->name('profile.settings.update');
+});
+// return view calendar
+Route::get('/calendar', function () {
+    return view('profile.calendar');
+})->name('calendar');
+Route::middleware(['auth', 'role:business_advertiser'])->group(function () {
+    Route::get('/profile/calendar', [CalendarController::class, 'index'])->name('profile.calendar');
 });
 
 Route::get('/{slug}', [LandingPageController::class, 'show'])->name('landing.show');
