@@ -11,7 +11,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ReviewController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\BusinessSettingsController;
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
 // HomeController
@@ -107,5 +107,12 @@ Route::middleware('auth')->name('products.')->prefix('products')->group(function
     Route::delete('/{product}', [ProductController::class, 'destroy'])->name('destroy');
 });
 
-// LandingPageController
+
+Route::middleware(['auth'])->prefix('profile')->group(function () {
+    Route::get('/settings', [BusinessSettingsController::class, 'edit'])->name('profile.settings');
+    Route::put('/settings', [BusinessSettingsController::class, 'update'])->name('profile.settings.update');
+  
+});
+
+// LandingPage url
 Route::get('/{slug}', [LandingPageController::class, 'show'])->name('landing.show');

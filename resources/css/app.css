@@ -7,9 +7,10 @@
 @source "../views";
 
 @theme {
-    --color-primary: #F55C1B;
-    --font-sans:
+    --color-primary: var(--tw-color-primary, #F97316); 
+    --font-sans: var(--tw-font-sans);
+    /* --font-sans:
         'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji',
-        'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+        'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji'; */
 
 }
