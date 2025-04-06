@@ -7,7 +7,7 @@
         <div class="text-center mb-6">
             <div class="mt-2">
                 <h3 class="text-2xl font-semibold">Write a Review</h3>
-                <p class="text-sm text-gray-500">Leave a review for <strong>{{ $ad->title }}</strong></p>
+                <p class="text-sm text-gray-500">Leave a review for <strong>{{ $product->name }}</strong></p>
             </div>
         </div>
 
@@ -25,7 +25,7 @@
         <form method="POST" action="{{ route('review.store') }}">
             @csrf
 
-            <input type="hidden" name="ad_id" value="{{ $ad->id }}">
+            <input type="hidden" name="product_id" value="{{ $product->id }}">
 
             <div class="mb-5">
                 <input class="w-full p-3 text-sm bg-gray-50 outline-none rounded"

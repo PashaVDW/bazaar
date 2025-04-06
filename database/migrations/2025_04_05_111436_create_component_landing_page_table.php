@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('component_id')->constrained()->cascadeOnDelete();
             $table->foreignId('landing_page_id')->constrained()->cascadeOnDelete();
-            $table->integer('order')->default(0); 
+            $table->integer('order')->default(0);
             $table->json('settings')->nullable();
             $table->timestamps();
         });

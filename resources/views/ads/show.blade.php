@@ -45,6 +45,20 @@
                         <p class="text-lg text-gray-700 leading-relaxed mb-8">
                             {{ $ad->products->first()->description }}
                         </p>
+
+                        @if ($ad->products->isNotEmpty())
+                            <form method="POST" action="{{ route('cart.add', $ad->products->first()->id) }}">
+                                @csrf
+                                <button type="submit"
+                                        class="inline-flex items-center justify-center px-6 py-3 text-base font-medium text-white bg-indigo-600 rounded-xl hover:bg-indigo-700 transition w-full sm:w-auto">
+                                    <svg class="w-5 h-5 mr-2 -ml-1" fill="none" stroke="currentColor" stroke-width="2"
+                                         viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
+                                        <path d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2 9h14l-2-9M10 21a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm8 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2z" />
+                                    </svg>
+                                    Add to Cart
+                                </button>
+                            </form>
+                        @endif
                     </div>
                 </div>
             </div>

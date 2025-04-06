@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('landing_pages', function (Blueprint $table) {
             $table->id();
             $table->foreignId('business_id')->constrained()->cascadeOnDelete()->unique();
-            $table->string('slug')->unique(); 
+            $table->string('slug')->unique();
             $table->string('logo_path')->nullable();
             $table->string('primary_color')->nullable();
             $table->string('status')->default('draft');

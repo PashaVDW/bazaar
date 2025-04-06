@@ -26,5 +26,4 @@ class LandingPage extends Model
             ->withTimestamps()
             ->orderBy('pivot_order');
     }
-
 }
