@@ -13,6 +13,8 @@ use App\Http\Controllers\ReservationController;
 use App\Http\Controllers\ReviewController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\CalendarController;
+
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
@@ -114,6 +116,12 @@ Route::middleware(['auth'])->prefix('profile')->group(function () {
     Route::get('/settings', [BusinessSettingsController::class, 'edit'])->name('profile.settings');
     Route::put('/settings', [BusinessSettingsController::class, 'update'])->name('profile.settings.update');
 });
+// return view calendar
+Route::middleware(['auth', 'role:business_advertiser'])->group(function () {
+    Route::get('/profile/calendar', [CalendarController::class, 'index'])->name('profile.calendar');
+    Route::get('/ads-calendar', [CalendarController::class, 'adsCalendar'])->name('advertisements.ad-calendar');
+});
+
 
 // Catch-all for public landing pages
 Route::get('/{slug}', [LandingPageController::class, 'show'])->name('landing.show');

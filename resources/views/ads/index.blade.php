@@ -9,6 +9,14 @@
         @if (session('error'))
             <x-shared.toast type="error" :message="session('error')" />
         @endif
+   <x-shared.view-switch
+    left-label="Advertisements Overview"
+    right-label="Advertisements Calendar"
+    left-route="advertisements.index"
+    right-route="advertisements.ad-calendar"
+    switch-key="switch"
+/>
+
 
         <x-shared.table title="Your Advertisements">
             <x-slot:actions>
