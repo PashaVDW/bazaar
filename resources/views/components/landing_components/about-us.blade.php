@@ -10,7 +10,7 @@
 <div class="py-10 px-6 flex flex-col md:flex-row items-center">
     <div class="md:w-1/3 mb-6 md:mb-0">
         @if ($logo)
-            <img src="{{ $logo }}" alt="Preview Logo" class="max-w-xs rounded-2xl">
+            <img src="{{ is_array($logo) ? ($logo['logo_base64'] ?? '') : $logo }}">
         @else
             Upload a logo and uncheck and check checkbox to preview
         @endif

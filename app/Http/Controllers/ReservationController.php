@@ -54,7 +54,7 @@ class ReservationController extends Controller
 
         return view('reservations.review', compact('reservation'));
     }
-
+    
     public function finalizeReturn(FinalizeReturnRequest $request, Reservation $reservation)
     {
         if ($reservation->product->user_id !== Auth::id()) {
