@@ -8,37 +8,11 @@ use Spatie\Permission\Models\Role;
 
 class RolePermissionSeeder extends Seeder
 {
-    /**
-     * Run the database seeds.
-     */
     public function run(): void
     {
-        Permission::create(['name' => 'create advertisements']);
-        Permission::create(['name' => 'create rental advertisements']);
-        Permission::create(['name' => 'create bids']);
-        Permission::create(['name' => 'link advertisements']);
-        Permission::create(['name' => 'view advertisement calendar']);
-
-        Permission::create(['name' => 'upload csvs']);
-        Permission::create(['name' => 'customize appearance']);
-        Permission::create(['name' => 'set custom url']);
-        Permission::create(['name' => 'create page layouts']);
-        Permission::create(['name' => 'expose own api']);
-        Permission::create(['name' => 'upload contracts']);
-        Permission::create(['name' => 'export registration as pdf']);
-
-        $private_advertiser = Role::create(['name' => 'private_advertiser']);
-        $private_advertiser->givePermissionTo([
+        $permissions = [
             'create advertisements',
-            'create rental advertisements',
-            'create bids',
-            'link advertisements',
-            'view advertisement calendar',
-        ]);
-
-        $business_advertiser = Role::create(['name' => 'business_advertiser']);
-        $business_advertiser->givePermissionTo([
-            'create advertisements',
+            'create products',
             'create rental advertisements',
             'create bids',
             'link advertisements',
@@ -50,8 +24,25 @@ class RolePermissionSeeder extends Seeder
             'expose own api',
             'upload contracts',
             'export registration as pdf',
+        ];
+
+        foreach ($permissions as $permission) {
+            Permission::firstOrCreate(['name' => $permission]);
+        }
+
+        $privateAdvertiser = Role::firstOrCreate(['name' => 'private_advertiser']);
+        $privateAdvertiser->givePermissionTo([
+            'create advertisements',
+            'create products',
+            'create rental advertisements',
+            'create bids',
+            'link advertisements',
+            'view advertisement calendar',
         ]);
 
-        Role::create(['name' => 'Super Admin']);
+        $businessAdvertiser = Role::firstOrCreate(['name' => 'business_advertiser']);
+        $businessAdvertiser->givePermissionTo($permissions);
+
+        Role::firstOrCreate(['name' => 'Super Admin']);
     }
 }

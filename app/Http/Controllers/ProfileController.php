@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Reservation;
 use Illuminate\Support\Facades\Auth;
 
 class ProfileController extends Controller
@@ -16,11 +17,42 @@ class ProfileController extends Controller
         $purchases = Auth::user()
             ->purchases()
             ->with(['products.ad'])
+            ->whereHas('products', function ($query) {
+                $query->whereIn('type', ['sale', 'auctions']);
+            })
             ->whereNotNull('purchased_at')
             ->orderByDesc('purchased_at')
             ->paginate(5);
 
-        return view('purchases.index', compact('purchases'));
+        return view('purchases.purchase', [
+            'purchases' => $purchases,
+            'type' => 'purchase',
+        ]);
+    }
+
+    public function rentalHistory()
+    {
+        $user = Auth::user();
+
+        $reservations = $user->reservations()
+            ->with(['product', 'returnRequest'])
+            ->orderByDesc('created_at')
+            ->paginate(5);
+
+        $ownsRentalProducts = $user->products()->where('type', 'rental')->exists();
+
+        $ownedReservations = collect();
+
+        if ($ownsRentalProducts) {
+            $ownedReservations = Reservation::with('user', 'product', 'returnRequest')
+                ->whereHas('product', function ($q) use ($user) {
+                    $q->where('user_id', $user->id)->where('type', 'rental');
+                })
+                ->latest()
+                ->get();
+        }
+
+        return view('purchases.rental', compact('reservations', 'ownedReservations', 'ownsRentalProducts'));
     }
 
     public function showPurchase(int $id)

@@ -14,53 +14,51 @@
 
     @if ($errors->any())
         <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-6">
-            <strong class="font-bold">Whoops!</strong>
-            <span class="block">There were some problems with your input.</span>
+            <strong class="font-bold">{{ __('messages.whoops') }}</strong>
+            <span class="block">{{ __('messages.problems_with_input') }}</span>
         </div>
     @endif
 
-   <div class="mb-4">
-        <label for="slug" class="block font-medium">Custom URL (slug)</label>
+    <div class="mb-4">
+        <label for="slug" class="block font-medium">{{ __('messages.custom_url') }}</label>
         <input type="text" name="slug" id="slug"
-            value="{{ old('slug', $landingPage?->slug) }}"
-            class="w-full border {{ $errors->has('slug') ? 'border-red-500' : 'border-gray-300' }} rounded p-2 mt-1"
-            placeholder="e.g. company-x">       
-        <span class="text-sm text-gray-500">Only lowercase letters, numbers, and hyphens are allowed (e.g. my-company or MyLanding1).</span>
+               value="{{ old('slug', $landingPage?->slug) }}"
+               class="w-full border {{ $errors->has('slug') ? 'border-red-500' : 'border-gray-300' }} rounded p-2 mt-1"
+               placeholder="{{ __('messages.example_slug') }}">
+        <span class="text-sm text-gray-500">{{ __('messages.slug_description') }}</span>
         @error('slug')
-            <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
+        <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
         @enderror
     </div>
 
-
     <div class="mb-4">
-        <label for="logo" class="block font-medium">Upload Logo</label>
+        <label for="logo" class="block font-medium">{{ __('messages.upload_logo') }}</label>
         <input type="file" name="logo" id="logo"
-            class="w-full mt-1 rounded p-2 {{ $errors->has('logo') ? 'border-red-500' : '' }}"
-            accept="image/*">
+               class="w-full mt-1 rounded p-2 {{ $errors->has('logo') ? 'border-red-500' : '' }}"
+               accept="image/*">
         <div class="mt-2" id="logo-preview">
             @if ($landingPage?->logo_path)
                 <img src="{{ Storage::url($landingPage->logo_path) }}" class="h-16">
             @endif
         </div>
         @error('logo')
-            <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
+        <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
         @enderror
     </div>
-
 
     <div class="mb-4">
-        <label for="color" class="block font-medium">Primary Color</label>
+        <label for="color" class="block font-medium">{{ __('messages.primary_color') }}</label>
         <input type="color" name="color" id="color"
-            value="{{ old('color', $landingPage->primary_color ?? '#f97316') }}"
-            class="w-full h-10 {{ $errors->has('color') ? 'border-red-500' : 'border-gray-300' }}">
+               value="{{ old('color', $landingPage->primary_color ?? '#f97316') }}"
+               class="w-full h-10 {{ $errors->has('color') ? 'border-red-500' : 'border-gray-300' }}">
         @error('color')
-            <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
+        <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
         @enderror
     </div>
 
-    <h3 class="font-semibold mb-2">Available Components</h3>
-    <p class="text-sm text-gray-500 mb-4">Select the components you want to include in your landing page. And Order them by draging them in the left sidebar.</p>
-      
+    <h3 class="font-semibold mb-2">{{ __('messages.available_components') }}</h3>
+    <p class="text-sm text-gray-500 mb-4">{{ __('messages.select_components') }}</p>
+
     <input type="hidden" name="ordered_components" id="ordered-components">
 
     <div id="sortable-components" class="space-y-4">
@@ -79,7 +77,7 @@
                            value="{{ $id }}"
                            class="mr-2 component-toggle"
                            data-component-id="{{ $id }}"
-                           {{ $selected ? 'checked' : '' }}>
+                        {{ $selected ? 'checked' : '' }}>
                     <span class="font-medium">{{ $component->name }}</span>
                 </label>
 
@@ -94,7 +92,7 @@
                         @else
                             <input type="{{ $config['type'] ?? 'text' }}"
                                    name="components[{{ $index }}][settings][{{ $field }}]"
-                                   class="w-full border border-gray-300  p-2 rounded"
+                                   class="w-full border border-gray-300 p-2 rounded"
                                    placeholder="{{ $config['placeholder'] ?? '' }}"
                                    value="{{ $settings[$field] ?? '' }}">
                         @endif
@@ -105,6 +103,6 @@
     </div>
 
     <button type="submit" class="mt-6 bg-primary text-white px-4 py-2 rounded hover:bg-orange-600">
-        {{ $method === 'POST' ? 'Create Page' : 'Update Page' }}
+        {{ $method === 'POST' ? __('messages.create_page') : __('messages.update_page') }}
     </button>
 </form>

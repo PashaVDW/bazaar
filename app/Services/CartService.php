@@ -2,9 +2,13 @@
 
 namespace App\Services;
 
+use App\Http\Requests\StoreReservationRequest;
 use App\Models\Product;
+use App\Models\Purchase;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Validator;
 
 class CartService
 {
@@ -86,5 +90,68 @@ class CartService
         Session::put('cart', $cart);
 
         return true;
+    }
+
+    public function validateCartBeforeCheckout(array $cart, ReservationService $reservationService)
+    {
+        foreach ($cart as $item) {
+            $product = $item['product'];
+            $quantity = $item['quantity'];
+
+            if (in_array($product->type, ['sale', 'auctions']) && $product->stock < $quantity) {
+                return redirect()->back()->with('error', "Not enough stock for {$product->name}. Only {$product->stock} left.");
+            }
+
+            if ($product->type === 'rental') {
+                $data = [
+                    'product_id' => $product->id,
+                    'start_time' => $item['start_date'] ?? null,
+                    'end_time' => $item['end_date'] ?? null,
+                ];
+
+                $validator = Validator::make($data, (new StoreReservationRequest)->rules());
+
+                if ($validator->fails()) {
+                    return redirect()->back()
+                        ->withErrors($validator)
+                        ->with('error', 'Invalid rental reservation data.');
+                }
+
+                for ($i = 0; $i < $quantity; $i++) {
+                    $result = $reservationService->reserve(
+                        $data['product_id'],
+                        $data['start_time'],
+                        $data['end_time']
+                    );
+
+                    if ($result !== true) {
+                        return redirect()->back()->with('error', $result);
+                    }
+                }
+            }
+        }
+
+        return true;
+    }
+
+    public function processCheckout(array $cart, ReservationService $reservationService)
+    {
+        $purchase = Purchase::create([
+            'user_id' => Auth::id(),
+            'purchased_at' => now(),
+        ]);
+
+        foreach ($cart as $item) {
+            $product = $item['product'];
+            $quantity = $item['quantity'];
+
+            if (in_array($product->type, ['sale', 'auctions'])) {
+                $product->decrement('stock', $quantity);
+            }
+
+            $purchase->products()->attach($product->id, ['quantity' => $quantity]);
+        }
+
+        return $purchase;
     }
 }

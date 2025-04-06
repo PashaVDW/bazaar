@@ -47,12 +47,18 @@ class AdvertiserController extends Controller
 
         $ad = Ad::create($data);
 
-        if ($request->has('product_id')) {
-            $product = Product::find($request->product_id);
-            if ($product) {
-                $product->ad_id = $ad->id;
-                $product->save();
-            }
+        if ($request->has('main_product_id')) {
+            Product::where('id', $request->main_product_id)->update([
+                'ad_id' => $ad->id,
+                'is_main' => true,
+            ]);
+        }
+
+        if ($request->has('sub_product_ids')) {
+            Product::whereIn('id', $request->sub_product_ids)->update([
+                'ad_id' => $ad->id,
+                'is_main' => false,
+            ]);
         }
 
         $qrPath = $qrCodeService->generateForAd($ad);
@@ -71,6 +77,7 @@ class AdvertiserController extends Controller
 
     public function update(UpdateAdvertisementRequest $request, string $id)
     {
+        
         $ad = Ad::where('id', $id)->where('user_id', Auth::id())->firstOrFail();
 
         $data = $request->validated();
@@ -80,6 +87,22 @@ class AdvertiserController extends Controller
         } else {
             $data['image'] = $ad->image;
         }
+        Product::where('ad_id', $ad->id)->update([
+            'ad_id' => null,
+            'is_main' => false,
+        ]);
+        if ($request->filled('main_product_id')) {
+            Product::where('id', $request->main_product_id)->update([
+                'ad_id' => $ad->id,
+                'is_main' => true,
+            ]);
+        }
+        if ($request->filled('sub_product_ids')) {
+            Product::whereIn('id', $request->sub_product_ids)->update([
+                'ad_id' => $ad->id,
+                'is_main' => false,
+            ]);
+}
 
         $ad->update($data);
 

@@ -1,7 +1,7 @@
 @props([
     'id',
-    'title' => 'Are you sure?',
-    'message' => 'This action cannot be undone.',
+    'title' => __('messages.are_you_sure'),
+    'message' => __('messages.this_action_cannot_be_undone'),
     'action',
 ])
 
@@ -17,12 +17,12 @@
             <div class="flex gap-4">
                 <button type="submit"
                         class="w-1/2 py-2 px-4 bg-red-600 text-white text-sm font-semibold rounded-lg hover:bg-red-700 transition">
-                    Yes, delete
+                    {{ __('messages.yes_delete') }}
                 </button>
                 <button type="button"
                         class="w-1/2 py-2 px-4 bg-gray-100 text-gray-700 text-sm font-semibold rounded-lg hover:bg-gray-200 transition"
                         data-modal-hide="{{ $id }}">
-                    Cancel
+                    {{ __('messages.cancel') }}
                 </button>
             </div>
         </form>

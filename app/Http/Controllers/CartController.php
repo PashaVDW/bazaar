@@ -2,14 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\StoreReservationRequest;
 use App\Models\Product;
-use App\Models\Purchase;
 use App\Services\CartService;
 use App\Services\ReservationService;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Session;
 
 class CartController extends Controller
 {
@@ -24,7 +21,22 @@ class CartController extends Controller
     {
         $cart = $this->cartService->getCartWithProducts();
 
-        return view('cart.index', compact('cart'));
+        $cart = array_map(function ($item) {
+            $product = $item['product'];
+
+            return [
+                ...$item,
+                'image_url' => $product->image ? asset('storage/'.$product->image) : null,
+                'type' => ucfirst($product->type),
+                'name' => $product->name,
+                'price_each' => $product->price,
+                'total_price' => $product->price * $item['quantity'],
+            ];
+        }, $cart);
+
+        $total = array_sum(array_column($cart, 'total_price'));
+
+        return view('cart.index', compact('cart', 'total'));
     }
 
     public function add(Request $request, Product $product)
@@ -55,62 +67,101 @@ class CartController extends Controller
             : redirect()->back()->with('error', 'Product not found in cart');
     }
 
+    public function getCart(): array
+    {
+        return Session::get('cart', []);
+    }
+
+    public function getCartWithProducts(): array
+    {
+        $cart = $this->getCart();
+
+        foreach ($cart as $key => $item) {
+            if (! isset($item['product']->ad)) {
+                $product = Product::with('ad')->find($item['product']->id);
+                if ($product && $product->ad) {
+                    $cart[$key]['product'] = $product;
+                } else {
+                    unset($cart[$key]);
+                }
+            }
+        }
+
+        Session::put('cart', $cart);
+
+        return $cart;
+    }
+
+    public function addProductToCart(Request $request, Product $product): bool|\Illuminate\Http\RedirectResponse
+    {
+        $product->load('ad');
+        $cart = $this->getCart();
+
+        $entry = [
+            'product' => $product,
+            'quantity' => ($cart[$product->id]['quantity'] ?? 0) + 1,
+        ];
+
+        if ($product->type === 'rental') {
+            $validated = $request->validate([
+                'start_date' => 'required|date|after_or_equal:now',
+                'end_date' => 'required|date|after:start_date',
+            ]);
+
+            $entry['start_date'] = $validated['start_date'];
+            $entry['end_date'] = $validated['end_date'];
+        }
+
+        $cart[$product->id] = $entry;
+
+        Session::put('cart', $cart);
+
+        return true;
+    }
+
+    public function updateQuantity(Product $product, int $quantity): bool
+    {
+        $cart = $this->getCart();
+
+        if (! isset($cart[$product->id])) {
+            return false;
+        }
+
+        $cart[$product->id]['quantity'] = $quantity;
+        Session::put('cart', $cart);
+
+        return true;
+    }
+
+    public function removeProductFromCart(Product $product): bool
+    {
+        $cart = $this->getCart();
+
+        if (! isset($cart[$product->id])) {
+            return false;
+        }
+
+        unset($cart[$product->id]);
+        Session::put('cart', $cart);
+
+        return true;
+    }
+
     public function checkout(ReservationService $reservationService)
     {
         $cart = $this->cartService->getCart();
+
         if (empty($cart)) {
             return redirect()->back()->with('error', 'Your cart is empty');
         }
 
-        $purchase = Purchase::create([
-            'user_id' => Auth::id(),
-            'purchased_at' => now(),
-        ]);
+        $validationResult = $this->cartService->validateCartBeforeCheckout($cart, $reservationService);
 
-        foreach ($cart as $item) {
-            $product = $item['product'];
-            $quantity = $item['quantity'];
-
-            if (in_array($product->type, ['sale', 'auction'])) {
-                if ($product->stock < $quantity) {
-                    return redirect()->back()->with('error', "Not enough stock for {$product->name}. Only {$product->stock} left.");
-                }
-
-                $product->decrement('stock', $quantity);
-
-                $purchase->products()->attach($product->id, ['quantity' => $quantity]);
-            }
-
-            if ($product->type === 'rental') {
-                $data = [
-                    'product_id' => $product->id,
-                    'start_time' => $item['start_date'] ?? null,
-                    'end_time' => $item['end_date'] ?? null,
-                ];
-
-                $validator = Validator::make($data, (new StoreReservationRequest)->rules());
-
-                if ($validator->fails()) {
-                    return redirect()->back()
-                        ->withErrors($validator)
-                        ->with('error', 'Invalid rental reservation data.');
-                }
-
-                for ($i = 0; $i < $quantity; $i++) {
-                    $result = $reservationService->reserve(
-                        $data['product_id'],
-                        $data['start_time'],
-                        $data['end_time']
-                    );
-
-                    if ($result !== true) {
-                        return redirect()->back()->with('error', $result);
-                    }
-                }
-
-                $purchase->products()->attach($product->id, ['quantity' => $quantity]);
-            }
+        if ($validationResult !== true) {
+            return $validationResult;
         }
+
+        $this->cartService->processCheckout($cart, $reservationService);
 
         session()->forget('cart');
 

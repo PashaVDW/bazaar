@@ -39,4 +39,25 @@ class Product extends Model
     {
         return $this->hasMany(Reservation::class);
     }
+
+    public function scopeMain($query)
+    {
+        return $query->where('is_main', true);
+    }
+
+    public function scopeSub($query)
+    {
+        return $query->where('is_main', false);
+    }
+
+    public function bids()
+    {
+        return $this->hasMany(Bid::class);
+    }
+
+    public function winningBid()
+    {
+        return $this->belongsTo(Bid::class, 'winning_bid_id');
+    }
+
 }
