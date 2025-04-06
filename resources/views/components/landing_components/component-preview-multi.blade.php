@@ -5,16 +5,13 @@
         @php
             $componentId = $component->id;
             $componentSettings = $settings[$componentId] ?? [];
-
-            $componentData = array_merge($componentSettings, [
-                'ads' => $ads,
-                'reviews' => $reviews,
-                'business' => $business,
-                'logo' => $logo,
-                'preview' => true,
-            ]);
         @endphp
 
-        @include($component->view_path, $componentData)
+        @include($component->view_path, array_merge($componentSettings, [
+            'ads' => $ads,
+            'reviews' => $reviews,
+            'business' => $business,
+            'logo' => $logo,
+        ]))
     @endforeach
 @endsection

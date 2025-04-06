@@ -20,8 +20,10 @@
                     <div class="absolute inset-y-0 left-0 flex items-center pl-3">
                         <i class="fas fa-search text-gray-400"></i>
                     </div>
-                    @foreach(request()->except('search', 'page') as $key => $value)
-                        <input type="hidden" name="{{ $key }}" value="{{ $value }}">
+                   @foreach(request()->except('search', 'page') as $key => $value)
+                        @if (is_scalar($value))
+                            <input type="hidden" name="{{ $key }}" value="{{ $value }}">
+                        @endif
                     @endforeach
                 </div>
             </form>
