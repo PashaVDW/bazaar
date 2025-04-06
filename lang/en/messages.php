@@ -242,5 +242,13 @@ return [
     'share' => 'Share',
     'share_qr_code' => 'Share QR Code',
     'no_ads_found_for_your_filters' => 'No ads found for your filters.',
+    'create_advertisement_subtext' => 'Fill in the details below to publish your ad',
+    'upload_image' => 'Upload an image',
+    'please_reselect_image' => 'Please reselect the image',
+    'start_date_time' => 'Start Date & Time',
+    'end_date_time' => 'End Date & Time',
+    'main_product' => 'Main Product',
+    'sub_products_optional' => 'Sub Products (optional)',
+    'create' => 'Create Advertisement',
 
 ];
