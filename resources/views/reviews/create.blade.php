@@ -1,17 +1,17 @@
 @extends('layouts.profile')
 
-@section('title', __('write_a_review'))
+@section('title', __('messages.write_a_review'))
 
 @section('content')
     <div class="w-full max-w-2xl mx-auto px-6 py-10"
          x-data="reviewSelect({{ json_encode([
-            'product' => isset($productReview),
-            'advertiser' => isset($advertiserReview)
-         ]) }})">
+        'product' => isset($productReview),
+        'advertiser' => isset($advertiserReview)
+     ]) }})">
         <div class="text-center mb-6">
-            <h3 class="text-2xl font-semibold">{{ __('write_a_review') }}</h3>
+            <h3 class="text-2xl font-semibold">{{ __('messages.write_a_review') }}</h3>
             <p class="text-sm text-gray-500">
-                {{ __('choose_who_to_review') }} <strong>{{ $product->name }}</strong> {{ __('and_or_the_advertiser') }}
+                {{ __('messages.choose_who_to_review') }} <strong>{{ $product->name }}</strong> {{ __('messages.and_or_the_advertiser') }}
             </p>
         </div>
 
@@ -21,25 +21,25 @@
             <input type="hidden" name="advertiser_id" value="{{ $product->user_id }}">
 
             <div class="mb-5">
-                <label class="block mb-2 text-sm font-medium text-gray-700">{{ __('review_target') }}</label>
+                <label class="block mb-2 text-sm font-medium text-gray-700">{{ __('messages.review_target') }}</label>
                 <div class="relative">
                     <button type="button" @click="open = !open"
                             class="relative w-full bg-white border border-gray-300 rounded-md shadow-sm pl-3 pr-10 py-2 text-left cursor-default focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500 text-sm">
-                        <span x-text="selectedLabels().join(', ') || '{{ __('select') }}'" class="truncate block"></span>
+                        <span x-text="selectedLabels().join(', ') || '{{ __('messages.select') }}'" class="truncate block"></span>
                         <span class="absolute inset-y-0 right-0 flex items-center pr-2 pointer-events-none">
-                            <svg class="h-5 w-5 text-gray-400" fill="currentColor" viewBox="0 0 20 20">
-                                <path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 10.94l3.71-3.71a.75.75 0 111.06 1.06l-4.24 4.25a.75.75 0 01-1.06 0L5.23 8.27a.75.75 0 01.02-1.06z" clip-rule="evenodd" />
-                            </svg>
-                        </span>
+                        <svg class="h-5 w-5 text-gray-400" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 10.94l3.71-3.71a.75.75 0 111.06 1.06l-4.24 4.25a.75.75 0 01-1.06 0L5.23 8.27a.75.75 0 01.02-1.06z" clip-rule="evenodd" />
+                        </svg>
+                    </span>
                     </button>
 
                     <div x-show="open" @click.outside="open = false"
                          class="absolute z-10 mt-1 w-full bg-white border border-gray-200 rounded-md shadow-lg max-h-60 overflow-auto focus:outline-none text-sm">
                         <label class="block px-4 py-2 hover:bg-gray-50 cursor-pointer">
-                            <input type="checkbox" value="product" name="review_type[]" x-model="selected" class="mr-2"> Product
+                            <input type="checkbox" value="product" name="review_type[]" x-model="selected" class="mr-2"> {{ __('messages.product') }}
                         </label>
                         <label class="block px-4 py-2 hover:bg-gray-50 cursor-pointer">
-                            <input type="checkbox" value="advertiser" name="review_type[]" x-model="selected" class="mr-2"> Advertiser
+                            <input type="checkbox" value="advertiser" name="review_type[]" x-model="selected" class="mr-2"> {{ __('messages.advertiser') }}
                         </label>
                     </div>
                 </div>
@@ -52,7 +52,7 @@
                 <input class="w-full p-3 text-sm bg-gray-50 outline-none rounded"
                        type="text"
                        name="title"
-                       placeholder="{{ __('review_title') }}"
+                       placeholder="{{ __('messages.review_title') }}"
                        value="{{ old('title', $productReview->title ?? $advertiserReview->title ?? '') }}"
                        required>
                 @error('title')
@@ -61,11 +61,11 @@
             </div>
 
             <div class="mb-5">
-                <textarea class="w-full p-3 text-sm bg-gray-50 outline-none rounded"
-                          name="content"
-                          placeholder="{{ __('your_review') }}"
-                          rows="5"
-                          required>{{ old('content', $productReview->content ?? $advertiserReview->content ?? '') }}</textarea>
+            <textarea class="w-full p-3 text-sm bg-gray-50 outline-none rounded"
+                      name="content"
+                      placeholder="{{ __('messages.your_review') }}"
+                      rows="5"
+                      required>{{ old('content', $productReview->content ?? $advertiserReview->content ?? '') }}</textarea>
                 @error('content')
                 <p class="text-sm text-red-600 mt-2">{{ $message }}</p>
                 @enderror
@@ -91,11 +91,11 @@
 
             <button type="submit"
                     class="w-full py-3 bg-green-600 hover:bg-green-700 rounded text-sm font-bold text-white transition">
-                {{ __('submit_review') }}
+                {{ __('messages.submit_review') }}
             </button>
 
             <p class="mt-4 text-sm text-center text-gray-500">
-                <a href="{{ route('profile.purchaseHistory') }}" class="text-green-600 hover:underline">&larr; {{ __('back_to_history') }}</a>
+                <a href="{{ route('profile.purchaseHistory') }}" class="text-green-600 hover:underline">&larr; {{ __('messages.back_to_history') }}</a>
             </p>
         </form>
     </div>

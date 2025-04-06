@@ -20,10 +20,14 @@
 
         <div class="hidden lg:flex items-center space-x-6">
             <x-shared.nav-link route="profile.index" icon="fa-house" :label="__('messages.dashboard')" />
+            @role(['private_advertiser', 'business_advertiser'])
             <x-shared.nav-link route="advertisements.index" icon="fa-rectangle-ad" :label="__('messages.ads')" />
+            @endrole
             <x-shared.nav-link route="profile.purchaseHistory" icon="fa-receipt" :label="__('messages.purchases')" />
             <x-shared.nav-link route="profile.rentalHistory" icon="fas fa-clock" :label="__('messages.rentals')" />
+            @role(['private_advertiser', 'business_advertiser'])
             <x-shared.nav-link route="products.index" icon="fa-cube" :label="__('messages.products')" />
+            @endrole
             @role('business_advertiser')
             <x-shared.nav-link route="profile.contract" icon="fa-file-contract" :label="__('messages.contract')" />
             <x-shared.nav-link route="landing.index" icon="fa-rocket" :label="__('messages.landing')" />
@@ -47,11 +51,11 @@
                     <div class="font-semibold">{{ Auth::user()->name }}</div>
                     <div class="text-gray-500">{{ Auth::user()->email }}</div>
                 </div>
+                @role('business_advertiser')
                 <a href="{{ route('profile.settings') }}"
                    class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
                     <i class="fa-solid fa-palette mr-2"></i> {{ __('messages.style_settings') }}
                 </a>
-                @role('business_advertiser')
                     <a href="{{ route('developer.index') }}"
                        class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
                         <i class="fas fa-code mr-2"></i> {{ __('messages.developer_settings') }}

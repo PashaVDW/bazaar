@@ -253,5 +253,4 @@ return [
     'search_placeholder' => 'Zoek advertenties of producten...',
     'all_types' => 'Alle types',
     'price_euro' => 'Prijs (€)',
-
 ];

@@ -51,30 +51,30 @@
         <div class="flex items-center gap-4">
             @auth
                 @role('Super Admin')
-                <a href="{{ route('admin.contracts.index') }}"
-                   class="px-3 py-1 text-sm border border-gray-300 rounded-md hover:bg-gray-50 transition flex items-center gap-1">
-                    <i class="fas fa-user-shield text-xs"></i>
-                    {{ __('messages.admin') }}
-                </a>
+                    <a href="{{ route('admin.contracts.index') }}"
+                       class="px-3 py-1 text-sm border border-gray-300 rounded-md hover:bg-gray-50 transition flex items-center gap-1">
+                        <i class="fas fa-user-shield text-xs"></i>
+                        {{ __('messages.admin') }}
+                    </a>
                 @elserole('business_advertiser')
-                <a href="{{ route('profile.index') }}"
-                   class="px-3 py-1 text-sm border border-gray-300 rounded-md hover:bg-gray-50 transition flex items-center gap-1">
-                    <i class="fas fa-building text-xs"></i>
-                    {{ __('messages.business') }}
-                </a>
+                    <a href="{{ route('profile.index') }}"
+                       class="px-3 py-1 text-sm border border-gray-300 rounded-md hover:bg-gray-50 transition flex items-center gap-1">
+                        <i class="fas fa-building text-xs"></i>
+                        {{ __('messages.business') }}
+                    </a>
                 @elserole('private_advertiser')
-                <a href="{{ route('profile.index') }}"
-                   class="px-3 py-1 text-sm border border-gray-300 rounded-md hover:bg-gray-50 transition flex items-center gap-1">
-                    <i class="fas fa-user text-xs"></i>
-                    {{ __('messages.profile') }}
-                </a>
-                @elserole('customer')
-                <a href="{{ route('profile.index') }}"
-                   class="px-3 py-1 text-sm border border-gray-300 rounded-md hover:bg-gray-50 transition flex items-center gap-1">
-                    <i class="fas fa-box text-xs"></i>
-                    {{ __('messages.orders') }}
-                </a>
-                @endrole
+                    <a href="{{ route('profile.index') }}"
+                       class="px-3 py-1 text-sm border border-gray-300 rounded-md hover:bg-gray-50 transition flex items-center gap-1">
+                        <i class="fas fa-user text-xs"></i>
+                        {{ __('messages.profile') }}
+                    </a>
+                @else
+                    <a href="{{ route('profile.index') }}"
+                       class="px-3 py-1 text-sm border border-gray-300 rounded-md hover:bg-gray-50 transition flex items-center gap-1">
+                        <i class="fas fa-box text-xs"></i>
+                        {{ __('messages.orders') }}
+                    </a>
+                @endif
 
                 <a href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"
                    class="text-gray-600 hover:text-red-600 transition" title="{{ __('messages.logout') }}">
