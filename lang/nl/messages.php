@@ -241,5 +241,13 @@ return [
     'share' => 'Deel',
     'share_qr_code' => 'Deel QR-code',
     'no_ads_found_for_your_filters' => 'Geen advertenties gevonden voor je filters.',
+    'create_advertisement_subtext' => 'Vul de onderstaande gegevens in om je advertentie te publiceren',
+    'upload_image' => 'Afbeelding uploaden',
+    'please_reselect_image' => 'Selecteer de afbeelding opnieuw',
+    'start_date_time' => 'Startdatum & tijd',
+    'end_date_time' => 'Einddatum & tijd',
+    'main_product' => 'Hoofdproduct',
+    'sub_products_optional' => 'Subproducten (optioneel)',
+    'create' => 'Advertentie aanmaken',
 
 ];
