@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreAdvertisementRequest;
 use App\Http\Requests\UpdateAdvertisementRequest;
+use App\Http\Requests\UploadCsvRequest;
 use App\Imports\AdsImport;
 use App\Models\Ad;
 use App\Models\Product;
@@ -98,14 +99,20 @@ class AdvertiserController extends Controller
         return redirect()->route('advertisements.index')->with('success', 'Advertisement deleted.');
     }
 
-    public function importCsv(UploadCsvRequest $request)
+    public function importCsv(UploadCsvRequest $request, QrCodeService $qrCodeService)
     {
         $validated = $request->validated();
 
         $file = $request->file('csv_file');
 
-        Excel::import(new AdsImport, $file);
+        $rows = array_map('str_getcsv', file($file->getRealPath()));
+        if (count($rows) - 1 > 4) {
+            return redirect()->back()->with('error', 'You may only import up to 4 records at once.');
+        }
+
+        Excel::import(new AdsImport($qrCodeService), $file);
 
         return redirect()->route('advertisements.index')->with('success', 'Advertisements imported successfully.');
     }
+
 }

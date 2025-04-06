@@ -12,28 +12,22 @@ use App\Http\Controllers\ReviewController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BusinessSettingsController;
+
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
-// HomeController
 Route::middleware('auth')->group(function () {
     Route::post('/ads/{ad}/favorite', [HomeController::class, 'favorite'])->name('ads.favorite');
     Route::delete('/ads/{ad}/unfavorite', [HomeController::class, 'unfavorite'])->name('ads.unfavorite');
     Route::get('/ads/{ad}', [HomeController::class, 'show'])->name('ads.show');
 });
 
-// BusinessExportController
 Route::middleware(['auth', 'role:Super Admin'])->prefix('admin')->name('admin.')->group(function () {
     Route::get('/businesses/{id}/export-pdf', [BusinessExportController::class, 'export'])->name('business.export.pdf');
-});
-
-// AdminController
-Route::middleware(['auth', 'role:Super Admin'])->name('admin.')->prefix('admin')->group(function () {
     Route::get('/contracts', [AdminController::class, 'contractIndex'])->name('contracts.index');
     Route::get('/contracts/{business}/upload', [AdminController::class, 'uploadContract'])->name('upload');
     Route::post('/contracts/{business}/upload', [AdminController::class, 'saveUploadedContract'])->name('contracts.upload.save');
 });
 
-// ProfileController
 Route::middleware('auth')->name('profile.')->group(function () {
     Route::get('/profile/purchases/{timestamp}', [ProfileController::class, 'showPurchase'])->name('purchases.show');
     Route::get('/purchaseHistory', [ProfileController::class, 'purchaseHistory'])->name('purchaseHistory');
@@ -42,7 +36,6 @@ Route::middleware('auth')->name('profile.')->group(function () {
     Route::get('/profile/contract', [BusinessExportController::class, 'showContract'])->name('contract');
 });
 
-// AdvertisementController
 Route::middleware(['permission:create advertisements'])->name('advertisements.')->prefix('advertisements')->group(function () {
     Route::get('/', [AdvertiserController::class, 'index'])->name('index');
     Route::get('/create', [AdvertiserController::class, 'create'])->name('create');
@@ -53,7 +46,7 @@ Route::middleware(['permission:create advertisements'])->name('advertisements.')
 });
 
 Route::middleware(['auth', 'role:business_advertiser'])->group(function () {
-    Route::post('advertisements/import', [AdvertiserController::class, 'importCsv'])->name('advertisements.import');
+    Route::post('/advertisements/import', [AdvertiserController::class, 'importCsv'])->name('advertisements.import');
 });
 
 Route::middleware(['auth', 'role:business_advertiser'])->group(function () {
@@ -83,20 +76,17 @@ Route::post('/component-preview/multi', function (Request $request) {
     ]);
 })->name('component.preview.multi');
 
-// CartController
 Route::post('/cart/add/{product}', [CartController::class, 'add'])->name('cart.add');
 Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
 Route::post('/cart/update/{product}', [CartController::class, 'update'])->name('cart.update');
 Route::delete('/cart/remove/{ad}', [CartController::class, 'remove'])->name('cart.remove');
 Route::post('/checkout', [CartController::class, 'checkout'])->name('cart.checkout')->middleware('auth');
 
-// ReviewController
 Route::middleware('auth')->group(function () {
     Route::get('/review/create', [ReviewController::class, 'create'])->name('review.create');
     Route::post('/review/store', [ReviewController::class, 'store'])->name('review.store');
 });
 
-// ProductController
 Route::middleware('auth')->name('products.')->prefix('products')->group(function () {
     Route::get('/', [ProductController::class, 'index'])->name('index');
     Route::get('/create', [ProductController::class, 'create'])->name('create');
@@ -107,12 +97,9 @@ Route::middleware('auth')->name('products.')->prefix('products')->group(function
     Route::delete('/{product}', [ProductController::class, 'destroy'])->name('destroy');
 });
 
-
 Route::middleware(['auth'])->prefix('profile')->group(function () {
     Route::get('/settings', [BusinessSettingsController::class, 'edit'])->name('profile.settings');
     Route::put('/settings', [BusinessSettingsController::class, 'update'])->name('profile.settings.update');
-  
 });
 
-// LandingPage url
 Route::get('/{slug}', [LandingPageController::class, 'show'])->name('landing.show');
