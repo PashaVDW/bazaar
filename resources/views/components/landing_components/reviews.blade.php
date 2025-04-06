@@ -1,5 +1,5 @@
 <div class="bg-white py-10 px-6 rounded-lg shadow-md">
-    <h2 class="text-2xl font-bold text-gray-800 mb-6 text-center">Customer Reviews</h2>
+    <h2 class="text-2xl font-bold text-gray-800 mb-6 text-center">{{ __('messages.customer_reviews') }}</h2>
     <div class="space-y-4">
         @foreach($reviews as $review)
             <div class="border border-gray-200 rounded p-4">
