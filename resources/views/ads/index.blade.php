@@ -5,7 +5,7 @@
     @if (session('success'))
         <x-shared.toast type="success" :message="session('success')" />
     @endif
-    
+
     @if (session('error'))
         <x-shared.toast type="error" :message="session('error')" />
     @endif
@@ -41,7 +41,6 @@
                     <td class="px-6 py-4 text-gray-700">{{ $ad->ads_starttime }}</td>
                     <td class="px-6 py-4 text-gray-700">{{ $ad->ads_endtime }}</td>
                     <td class="px-6 py-4">
-
                         @if ($ad->is_active)
                             <span class="px-3 py-1 text-xs bg-green-100 text-green-700 rounded-full font-medium">Active</span>
                         @else

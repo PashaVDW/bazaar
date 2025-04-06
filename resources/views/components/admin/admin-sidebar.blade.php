@@ -1,28 +1,31 @@
- <aside class="w-64 bg-white shadow-md hidden md:block">
-        <div class="p-4">
-            <x-shared.logo />
+<aside class="w-64 bg-white shadow-md border-r border-gray-200 hidden md:flex flex-col justify-between">
+    <div>
+        <div class="p-6 border-b border-gray-100">
+            <x-shared.logo class="w-32" />
         </div>
-        <nav class="p-4 space-y-2 text-gray-700">
-            <a href="#" class="flex items-center space-x-2 px-4 py-2 rounded hover:bg-gray-100">
-                <i class="fas fa-tachometer-alt"></i>
-                <span>Dashboard</span>
-            </a>
-            <a href="{{ route('admin.contracts.index') }}" class="flex items-center space-x-2 px-4 py-2 rounded hover:bg-gray-100">
-                <i class="fas fa-file-contract"></i>
-                <span>Contracts</span>
-            </a>
-            <a href="#" class="flex items-center space-x-2 px-4 py-2 rounded hover:bg-gray-100">
-                <i class="fas fa-users"></i>
-                <span>Users</span>
-            </a>
 
-            <a href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();" class="flex items-center space-x-2 px-4 py-2 rounded text-red-600 hover:bg-red-100">
-                <i class="fas fa-sign-out-alt"></i>
-                <span>Logout</span>
-            </a>
-            <form id="logout-form" method="POST" action="{{ route('logout') }}" class="hidden">
-                @csrf
-            </form>
-
+        <nav class="p-4 space-y-2 text-sm font-medium text-gray-700">
+            {{-- <x-shared.nav-link route="home" icon="fa-tachometer-alt" label="Dashboard" /> --}}
+            <x-shared.nav-link route="admin.contracts.index" icon="fa-file-contract" label="Contracts" />
+            {{-- <x-shared.nav-link route="home" icon="fa-users" label="Users" /> --}}
         </nav>
-    </aside>
+    </div>
+    <div class="p-4 border-t border-gray-100">
+        <div class="flex items-center gap-3">
+            <img class="w-10 h-10 rounded-full object-cover"
+                 src="https://ui-avatars.com/api/?name={{ urlencode(Auth::user()->name) }}&background=random&color=fff"
+                 alt="Avatar">
+            <div class="flex-1">
+                <p class="text-sm font-semibold text-gray-800">{{ Auth::user()->name }}</p>
+                <p class="text-xs text-gray-500">{{ Auth::user()->email }}</p>
+            </div>
+            <form method="POST" action="{{ route('logout') }}">
+                @csrf
+                <button title="Logout"
+                        class="text-gray-500 hover:text-red-500 transition">
+                    <i class="fas fa-sign-out-alt text-lg"></i>
+                </button>
+            </form>
+        </div>
+    </div>
+</aside>
