@@ -2,11 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Ad;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Str;
-use Carbon\Carbon;
-use App\Models\Ad;
 
 class CalendarController extends Controller
 {
@@ -15,9 +14,9 @@ class CalendarController extends Controller
         $startOfWeek = $request->query('week_start')
             ? Carbon::parse($request->query('week_start'))->startOfWeek()
             : now()->startOfWeek();
-    
+
         $dates = collect(range(0, 6))->map(fn ($i) => $startOfWeek->copy()->addDays($i));
-    
+
         $eventsRaw = [
             [
                 'start_datetime' => '2025-04-10 10:00',
@@ -38,22 +37,22 @@ class CalendarController extends Controller
                 'customer' => 'Alice Johnson',
             ],
         ];
-    
+
         $customers = collect($eventsRaw)->pluck('customer')->unique()->toArray();
         $colorMap = $this->assignUniqueColors($customers);
-    
+
         $events = collect($eventsRaw)->map(fn ($event) => [
             ...$event,
             'color' => $colorMap[$event['customer']],
         ]);
-    
+
         return view('profile.calendar', [
             'weekDates' => $dates,
             'startOfWeek' => $startOfWeek,
             'events' => $events,
         ]);
     }
-    
+
     public function adsCalendar(Request $request)
     {
         $startOfWeek = $request->query('week_start')

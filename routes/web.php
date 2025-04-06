@@ -4,7 +4,9 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AdvertiserController;
 use App\Http\Controllers\BusinessExportController;
 use App\Http\Controllers\BusinessSettingsController;
+use App\Http\Controllers\CalendarController;
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\DeveloperSettingsController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LandingPageController;
 use App\Http\Controllers\ProductController;
@@ -13,8 +15,6 @@ use App\Http\Controllers\ReservationController;
 use App\Http\Controllers\ReviewController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\CalendarController;
-
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
@@ -23,6 +23,7 @@ Route::middleware('auth')->group(function () {
     Route::post('/ads/{ad}/favorite', [HomeController::class, 'favorite'])->name('ads.favorite');
     Route::delete('/ads/{ad}/unfavorite', [HomeController::class, 'unfavorite'])->name('ads.unfavorite');
     Route::get('/ads/{ad}', [HomeController::class, 'show'])->name('ads.show');
+
 });
 
 // BusinessExportController & AdminController
@@ -122,7 +123,6 @@ Route::middleware(['auth', 'can:create advertisements'])->group(function () {
     Route::get('/ads-calendar', [CalendarController::class, 'adsCalendar'])->name('advertisements.ad-calendar');
 });
 
-
 // Catch-all for public landing pages
 Route::get('/{slug}', [LandingPageController::class, 'show'])->name('landing.show');
 
@@ -132,5 +132,11 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/return-requests/{reservation}/review', [ReservationController::class, 'reviewReturn'])->name('return.review');
     Route::post('/return-requests/{reservation}/finalize', [ReservationController::class, 'finalizeReturn'])->name('return.finalize');
+});
 
+// DeveloperSettingsController
+Route::middleware(['role:business_advertiser'])->prefix('developer')->name('developer.')->group(function () {
+    Route::get('/settings', [DeveloperSettingsController::class, 'index'])->name('index');
+    Route::post('/createToken', [DeveloperSettingsController::class, 'createToken'])->name('createToken');
+    Route::delete('/developer/tokens/{id}', [DeveloperSettingsController::class, 'destroy'])->name('destroyToken');
 });
