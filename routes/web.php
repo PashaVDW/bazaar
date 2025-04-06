@@ -6,6 +6,7 @@ use App\Http\Controllers\BusinessExportController;
 use App\Http\Controllers\BusinessSettingsController;
 use App\Http\Controllers\CalendarController;
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\DeveloperSettingsController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LandingPageController;
 use App\Http\Controllers\ProductController;
@@ -131,5 +132,11 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/return-requests/{reservation}/review', [ReservationController::class, 'reviewReturn'])->name('return.review');
     Route::post('/return-requests/{reservation}/finalize', [ReservationController::class, 'finalizeReturn'])->name('return.finalize');
+});
 
+// DeveloperSettingsController
+Route::middleware(['role:business_advertiser'])->prefix('developer')->name('developer.')->group(function () {
+    Route::get('/settings', [DeveloperSettingsController::class, 'index'])->name('index');
+    Route::post('/createToken', [DeveloperSettingsController::class, 'createToken'])->name('createToken');
+    Route::delete('/developer/tokens/{id}', [DeveloperSettingsController::class, 'destroy'])->name('destroyToken');
 });
