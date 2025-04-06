@@ -42,6 +42,7 @@ Route::middleware('auth')->name('profile.')->group(function () {
     Route::post('/profile/contract/upload', [BusinessExportController::class, 'saveUploadedContract'])->name('contract.upload.save');
     Route::get('/profile/contract', [BusinessExportController::class, 'showContract'])->name('contract');
     Route::get('/rentalHistory', [ProfileController::class, 'rentalHistory'])->name('rentalHistory');
+    Route::get('/rentalCalendar', [CalendarController::class, 'rentalCalendar'])->name('rentalCalendar');
 });
 
 // AdvertiserController
