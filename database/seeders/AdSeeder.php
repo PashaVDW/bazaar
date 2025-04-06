@@ -6,8 +6,8 @@ use App\Models\Ad;
 use App\Models\Product;
 use App\Models\Review;
 use App\Models\User;
-use Illuminate\Database\Seeder;
 use App\Services\QrCodeService;
+use Illuminate\Database\Seeder;
 
 class AdSeeder extends Seeder
 {
@@ -16,11 +16,15 @@ class AdSeeder extends Seeder
         $user = User::first() ?? User::factory()->create();
         $qrCodeService = app(QrCodeService::class);
 
+        $types = ['sale', 'rental', 'auction'];
+
         for ($i = 1; $i <= 20; $i++) {
+            $type = $types[($i - 1) % count($types)];
+
             $ad = Ad::create([
                 'user_id' => $user->id,
-                'title' => 'Ad title #' . $i,
-                'description' => 'Some description',
+                'title' => strtoupper($type).' Ad #'.$i,
+                'description' => 'Description for '.$type.' ad #'.$i,
                 'image' => 'sample1.jpg',
                 'ads_starttime' => now(),
                 'ads_endtime' => now()->addDays(10),
@@ -33,10 +37,10 @@ class AdSeeder extends Seeder
             $product = Product::create([
                 'user_id' => $user->id,
                 'ad_id' => $ad->id,
-                'name' => 'Product #' . $i,
-                'description' => 'Product description',
+                'name' => strtoupper($type).' Product #'.$i,
+                'description' => 'Product description for '.$type.' product #'.$i,
                 'price' => rand(10, 100),
-                'type' => 'sale',
+                'type' => $type,
                 'stock' => rand(1, 50),
                 'image' => 'sample1.jpg',
             ]);
@@ -44,8 +48,8 @@ class AdSeeder extends Seeder
             Review::create([
                 'user_id' => $user->id,
                 'product_id' => $product->id,
-                'title' => 'Review for Product #' . $i,
-                'content' => 'This is a review content for product #' . $i,
+                'title' => 'Review for '.$product->name,
+                'content' => 'This is a review content for '.$product->name,
                 'rating' => rand(3, 5),
             ]);
         }

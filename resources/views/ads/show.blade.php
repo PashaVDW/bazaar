@@ -27,6 +27,7 @@
                         @php
                             $reviews = $ad->products->flatMap->reviews;
                             $averageRating = $reviews->count() ? round($reviews->pluck('rating')->avg()) : 0;
+                            $product = $ad->products->first();
                         @endphp
 
                         @if ($reviews->isNotEmpty())
@@ -43,12 +44,27 @@
                         @endif
 
                         <p class="text-lg text-gray-700 leading-relaxed mb-8">
-                            {{ $ad->products->first()->description }}
+                            {{ $product->description }}
                         </p>
 
-                        @if ($ad->products->isNotEmpty())
-                            <form method="POST" action="{{ route('cart.add', $ad->products->first()->id) }}">
+                        @if ($product)
+                            <form method="POST" action="{{ route('cart.add', $product->id) }}">
                                 @csrf
+
+                                @if ($product->type === 'rental')
+                                    <div class="mb-4">
+                                        <label for="start_date" class="block mb-2 text-sm font-medium text-gray-700">Start Date</label>
+                                        <input type="datetime-local" name="start_date" id="start_date" required
+                                               class="w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500">
+                                    </div>
+
+                                    <div class="mb-6">
+                                        <label for="end_date" class="block mb-2 text-sm font-medium text-gray-700">End Date</label>
+                                        <input type="datetime-local" name="end_date" id="end_date" required
+                                               class="w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500">
+                                    </div>
+                                @endif
+
                                 <button type="submit"
                                         class="inline-flex items-center justify-center px-6 py-3 text-base font-medium text-white bg-indigo-600 rounded-xl hover:bg-indigo-700 transition w-full sm:w-auto">
                                     <svg class="w-5 h-5 mr-2 -ml-1" fill="none" stroke="currentColor" stroke-width="2"

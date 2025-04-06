@@ -18,7 +18,6 @@ class ProductController extends Controller
         return view('products.index', compact('products'));
     }
 
-
     public function create()
     {
         $ads = Ad::where('user_id', auth()->id())->get();

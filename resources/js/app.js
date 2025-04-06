@@ -138,3 +138,9 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     });
 });
+document.addEventListener('DOMContentLoaded', function () {
+    const scrollContainer = document.querySelector('.calendar-scroll-container');
+    if (scrollContainer) {
+        scrollContainer.scrollTop = 7 * 80;
+    }
+});

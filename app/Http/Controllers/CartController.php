@@ -3,15 +3,63 @@
 namespace App\Http\Controllers;
 
 use App\Models\Product;
-use App\Models\Purchase;
+use App\Services\CartService;
+use App\Services\ReservationService;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
 
 class CartController extends Controller
 {
+    protected CartService $cartService;
+
+    public function __construct(CartService $cartService)
+    {
+        $this->cartService = $cartService;
+    }
+
     public function index()
     {
-        $cart = session()->get('cart', []);
+        $cart = $this->cartService->getCartWithProducts();
+
+        return view('cart.index', compact('cart'));
+    }
+
+    public function add(Request $request, Product $product)
+    {
+        $result = $this->cartService->addProductToCart($request, $product);
+
+        return $result === true
+            ? redirect()->back()->with('success', 'Added to cart')
+            : $result;
+    }
+
+    public function update(Request $request, Product $product)
+    {
+        $request->validate(['quantity' => 'required|integer|min:1']);
+        $updated = $this->cartService->updateQuantity($product, $request->quantity);
+
+        return $updated
+            ? redirect()->back()->with('success', 'Quantity updated')
+            : redirect()->back()->with('error', 'Product not found in cart');
+    }
+
+    public function remove(Product $product)
+    {
+        $removed = $this->cartService->removeProductFromCart($product);
+
+        return $removed
+            ? redirect()->back()->with('success', 'Removed from cart')
+            : redirect()->back()->with('error', 'Product not found in cart');
+    }
+
+    public function getCart(): array
+    {
+        return Session::get('cart', []);
+    }
+
+    public function getCartWithProducts(): array
+    {
+        $cart = $this->getCart();
 
         foreach ($cart as $key => $item) {
             if (! isset($item['product']->ad)) {
@@ -24,77 +72,81 @@ class CartController extends Controller
             }
         }
 
-        session()->put('cart', $cart);
+        Session::put('cart', $cart);
 
-        return view('cart.index', compact('cart'));
+        return $cart;
     }
 
-    public function add(Request $request, Product $product)
+    public function addProductToCart(Request $request, Product $product): bool|\Illuminate\Http\RedirectResponse
     {
         $product->load('ad');
+        $cart = $this->getCart();
 
-        $cart = session()->get('cart', []);
-
-        $cart[$product->id] = [
+        $entry = [
             'product' => $product,
             'quantity' => ($cart[$product->id]['quantity'] ?? 0) + 1,
         ];
 
-        session()->put('cart', $cart);
+        if ($product->type === 'rental') {
+            $validated = $request->validate([
+                'start_date' => 'required|date|after_or_equal:now',
+                'end_date' => 'required|date|after:start_date',
+            ]);
 
-        return redirect()->back()->with('success', 'Added to cart');
-    }
-
-    public function update(Request $request, Product $product)
-    {
-        $request->validate([
-            'quantity' => 'required|integer|min:1',
-        ]);
-
-        $cart = session()->get('cart', []);
-
-        if (isset($cart[$product->id])) {
-            $cart[$product->id]['quantity'] = $request->quantity;
-            session()->put('cart', $cart);
-
-            return redirect()->back()->with('success', 'Quantity updated');
+            $entry['start_date'] = $validated['start_date'];
+            $entry['end_date'] = $validated['end_date'];
         }
 
-        return redirect()->back()->with('error', 'Product not found in cart');
+        $cart[$product->id] = $entry;
+
+        Session::put('cart', $cart);
+
+        return true;
     }
 
-    public function remove(Product $product)
+    public function updateQuantity(Product $product, int $quantity): bool
     {
-        $cart = session()->get('cart', []);
+        $cart = $this->getCart();
 
-        if (isset($cart[$product->id])) {
-            unset($cart[$product->id]);
-            session()->put('cart', $cart);
-
-            return redirect()->back()->with('success', 'Removed from cart');
+        if (! isset($cart[$product->id])) {
+            return false;
         }
 
-        return redirect()->back()->with('error', 'Product not found in cart');
+        $cart[$product->id]['quantity'] = $quantity;
+        Session::put('cart', $cart);
+
+        return true;
     }
 
-    public function checkout()
+    public function removeProductFromCart(Product $product): bool
     {
-        $cart = session()->get('cart', []);
+        $cart = $this->getCart();
+
+        if (! isset($cart[$product->id])) {
+            return false;
+        }
+
+        unset($cart[$product->id]);
+        Session::put('cart', $cart);
+
+        return true;
+    }
+
+    public function checkout(ReservationService $reservationService)
+    {
+        $cart = $this->cartService->getCart();
 
         if (empty($cart)) {
             return redirect()->back()->with('error', 'Your cart is empty');
         }
 
-        $purchase = Purchase::create([
-            'user_id' => Auth::id(),
-            'purchased_at' => now(),
-        ]);
+        $validationResult = $this->cartService->validateCartBeforeCheckout($cart, $reservationService);
 
-        foreach ($cart as $item) {
-            $purchase->products()->attach($item['product']->id, [
-                'quantity' => $item['quantity'],
-            ]);
+        if ($validationResult !== true) {
+            return $validationResult;
         }
+
+        $this->cartService->processCheckout($cart, $reservationService);
 
         session()->forget('cart');
 
