@@ -4,6 +4,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AdvertiserController;
 use App\Http\Controllers\BusinessExportController;
 use App\Http\Controllers\BusinessSettingsController;
+use App\Http\Controllers\CalendarController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LandingPageController;
@@ -13,8 +14,6 @@ use App\Http\Controllers\ReservationController;
 use App\Http\Controllers\ReviewController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\CalendarController;
-
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
@@ -121,7 +120,6 @@ Route::middleware(['auth', 'role:business_advertiser'])->group(function () {
     Route::get('/profile/calendar', [CalendarController::class, 'index'])->name('profile.calendar');
     Route::get('/ads-calendar', [CalendarController::class, 'adsCalendar'])->name('advertisements.ad-calendar');
 });
-
 
 // Catch-all for public landing pages
 Route::get('/{slug}', [LandingPageController::class, 'show'])->name('landing.show');
