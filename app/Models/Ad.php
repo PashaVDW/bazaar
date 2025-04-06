@@ -40,4 +40,14 @@ class Ad extends Model
     {
         return $this->hasMany(Product::class);
     }
+
+    public function mainProduct()
+    {
+        return $this->hasOne(Product::class)->where('is_main', true);
+    }
+
+    public function subProducts()
+    {
+        return $this->hasMany(Product::class)->where('is_main', false);
+    }
 }

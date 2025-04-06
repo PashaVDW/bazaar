@@ -21,7 +21,22 @@ class CartController extends Controller
     {
         $cart = $this->cartService->getCartWithProducts();
 
-        return view('cart.index', compact('cart'));
+        $cart = array_map(function ($item) {
+            $product = $item['product'];
+
+            return [
+                ...$item,
+                'image_url' => $product->image ? asset('storage/'.$product->image) : null,
+                'type' => ucfirst($product->type),
+                'name' => $product->name,
+                'price_each' => $product->price,
+                'total_price' => $product->price * $item['quantity'],
+            ];
+        }, $cart);
+
+        $total = array_sum(array_column($cart, 'total_price'));
+
+        return view('cart.index', compact('cart', 'total'));
     }
 
     public function add(Request $request, Product $product)
