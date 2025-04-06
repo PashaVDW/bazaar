@@ -98,7 +98,7 @@ class CartService
             $product = $item['product'];
             $quantity = $item['quantity'];
 
-            if (in_array($product->type, ['sale', 'auction']) && $product->stock < $quantity) {
+            if (in_array($product->type, ['sale', 'auctions']) && $product->stock < $quantity) {
                 return redirect()->back()->with('error', "Not enough stock for {$product->name}. Only {$product->stock} left.");
             }
 
@@ -145,7 +145,7 @@ class CartService
             $product = $item['product'];
             $quantity = $item['quantity'];
 
-            if (in_array($product->type, ['sale', 'auction'])) {
+            if (in_array($product->type, ['sale', 'auctions'])) {
                 $product->decrement('stock', $quantity);
             }
 

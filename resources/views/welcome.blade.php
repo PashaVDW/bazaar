@@ -13,8 +13,8 @@
                     <x-shared.horizontal-filter :action="route('home')" />
 
                     <span class="md:absolute md:right-0 md:bottom-3 text-sm text-gray-400 font-medium">
-                    {{ $ads->total() }} {{ Str::plural(__('messages.ad'), $ads->total()) }} {{ __('messages.found') }}
-                </span>
+                        {{ $ads->total() }} {{ Str::plural(__('messages.ad'), $ads->total()) }} {{ __('messages.found') }}
+                    </span>
                 </div>
 
                 <div class="grid gap-6">
@@ -26,6 +26,7 @@
                                         $product = $ad->products->first();
                                         $reviews = $ad->products->flatMap->reviews;
                                         $avgRating = $reviews->count() ? round($reviews->avg('rating'), 1) : null;
+                                        $highestBid = $product && $product->type === 'auction' ? $product->bids->max('amount') : null;
                                     @endphp
 
                                     <div class="bg-white border border-gray-200 rounded-xl shadow-sm hover:shadow-md transition duration-200 flex flex-col h-full">
@@ -59,13 +60,37 @@
                                         </a>
 
                                         @if ($product)
-                                            <form method="POST" action="{{ route('cart.add', $product) }}" class="p-4 pt-0 mt-auto">
-                                                @csrf
-                                                <button type="submit"
-                                                        class="w-full text-sm bg-primary hover:bg-primary-hover text-white py-2 px-4 rounded-md transition">
-                                                    <i class="fas fa-cart-plus mr-1"></i> {{ __('messages.add_to_cart') }}
-                                                </button>
-                                            </form>
+                                            @if ($product->type === 'auction')
+                                                <div class="px-4 pb-3 text-sm text-gray-600">
+                                                    {{ __('messages.highest_bid') }}:
+                                                    @if ($highestBid)
+                                                        €{{ number_format($highestBid, 2) }}
+                                                    @else
+                                                        €0.00
+                                                    @endif
+                                                </div>
+
+                                                <form method="POST" action="{{ route('auctions.bid', $product) }}" class="px-4 pb-4">
+                                                    @csrf
+                                                    <div class="flex items-center gap-2">
+                                                        <input type="number" name="amount" min="{{ $highestBid ? $highestBid + 0.01 : 0.01 }}" step="0.01"
+                                                               placeholder="Your bid"
+                                                               required
+                                                               class="w-full text-sm p-2 border border-gray-300 rounded" />
+                                                        <button type="submit" class="text-sm bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700">
+                                                            {{ __('messages.place_bid') }}
+                                                        </button>
+                                                    </div>
+                                                </form>
+                                            @else
+                                                <form method="POST" action="{{ route('cart.add', $product) }}" class="p-4 pt-0 mt-auto">
+                                                    @csrf
+                                                    <button type="submit"
+                                                            class="w-full text-sm bg-primary hover:bg-primary-hover text-white py-2 px-4 rounded-md transition">
+                                                        <i class="fas fa-cart-plus mr-1"></i> {{ __('messages.add_to_cart') }}
+                                                    </button>
+                                                </form>
+                                            @endif
                                         @endif
 
                                         <div class="px-5 pb-5">

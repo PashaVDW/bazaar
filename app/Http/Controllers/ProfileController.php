@@ -18,7 +18,7 @@ class ProfileController extends Controller
             ->purchases()
             ->with(['products.ad'])
             ->whereHas('products', function ($query) {
-                $query->whereIn('type', ['sale', 'auction']);
+                $query->whereIn('type', ['sale', 'auctions']);
             })
             ->whereNotNull('purchased_at')
             ->orderByDesc('purchased_at')

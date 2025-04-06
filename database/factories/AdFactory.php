@@ -19,7 +19,7 @@ class AdFactory extends Factory
             'image' => 'ads/default.jpg',
             'ads_starttime' => now(),
             'ads_endtime' => now()->addDay(),
-            'type' => $this->faker->randomElement(['sale', 'rental', 'auction']),
+            'type' => $this->faker->randomElement(['sale', 'rental', 'auctions']),
             'is_active' => true,
             'hourly_price' => $this->faker->randomFloat(2, 10, 100),
         ];

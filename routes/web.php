@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AdvertiserController;
+use App\Http\Controllers\AuctionController;
 use App\Http\Controllers\BusinessExportController;
 use App\Http\Controllers\BusinessSettingsController;
 use App\Http\Controllers\CalendarController;
@@ -123,6 +124,12 @@ Route::middleware(['auth', 'role:business_advertiser', 'permission:expose own ap
     Route::get('/settings', [DeveloperSettingsController::class, 'index'])->name('index');
     Route::post('/createToken', [DeveloperSettingsController::class, 'createToken'])->name('createToken');
     Route::delete('/developer/tokens/{id}', [DeveloperSettingsController::class, 'destroy'])->name('destroyToken');
+});
+
+Route::middleware(['auth'])->group(function () {
+    Route::post('/products/{product}/bid', [AuctionController::class, 'placeBid'])->name('auctions.bid');
+    Route::middleware(['auth', 'role:private_advertiser|business_advertiser'])->post('/products/{product}/close-auctions', [AuctionController::class, 'closeAuction'])->name('auctions.close');
+    Route::middleware(['auth', 'role:private_advertiser|business_advertiser'])->get('/auctions', [AuctionController::class, 'index'])->name('auctions.index');
 });
 
 Route::get('/{slug}', [LandingPageController::class, 'show'])->name('landing.show');

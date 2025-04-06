@@ -17,7 +17,7 @@
                 <option value="">{{ __('messages.all_types') }}</option>
                 <option value="sale" @selected(request('type') === 'sale')>{{ __('messages.sale') }}</option>
                 <option value="rental" @selected(request('type') === 'rental')>{{ __('messages.rental') }}</option>
-                <option value="auction" @selected(request('type') === 'auction')>{{ __('messages.auction') }}</option>
+                <option value="auction" @selected(request('type') === 'auctions')>{{ __('messages.auctions') }}</option>
             </select>
         </div>
 

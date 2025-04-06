@@ -49,4 +49,15 @@ class Product extends Model
     {
         return $query->where('is_main', false);
     }
+
+    public function bids()
+    {
+        return $this->hasMany(Bid::class);
+    }
+
+    public function winningBid()
+    {
+        return $this->belongsTo(Bid::class, 'winning_bid_id');
+    }
+
 }
